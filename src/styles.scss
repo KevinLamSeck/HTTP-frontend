@@ -1,7 +1,24 @@
+@import "~@angular/material/theming";
+@import "assets/scss/generator-material-palette.scss";
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@include mat-core();
+
+$Hprimary: createPalette(#8b5cf6);
+$Haccent: createPalette(#8b5cf6);
+
+$lightMod-primary: mat-palette($Hprimary);
+$lightMod-accent: mat-palette($Haccent, 500, A100, A400);
+$lightMod-warn: mat-palette($mat-red);
+
+$mainLightTheme: mat-light-theme($lightMod-primary, $lightMod-accent, $lightMod-warn);
+
+@include angular-material-theme($mainLightTheme);
+
 body {
-  font-family: 'Open Sans';
   font-size: 1em;
   font-variant: normal;
 }
@@ -16,9 +33,9 @@ $cols: 12;
 
 @mixin col-x-list($col-name) {
   @for $i from 1 through $cols {
-      &.#{$col-name}#{$i} {
-        @include col-basis($i);
-      }
+    &.#{$col-name}#{$i} {
+      @include col-basis($i);
+    }
   }
 }
 /**
@@ -66,7 +83,7 @@ $cols: 12;
 .row {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-gap: .5em;
+  grid-gap: 0.5em;
 
   .col {
     &.xs-hidden {
@@ -97,15 +114,21 @@ $cols: 12;
   }
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 /**
 * MatSnackBar design
 **/
 .mat-snack-bar-container {
   &.failed {
-    background: rgba(240, 20, 0, .7);
+    background: rgba(240, 20, 0, 0.7);
     .mat-simple-snack-bar-content {
       color: rgb(10, 10, 10);
     }
@@ -115,7 +138,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 
   &.success {
-    background: rgba(20, 20, 200, .7);
+    background: rgba(20, 20, 200, 0.7);
     .mat-simple-snack-bar-content {
       color: rgb(240, 240, 240);
     }

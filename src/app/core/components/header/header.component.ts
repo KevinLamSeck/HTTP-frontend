@@ -4,7 +4,6 @@ import { BehaviorSubject } from 'rxjs';
 import { Member } from 'src/app/user/models/member';
 import { UserService } from 'src/app/user/services/user.service';
 import { LocalStorageService } from '../../services/local-storage.service';
-import { ToastService } from '../../toast.service';
 
 @Component({
   selector: 'app-header',
@@ -24,7 +23,7 @@ export class HeaderComponent implements OnInit {
     this._localStorageService.getMemberFromStorage()
   );
 
-  constructor(private _userService: UserService, private _router: Router) {
+  constructor(private _userService: UserService, public router: Router) {
     this.user$ = this._userService.user$;
   }
 
@@ -40,10 +39,14 @@ export class HeaderComponent implements OnInit {
 
   public goToDashboard(): void {
     const role = this._member.getRoleName();
-    this._router.navigate(['/dashboard', role.toLowerCase()]);
+    this.router.navigate(['/dashboard', role.toLowerCase()]);
   }
 
   public signOut(): void {
     this._userService.logout();
+  }
+
+  public goToSignIn(): void {
+    this.router.navigate(['/user/login']);
   }
 }

@@ -9,9 +9,10 @@
       </div>
       <div class="hidden sm:flex flex-row space-x-4">
         <member-avatar *ngIf="user$ | async"></member-avatar>
-        <!-- <button class="btn outlined dark:border-header dark:border-color" *ngIf="user$ | async" (click)="signOut()">
-          Sign Out
-        </button> -->
+        <button class="btn outlined dark:border-header dark:border-color" *ngIf="router.url === '/' "
+          (click)="goToSignIn() ">
+          Sign In
+        </button>
       </div>
 
 

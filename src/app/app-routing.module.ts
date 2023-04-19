@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardRoutingModule } from './dashboard/dashboard-routing.module';
-import { NotFoundComponent } from './pages/erros/not-found/not-found.component';
+import { NotFoundComponent } from './pages/errors/not-found/not-found.component';
+import { LandingPageComponent } from './pages/landing/landing-page/landing-page.component';
 import { AddComponent } from './student/add/add.component';
 import { ListComponent } from './student/list/list.component';
 import { UpdateComponent } from './student/update/update.component';
@@ -16,14 +17,20 @@ export class AppRoutingModule {
   public static readonly routes: Routes = [
     {
       path: '',
-      pathMatch: 'full',
-      redirectTo: `/dashboard/${DashboardRoutingModule._currentUser}`
+      component: LandingPageComponent,
+      canActivate: [NoAuthGuard]
     },
     {
       path: 'user',
       loadChildren: () =>
         import('./user/user.module').then((m) => m.UserModule),
       canActivate: [NoAuthGuard]
+    },
+    {
+      path: '',
+      pathMatch: 'full',
+      // canActivate: [AuthGuard],
+      redirectTo: `/dashboard/${DashboardRoutingModule._currentUser}`
     },
     {
       path: 'dashboard',
@@ -52,7 +59,7 @@ export class AppRoutingModule {
       ] */
     },
     {
-      path: '**',
+      path: 'dashboard/**',
       component: NotFoundComponent,
       pathMatch: 'full',
       data: { title: 'HTTP | You are lost ?' },

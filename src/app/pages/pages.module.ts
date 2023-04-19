@@ -1,13 +1,15 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { LandingPageComponent } from './landing/landing-page/landing-page.component';
 import { PagesRoutingModule } from './pages-routing.module';
-import { NotFoundComponent } from './erros/not-found/not-found.component';
 
 
 @NgModule({
   declarations: [
-    NotFoundComponent
+    NotFoundComponent,
+    LandingPageComponent
   ],
   imports: [
     CommonModule,

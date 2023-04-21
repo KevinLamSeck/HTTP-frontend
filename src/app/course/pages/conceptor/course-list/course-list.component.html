@@ -8,28 +8,24 @@
 
 <div class="mx-10">
   <mat-accordion *ngIf="coursesConceptor.length">
-    <mat-expansion-panel
-      [disabled]="course.modules?.length == 0"
-      class="dark:bg-neutral-600"
-      *ngFor="let course of coursesConceptor"
-    >
+    <mat-expansion-panel [disabled]="course.modules?.length == 0" class="dark:bg-neutral-600"
+      *ngFor="let course of coursesConceptor">
       <ng-template #template>
-        <p>
-          Do you want to {{ course.published ? "un" : "" }}publish the course
-          "{{ course.title }}"
-        </p>
-        <div mat-dialog-actions>
-          <button mat-button cdkFocusInitial (click)="closeSimpleDialog()">
-            No Thanks
-          </button>
-          <button
-            mat-button
-            (click)="
-              onPublishedCourse(course, !course.published); closeSimpleDialog()
-            "
-          >
-            Ok
-          </button>
+        <div class="my-2">
+          <p>
+            Do you want to {{ course.published ? "un" : "" }}publish the course
+            "{{ course.title }}"
+          </p>
+          <div mat-dialog-actions>
+            <button mat-button cdkFocusInitial (click)="closeSimpleDialog()">
+              No Thanks
+            </button>
+            <button mat-button (click)="
+                onPublishedCourse(course, !course.published); closeSimpleDialog()
+              ">
+              Ok
+            </button>
+          </div>
         </div>
       </ng-template>
       <mat-expansion-panel-header>
@@ -39,34 +35,20 @@
         <mat-panel-description class="flex-row-reverse dark:text-white">
           <ng-container *ngIf="course.modules!.length > 0; else noModules">
             {{ course.modules!.length }}
-            {{ course.modules!.length <= 1 ? "module" : "modules" }}
-          </ng-container>
-          <mat-icon
-            (click)="openSimpleDialog(template); $event.stopPropagation()"
-            class="visibilityIcon"
-            >{{ course.published ? "visibility" : "visibility_off" }}</mat-icon
-          >
-          <ng-template #noModules>no module</ng-template>
+            {{ course.modules!.length <= 1 ? "module" : "modules" }} </ng-container>
+              <mat-icon (click)="openSimpleDialog(template); $event.stopPropagation()" class="visibilityIcon">{{
+                course.published ? "visibility" : "visibility_off" }}</mat-icon>
+              <ng-template #noModules>no module</ng-template>
         </mat-panel-description>
         <mat-action-row>
-          <button
-            [ngClass]="{ correctButton: course.modules?.length == 0 }"
-            mat-button
-            color="primary"
-            class="dark:text-white"
-            mat-icon-button
-            [matMenuTriggerFor]="menu"
-            (click)="$event.stopPropagation()"
-          >
+          <button [ngClass]="{ correctButton: course.modules?.length == 0 }" mat-button color="primary"
+            class="dark:text-white" mat-icon-button [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()">
             ...
           </button>
         </mat-action-row>
       </mat-expansion-panel-header>
       <mat-accordion *ngFor="let module of course.modules">
-        <mat-expansion-panel
-          [disabled]="module.medias.length == 0"
-          class="mb-2 dark:bg-neutral-600"
-        >
+        <mat-expansion-panel [disabled]="module.medias.length == 0" class="dark:bg-neutral-600 mt-4">
           <mat-expansion-panel-header>
             <mat-panel-title class="dark:text-white">
               {{ module.name }}
@@ -74,32 +56,23 @@
             <mat-panel-description class="flex-row-reverse dark:text-white">
               <ng-container *ngIf="module.medias.length > 0; else noMedias">
                 {{ module.medias.length }}
-                {{ module.medias.length <= 1 ? "media" : "medias" }}
-              </ng-container>
-              <ng-template #noMedias>no media</ng-template>
+                {{ module.medias.length <= 1 ? "media" : "medias" }} </ng-container>
+                  <ng-template #noMedias>no media</ng-template>
             </mat-panel-description>
             <mat-action-row>
-              <button
-                [ngClass]="{ correctButton: module.medias.length == 0 }"
-                mat-button
-                color="primary"
-                class="dark:text-white"
-                mat-icon-button
-                [matMenuTriggerFor]="menuModule"
-                (click)="$event.stopPropagation()"
-              >
+              <button [ngClass]="{ correctButton: module.medias.length == 0 }" mat-button color="primary"
+                class="dark:text-white" mat-icon-button [matMenuTriggerFor]="menuModule"
+                (click)="$event.stopPropagation()">
                 ...
               </button>
             </mat-action-row>
           </mat-expansion-panel-header>
           <ng-container *ngFor="let media of module.medias">
-            <mat-panel-description
-              class="grid grid-cols-2 gap-4 dark:text-white"
-            >
+            <mat-panel-description class="grid grid-cols-2 gap-4 dark:text-white mt-4">
               <p>{{ media.title }}</p>
               <div class="flex justify-end">
                 <p class="mr-2">{{ media.typeMedia.title }}</p>
-                <p>.</p>
+                <p>|</p>
                 <p class="ml-2">
                   {{ media.duration * 1000 | date : "mm" }} h
                   {{ media.duration * 1000 | date : "ss" }} min
@@ -149,10 +122,7 @@
 
 <div class="mx-10">
   <mat-accordion *ngIf="courses.length">
-    <mat-expansion-panel
-      class="dark:bg-neutral-600"
-      *ngFor="let course of courses"
-    >
+    <mat-expansion-panel class="dark:bg-neutral-600" *ngFor="let course of courses">
       <mat-expansion-panel-header>
         <mat-panel-title class="dark:text-white">
           {{ course.title }}
@@ -160,19 +130,12 @@
         <mat-panel-description class="flex-row-reverse dark:text-white">
           <ng-container *ngIf="course.modules!.length > 0; else noModules">
             {{ course.modules!.length }}
-            {{ course.modules!.length <= 1 ? "module" : "modules" }}
-          </ng-container>
-          <ng-template #noModules>no module</ng-template>
+            {{ course.modules!.length <= 1 ? "module" : "modules" }} </ng-container>
+              <ng-template #noModules>no module</ng-template>
         </mat-panel-description>
         <mat-action-row>
-          <button
-            mat-button
-            color="primary"
-            class="dark:text-white"
-            mat-icon-button
-            [matMenuTriggerFor]="menu"
-            (click)="$event.stopPropagation()"
-          >
+          <button mat-button color="primary" class="dark:text-white" mat-icon-button [matMenuTriggerFor]="menu"
+            (click)="$event.stopPropagation()">
             ...
           </button>
         </mat-action-row>
@@ -186,27 +149,18 @@
             <mat-panel-description class="flex-row-reverse dark:text-white">
               <ng-container *ngIf="module.medias.length > 0; else noMedias">
                 {{ module.medias.length }}
-                {{ module.medias.length <= 1 ? "media" : "medias" }}
-              </ng-container>
-              <ng-template #noMedias>no media</ng-template>
+                {{ module.medias.length <= 1 ? "media" : "medias" }} </ng-container>
+                  <ng-template #noMedias>no media</ng-template>
             </mat-panel-description>
             <mat-action-row>
-              <button
-                mat-button
-                color="primary"
-                class="dark:text-white"
-                mat-icon-button
-                [matMenuTriggerFor]="menuModule"
-                (click)="$event.stopPropagation()"
-              >
+              <button mat-button color="primary" class="dark:text-white" mat-icon-button
+                [matMenuTriggerFor]="menuModule" (click)="$event.stopPropagation()">
                 ...
               </button>
             </mat-action-row>
           </mat-expansion-panel-header>
           <ng-container *ngFor="let media of module.medias">
-            <mat-panel-description
-              class="grid grid-cols-2 gap-4 dark:text-white"
-            >
+            <mat-panel-description class="grid grid-cols-2 gap-4 dark:text-white">
               <p>{{ media.title }}</p>
               <div class="flex justify-end">
                 <p class="mr-2">{{ media.typeMedia.title }}</p>
@@ -225,11 +179,7 @@
         <button mat-menu-item (click)="goToViewCourse(course)">
           <span class="dark:text-white">View course</span>
         </button>
-        <button
-          class="dark:text-white"
-          mat-menu-item
-          (click)="onCopyCourse(course)"
-        >
+        <button class="dark:text-white" mat-menu-item (click)="onCopyCourse(course)">
           <span class="">Copy course</span>
         </button>
       </mat-menu>

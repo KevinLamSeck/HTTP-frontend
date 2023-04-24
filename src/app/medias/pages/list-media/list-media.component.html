@@ -10,12 +10,12 @@
     <section>
         <span
             class="text-neutral-700 dark:text-neutral-300 flex flex-col lg:flex-row space-x-2 space-y-2 items-center align-middle justify-start">
-            <div class="mt-1.5"do>Filter by :</div>
-            <div class="chips" (click)="allMedias()">
+            <div class="mt-1.5" do>Filter by :</div>
+            <div class="chips select-none" (click)="allMedias()">
                 All
             </div>
             <ng-container *ngFor="let typeMedia of typeMediasChips">
-                <div class="chips" (click)="filterByType(typeMedia)">
+                <div class="chips select-none" (click)="filterByType(typeMedia)">
                     {{ typeMedia }}
                 </div>
             </ng-container>

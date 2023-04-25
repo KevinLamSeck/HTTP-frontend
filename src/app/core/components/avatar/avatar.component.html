@@ -1,29 +1,37 @@
-<div class="flex items-center">
+<div class="flex items-center dark:text-white">
+    <!-- AVATAR -->
     <div mat-button class="flex flex-row items-center align-middlew-10 h-10 bg-cover rounded gap-4"
         [matMenuTriggerFor]="menu">
-        <img src="https://placekitten.com/250/250" class="rounded h-full w-full overflow-hidden shadow" alt="" />
-        <span class="text-white">{{ memberData.firstName }}</span>
+        <img src="https://source.unsplash.com/random/300x300/?portrait,beauty"
+            class="rounded h-full w-full overflow-hidden shadow" alt="" />
+        <!-- <span class="text-white">{{ memberData.firstName }}</span> -->
     </div>
-
+    <!-- MENU -->
     <mat-menu #menu="matMenu" xPosition="before" class="no-styles mt-4">
-        <div class="w-56 divide-y divide-gray-100 rounded-md bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+        <div class="w-64 divide-y divide-neutral-600 my-4 p-4 rounded-md bg-white dark:bg-neutral-800 ring-1 ring-black ring-opacity-5 focus:outline-none shadow-md"
             role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-            <div class="px-4 py-3" role="none">
-                <p class="text-sm dark:text-gray-800" role="none">Signed in as</p>
-                <p class="truncate text-sm font-medium text-gray-900" role="none">
-                    {{ memberData.email }}
-                </p>
+            <div class="flex flex-row px-2 py-4 items-center align-middle gap-2" role="none">
+                <img src="https://source.unsplash.com/random/300x300/?portrait,beauty"
+                    class="rounded-full h-16 w-16 overflow-hidden" alt="" />
+                <div class="flex flex-col text-sm">
+                    <span class="">{{ memberData.firstName }}</span>
+                    <span class="dark:text-neutral-400">{{ memberData.getRoleName() }}</span>
+                    <span class="truncate font-light text-neutral-400 flex flex-row align-middle items-center
+                    " role="none">
+                        {{ memberData.email }}
+                    </span>
+                </div>
             </div>
             <div class="p-2" role="none">
                 <button (click)="toggleTheme()"
-                    class="btn text-gray-700 block w-full text-left text-sm font-medium hover:bg-primary-100">
+                    class="btn  block w-full text-left text-sm font-medium hover:bg-primary-100">
                     <span class="flex flex-row gap-2  align-middle" *ngIf="(theme$ | async) === 'light'"><i
                             class="material-icons">light_mode</i> Light Mode</span>
                     <span class="flex flex-row gap-2  align-middle" *ngIf="(theme$ | async) === 'dark'"><i
                             class="material-icons">dark_mode</i> Dark Mode</span>
                 </button>
-                <button class="btn text-gray-700 w-full !block text-left text-sm font-medium hover:bg-primary-100"
-                    role="menuitem" tabindex="-1" id="menu-item-3" (click)="signOut()">
+                <button class="btn  w-full !block text-left text-sm font-medium hover:bg-primary-100" role="menuitem"
+                    tabindex="-1" id="menu-item-3" (click)="signOut()">
                     <span class="flex flex-row gap-2 align-middle">
                         <i class="material-icons">logout</i>Sign out
                     </span>

@@ -48,4 +48,14 @@ export class DashboardComponent implements OnInit {
     this._router.navigate(['dashboard/conceptor/course/add']);
   }
 
+  greetings(currentUser: Member): string {
+    const username = currentUser.firstName;
+    const greetingsMSG = [`Good morning ${username} 🎉 !`, `Good afternoon ${username} 🎉 !`, `Good evening ${username} 🎉 !`];
+    const hour = new Date().getHours();
+
+    if (hour < 12) return greetingsMSG[0];
+    else if (hour < 18) return greetingsMSG[1];
+    else return greetingsMSG[2];
+  }
+
 }

@@ -79,7 +79,7 @@ export class CourseHandlerComponent implements OnInit {
 
   // * Remove the data when I unload the component
 
-  @HostListener('window:beforeunload')
+  @HostListener("window:beforeunload")
   removeDataToSessionStorage() {
     sessionStorage.removeItem("ModifiedCourse");
   }
@@ -97,7 +97,7 @@ export class CourseHandlerComponent implements OnInit {
       })
       .afterClosed()
       .subscribe((result: MediaType | undefined) => {
-        if (result !== undefined) {
+        if (result !== undefined && result?.title !== "") {
           console.log(result);
           let media: MediaType = {
             id: undefined,
@@ -125,7 +125,6 @@ export class CourseHandlerComponent implements OnInit {
       .afterClosed()
       .subscribe((result: MediaType | undefined) => {
         if (result !== undefined) {
-
           console.log(result);
           let media: MediaType = {
             id: undefined,
@@ -154,7 +153,6 @@ export class CourseHandlerComponent implements OnInit {
       .afterClosed()
       .subscribe((result: ModuleType | undefined) => {
         if (result !== undefined) {
-
         }
       });
   }
@@ -168,14 +166,13 @@ export class CourseHandlerComponent implements OnInit {
       .afterClosed()
       .subscribe((result: ModuleType | undefined) => {
         if (result !== undefined) {
-
           console.log(result);
           let module: ModuleType = {
             id: undefined,
             name: result.name,
             objective: result.objective,
             selected: false,
-            medias: result.medias
+            medias: result.medias,
           };
           this.modules.push(module);
 

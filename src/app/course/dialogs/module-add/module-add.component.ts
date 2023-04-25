@@ -10,15 +10,18 @@ import { FormModuleBuilderService } from "../../services/course-handler/form-mod
 })
 export class ModuleAddComponent implements OnInit {
   public form: FormGroup;
-  public addOrUpdate:boolean = false;
+  public addOrUpdate: boolean = false;
 
   constructor(
     private _formBuilder: FormModuleBuilderService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<ModuleAddComponent>
   ) {
-    this.addOrUpdate = (data==null);
-    this.form =(data==null)? this._formBuilder.form: this._formBuilder.buildForm(data);
+    this.addOrUpdate = data == null;
+    this.form =
+      data == null ? this._formBuilder.form : this._formBuilder.buildForm(data);
+    this.c["name"].setValue("");
+    this.c["objective"].setValue("");
   }
 
   ngOnInit(): void {}

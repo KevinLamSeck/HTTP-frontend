@@ -1,20 +1,24 @@
 .mat-colorWhite {
-
   color: #fff;
 }
-.mat-expansion-panel-header[aria-disabled=true] {
-  & span{
-
-      color: rgba(0, 0, 0, 1); 
+.mat-expansion-panel-header[aria-disabled="true"] {
+  & span {
+    color: rgba(0, 0, 0, 1);
   }
 }
 
-.mat-expansion-panel-header[aria-disabled=true] {
-  & span{
-   color: rgba(0,0,0,1); 
+.mat-expansion-panel-header[aria-disabled="true"] {
+  & span {
+    color: rgba(0, 0, 0, 1);
   }
 }
-.correctButton{
+.correctButton {
   margin-right: 0.55em;
 }
+.visibilityIcon {
+  margin-right: 1em;
+}
 
+.hot-action {
+  color: red;
+}

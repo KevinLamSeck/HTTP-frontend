@@ -1,7 +1,8 @@
-<div class="flex flex-col space-y-8">
-
+<div class="flex flex-col mx-auto justify-center space-y-8 max-w-2xl">
   <div class="text-center">
-    <h2 class="text-2xl sm:text-4xl leading-tight">{{actionTitle}} a media {{onModal}}</h2>
+    <h2 class="text-2xl sm:text-4xl leading-tight">
+      {{ actionTitle }} a media {{ onModal }}
+    </h2>
   </div>
 
   <ng-container *ngIf="media">
@@ -10,26 +11,32 @@
         <mat-form-field class="w-full">
           <mat-label>Media type</mat-label>
           <mat-select #types formControlName="typeMedia" required>
-            <mat-option *ngFor="let key of optionsMethod" [value]="key">{{key}}</mat-option>
+            <mat-option *ngFor="let option of optionsMethod" [value]="option">
+              {{ option }}
+            </mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field class="w-full">
-          <input matInput formControlName="title" placeholder="Media title...">
+          <input matInput formControlName="title" placeholder="Media title..." />
           <mat-error *ngIf="c['title'].errors && c['title'].touched">
             Title is required
           </mat-error>
         </mat-form-field>
         <mat-form-field class="w-full">
-          <input matInput formControlName="summary" placeholder="Summary...">
+          <input matInput formControlName="summary" placeholder="Summary..." />
         </mat-form-field>
         <mat-form-field class="w-full">
-          <input matInput formControlName="duration" placeholder="Media duration in seconds..." type="number">
+          <input matInput formControlName="duration" placeholder="Media duration in seconds..." type="number" />
           <mat-error *ngIf="c['duration'].errors && c['duration'].touched">
             Duration is required
           </mat-error>
         </mat-form-field>
-        <mat-form-field class="w-full" *ngIf="!['Document', 'Image', 'Slide', 'PDF'].includes(c['typeMedia'].value)">
-          <input matInput formControlName="url" placeholder="Media url...">
+        <mat-form-field class="w-full" *ngIf="
+            !['Document', 'Image', 'Slide', 'PDF'].includes(
+              c['typeMedia'].value
+            )
+          ">
+          <input matInput formControlName="url" placeholder="Media url..." />
           <mat-error *ngIf="c['url'].errors && c['url'].touched">
             Url is required
           </mat-error>
@@ -37,16 +44,24 @@
         <!-- Upload file UI -->
       </form>
       <div class="text-center">
-        <input type="file" class="" (change)="selectFile($event)"
-          *ngIf="['Document', 'Image', 'Slide', 'PDF'].includes(c['typeMedia'].value)">
+        <input type="file" class="" (change)="selectFile($event)" *ngIf="
+            ['Document', 'Image', 'Slide', 'PDF'].includes(c['typeMedia'].value)
+          " />
       </div>
       <div mat-dialog-actions class="flex justify-center">
-        <button class="mx-2 btn outlined rounded-xl hover:border-transparent" [routerLink]="['../']">Back</button>
-        <button mat-flat-button color="primary"
-          [disabled]="mediaForm.invalid || (['Document', 'Image', 'Slide', 'PDF'].includes(c['typeMedia'].value) && !mediaForm.get('file')?.value)"
-          (click)="onSubmit()" class="mx-4 btn primary">{{actionTitle}}</button>
+        <button class="mx-2 btn outlined rounded-xl hover:border-transparent" (click)="onBack()">
+          Back
+        </button>
+        <button mat-flat-button color="primary" [disabled]="
+            mediaForm.invalid ||
+            (['Document', 'Image', 'Slide', 'PDF'].includes(
+              c['typeMedia'].value
+            ) &&
+              !mediaForm.get('file')?.value)
+          " (click)="onSubmit()" class="mx-4 btn primary">
+          {{ actionTitle }}
+        </button>
       </div>
     </div>
   </ng-container>
-
 </div>

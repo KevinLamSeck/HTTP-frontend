@@ -34,15 +34,15 @@ export class CreateMediaComponent implements OnInit {
   @Input() visibility: boolean = false;
   @Output() newItemEvent = new EventEmitter<boolean>();
 
-  public actionTitle: string = 'Create';
+  public actionTitle: string = "Create";
 
   // Need this to wait display the form
   public media: MediaModel = new MediaModel({
-    _title: 'My Title',
-    _summary: 'My Summary',
+    _title: "My Title",
+    _summary: "My Summary",
     _duration: 120,
-    _typeMedia: { id: 1, title: 'Video' }
-  })
+    _typeMedia: { id: 1, title: "Video" },
+  });
 
   public mediaForm: FormGroup = new FormGroup({});
   public selectedOption: string = "";
@@ -74,7 +74,7 @@ export class CreateMediaComponent implements OnInit {
     private _fileUpload: FileUploadService,
     @Optional() @Inject(MAT_DIALOG_DATA) public onModal: boolean,
     @Optional() public dialogRef: MatDialogRef<CreateMediaComponent>
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.mediaForm = this._formBuilder.group({
@@ -110,9 +110,7 @@ export class CreateMediaComponent implements OnInit {
   }
 
   onNoClick() {
-    this.onModal
-      ? this.dialogRef.close()
-      : this.newItemEvent.emit(false);
+    this.onModal ? this.dialogRef.close() : this.newItemEvent.emit(false);
   }
 
   selectFile(event: any): void {
@@ -145,20 +143,24 @@ export class CreateMediaComponent implements OnInit {
     this.onModal
       ? this.dialogRef.close(media)
       : this._mediaService
-        .add(media)
-        .pipe(take(1))
-        .subscribe({
-          next: (response: any) => {
-            // TODO Display Success Message
-            console.log(response);
-            this._snackBar.open(`"${media.title}" was created.`, "Close");
-          },
-          complete: () => {
-            this.mediaForm.reset();
-          },
-        });
+          .add(media)
+          .pipe(take(1))
+          .subscribe({
+            next: (response: any) => {
+              // TODO Display Success Message
+              console.log(response);
+              this._snackBar.open(`"${media.title}" was created.`, "Close");
+            },
+            complete: () => {
+              this.mediaForm.reset();
+            },
+          });
   }
-
+  onBack() {
+    this.onModal
+      ? this.dialogRef.close(this.mediaForm.value)
+      : this._router.navigate(["../"]);
+  }
   private async submitMediaWithFile(): Promise<void> {
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
@@ -191,25 +193,25 @@ export class CreateMediaComponent implements OnInit {
           this.onModal
             ? this.dialogRef.close(media)
             : this._mediaService
-              .add(media)
-              .pipe(take(1))
-              .subscribe({
-                next: (response: any) => {
-                  // TODO Display Success Message
-                  console.log(response);
+                .add(media)
+                .pipe(take(1))
+                .subscribe({
+                  next: (response: any) => {
+                    // TODO Display Success Message
+                    console.log(response);
 
-                  this._snackBar.open(
-                    `"${media.title}" was created.`,
-                    "Close"
-                  );
-                },
-                complete: () => {
-                  this.mediaForm.reset();
-                },
-              });
+                    this._snackBar.open(
+                      `"${media.title}" was created.`,
+                      "Close"
+                    );
+                  },
+                  complete: () => {
+                    this.mediaForm.reset();
+                  },
+                });
           this.fileInfos = this._fileUpload.getFiles();
         } catch (error) {
-          this.message = 'Could not upload the file!';
+          this.message = "Could not upload the file!";
           this._snackBar.open(`${this.message}`, "Close");
 
           this.currentFile = undefined;

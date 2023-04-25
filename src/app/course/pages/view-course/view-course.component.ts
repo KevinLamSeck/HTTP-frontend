@@ -9,6 +9,7 @@ import { CourseType } from '../../types/course-type';
 export class ViewCourseComponent implements OnInit {
   public course: CourseType;
   public user: any;
+  public totalTime: Array<any> = [];
 
   constructor() {
     this.course = JSON.parse(sessionStorage.getItem('ModifiedCourse') + '');
@@ -16,6 +17,11 @@ export class ViewCourseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.user);
+    console.log(this.course.modules);
+    this.course.modules?.forEach((module) => {
+      this.totalTime.push(module.totalTime);
+    });
+
+    console.log(this.totalTime);
   }
 }

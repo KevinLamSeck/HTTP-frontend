@@ -1,42 +1,53 @@
-<div class="bg-slate-100 flex  justify-between mt-10 mx-28 px-10 rounded py-10 shadow-md  ">
+<div
+  class="bg-slate-100 flex justify-between mt-10 mx-28 px-10 rounded py-10 shadow-md"
+>
   <div class="flex-col gap-2 flex">
-    <h2>{{course.title}}</h2>
-    <h3>{{course.objective}}</h3>
-    <p>Created at : {{course.createdAt}}</p>
-    <p >Created by : {{user.firstName}} {{user.lastName}}</p>
+    <h2>{{ course.title }}</h2>
+    <h3>{{ course.objective }}</h3>
+    <p>Created at : {{ course.createdAt }}</p>
+    <p>Created by : {{ user.firstName }} {{ user.lastName }}</p>
   </div>
-  <div> <img src="https://placekitten.com/300/150" class="rounded h-full w-full overflow-hidden shadow" alt="" /></div>
+  <div>
+    <img
+      src="https://placekitten.com/300/150"
+      class="rounded h-full w-full overflow-hidden shadow"
+      alt=""
+    />
+  </div>
 </div>
 <div class="mt-10 mx-28">
   <h2 class="mb-10">Course content</h2>
-  <p class="mb-5">{{course.modules?.length}} modules . 5h23min total length</p>
-  <mat-accordion   *ngFor="let module of course.modules">
-    <mat-expansion-panel class="mb-2 dark:bg-neutral-600">
-    <mat-expansion-panel-header>
-      <mat-panel-title class="dark:text-white">
-        {{module.name}}
-      </mat-panel-title>
-      <mat-panel-description class="flex-row-reverse dark:text-white">
-        <ng-container *ngIf="module.medias.length > 0; else noMedias" >
-          {{module.medias.length }} {{module.medias.length <= 1 ? "media" : "medias"}}
-        </ng-container>
-        <ng-template #noMedias >no media</ng-template>
-      </mat-panel-description>
-      <mat-action-row >
-        <button mat-button color="primary" class="dark:text-white"  (click)="$event.stopPropagation()">...</button>
-      </mat-action-row>
-    </mat-expansion-panel-header>
-    <ng-container *ngFor="let media of module.medias" >
-      <mat-panel-description class=" grid grid-cols-2 gap-4 dark:text-white" >
-        <p > {{media.title}} </p>
-        <div class="flex justify-end">
-          <p class="mr-2"> {{media.typeMedia.title}}</p>
-          <p>.</p>
-          <p class="ml-2"> {{media.duration * 1000 | date:"mm" }} h {{media.duration * 1000 | date:"ss" }} min</p>
-        </div>
-      </mat-panel-description>
-    </ng-container>
-  </mat-expansion-panel>
-</mat-accordion>
+  <p class="mb-5">
+    {{ course.modules?.length }} modules . 5h23min total length
+  </p>
 
+  <mat-accordion *ngFor="let module of course.modules">
+    <mat-expansion-panel class="mb-2 dark:bg-neutral-600">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="dark:text-white">
+          {{ module.name }}
+        </mat-panel-title>
+        <mat-panel-description class="flex-row-reverse dark:text-white">
+          <ng-container *ngIf="module.medias.length > 0; else noMedias">
+            {{ module.medias.length }}
+            {{ module.medias.length <= 1 ? "media" : "medias" }}
+          </ng-container>
+          <ng-template #noMedias>no media</ng-template>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <ng-container *ngFor="let media of module.medias">
+        <mat-panel-description class="grid grid-cols-2 gap-4 dark:text-white">
+          <p>{{ media.title }}</p>
+          <div class="flex justify-end">
+            <p class="mr-2">{{ media.typeMedia.title }}</p>
+            <p>.</p>
+            <p class="ml-2">
+              {{ media.duration * 1000 | date : "mm" }} h
+              {{ media.duration * 1000 | date : "ss" }} min
+            </p>
+          </div>
+        </mat-panel-description>
+      </ng-container>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>

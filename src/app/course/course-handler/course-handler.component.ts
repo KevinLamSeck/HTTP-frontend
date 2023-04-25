@@ -54,7 +54,7 @@ export class CourseHandlerComponent implements OnInit {
   ngOnInit(): void {
     // If the current page is add then clear the form
     if (this.updateOrCreate === "Add") {
-      this.form.reset();
+      this.form.reset(); //hophop
     }
   }
 
@@ -230,6 +230,7 @@ export class CourseHandlerComponent implements OnInit {
 
     if (this.updateCourse) {
       course.id = this.course.id;
+      console.log(course);
       this._courseService.update(course).subscribe((courseType: CourseType) => {
         this._router.navigate(["/", "dashboard", "conceptor", "course"]);
       });

@@ -125,6 +125,7 @@ export class CourseListComponent implements OnInit {
       m.creator = newCreator;
       m.medias.forEach((media) => (media.creator = newCreator));
     });
+    console.log(course);
 
     this._courseService.copyCourse(course).subscribe();
   }

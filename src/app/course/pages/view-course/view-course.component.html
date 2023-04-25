@@ -22,7 +22,10 @@
   </p>
 
   <mat-accordion *ngFor="let module of course.modules">
-    <mat-expansion-panel class="mb-2 dark:bg-neutral-600">
+    <mat-expansion-panel
+      [disabled]="module.medias.length == 0"
+      class="mb-2 dark:bg-neutral-600"
+    >
       <mat-expansion-panel-header>
         <mat-panel-title class="dark:text-white">
           {{ module.name }}

@@ -159,6 +159,7 @@
 <div class="mx-10">
   <mat-accordion *ngIf="courses.length">
     <mat-expansion-panel
+      [disabled]="course.modules?.length == 0"
       class="dark:bg-neutral-600"
       *ngFor="let course of courses"
     >
@@ -173,12 +174,13 @@
               {{ course.modules!.length <= 1 ? "module" : "modules" }}
             </div>
           </ng-container>
-          <ng-template #noModules
-            ><div class="numberOfModules">no module</div></ng-template
-          >
+          <ng-template #noModules>
+            <div class="numberOfModules">no module</div>
+          </ng-template>
         </mat-panel-description>
         <mat-action-row>
           <button
+            [ngClass]="{ correctButton: course.modules?.length == 0 }"
             mat-button
             color="primary"
             class="dark:text-white"
@@ -192,7 +194,10 @@
       </mat-expansion-panel-header>
       <mat-accordion *ngFor="let module of course.modules">
         <!-- MODULE OTHER LIST -->
-        <mat-expansion-panel class="mt-4 dark:bg-neutral-600">
+        <mat-expansion-panel
+          [disabled]="module.medias.length == 0"
+          class="mt-4 dark:bg-neutral-600"
+        >
           <mat-expansion-panel-header>
             <mat-panel-title class="dark:text-white">
               {{ module.name }}
@@ -206,6 +211,7 @@
             </mat-panel-description>
             <mat-action-row>
               <button
+                [ngClass]="{ correctButton: course.modules?.length == 0 }"
                 mat-button
                 color="primary"
                 class="dark:text-white"

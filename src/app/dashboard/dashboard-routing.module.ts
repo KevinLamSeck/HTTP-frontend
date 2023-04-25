@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LocalStorageService } from '../core/services/local-storage.service';
 import { DashboardComponent } from './dashboard.component';
 import { RoleGuard } from './guards/role.guard';
 import { ConceptorComponent } from './pages/conceptor/conceptor.component';
@@ -14,13 +13,12 @@ import { StudentComponent } from './pages/student/student.component';
 })
 export class DashboardRoutingModule {
 
-  static _currentUser: string = LocalStorageService.getInstance().getMemberFromStorage().getRoleName().toLowerCase();
+  // static _currentUser: string = LocalStorageService.getInstance().getMemberFromStorage().getRoleName().toLowerCase();
 
   public static routes: Routes = [
     {
       path: '',
       pathMatch: 'full',
-      redirectTo: `${DashboardRoutingModule._currentUser}`
     },
     {
       path: '',

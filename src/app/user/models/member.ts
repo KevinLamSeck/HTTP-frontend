@@ -10,7 +10,7 @@ export class Member {
     private _phoneNumber?: string = '';
     private _login: string = '';
     private _password: string = '';
-    private _role?: string = '';
+    private _role: string = '';
 
     private _roles: Role = {
         MANAGER: 'Manager',
@@ -36,11 +36,11 @@ export class Member {
     }
 
     getRoleName() {
-        return this._roles[this.role!] ?? 'User';
+        return this._roles[this.role];
     }
 
     showRole(user: Member): string {
-        return user.isValidRole() ? user.getRoleName() : 'User';
+        return user.getRoleName();
     }
 
     public get id(): number | undefined {
@@ -99,11 +99,11 @@ export class Member {
         this._password = value;
     }
 
-    public get role(): string | undefined {
+    public get role(): string {
         return this._role;
     }
 
-    public set role(value: string | undefined) {
+    public set role(value: string) {
         this._role = value;
     }
 

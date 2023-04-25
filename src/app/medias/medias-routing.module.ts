@@ -5,40 +5,50 @@ import { CreateMediaComponent } from './pages/create-media/create-media.componen
 import { ListMediaComponent } from './pages/list-media/list-media.component';
 import { UpdateMediaComponent } from './pages/update-media/update-media.component';
 
-
 @NgModule({
   imports: [RouterModule.forChild(MediasRoutingModule.routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class MediasRoutingModule {
   public static routes: Routes = [
-    // {
-    //   path: '',
-    //   redirectTo: 'list',
-    //   pathMatch: 'full'
-    // },
-    {
-      path: 'add',
-      component: CreateMediaComponent,
-      canActivate: [RoleGuard],
-      data: { allowedRoles: ['CONCEPTOR'], title: 'Dashboard | Add Media', breadcrumb: 'Create Media' },
-    },
-    {
-      path: 'update',
-      component: UpdateMediaComponent,
-      canActivate: [RoleGuard],
-      data: { allowedRoles: ['CONCEPTOR'], title: 'Dashboard | Update Media', breadcrumb: 'Update Media' },
-    },
     {
       path: '',
-      component: ListMediaComponent,
       canActivate: [RoleGuard],
-      data: { allowedRoles: ['CONCEPTOR'], title: 'Dashboard | Media Hub', breadcrumb: 'Media Hub' },
+      data: {
+        allowedRoles: ['CONCEPTOR', 'MANAGER'],
+      },
+      children: [
+        {
+          path: 'add',
+          component: CreateMediaComponent,
+          canActivate: [RoleGuard],
+          data: {
+            allowedRoles: ['CONCEPTOR', 'MANAGER'],
+            title: 'Dashboard | Add Media',
+            breadcrumb: 'Create Media',
+          },
+        },
+        {
+          path: 'update',
+          component: UpdateMediaComponent,
+          canActivate: [RoleGuard],
+          data: {
+            allowedRoles: ['CONCEPTOR', 'MANAGER'],
+            title: 'Dashboard | Update Media',
+            breadcrumb: 'Update Media',
+          },
+        },
+        {
+          path: '',
+          component: ListMediaComponent,
+          canActivate: [RoleGuard],
+          data: {
+            allowedRoles: ['CONCEPTOR', 'MANAGER'],
+            title: 'Dashboard | Media Hub',
+            breadcrumb: 'Media Hub',
+          },
+        },
+      ],
     },
-    // {
-    //   path: '**',
-    //   redirectTo: '/dashboard/conceptor/media',
-    //   pathMatch: 'full'
-    // }
-  ]
+  ];
 }

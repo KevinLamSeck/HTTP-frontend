@@ -19,7 +19,10 @@ export class RoleGuard implements CanActivate {
     const allowedRoles = next.data['allowedRoles'];
     const userRole = new Member(this._localStorageService.getMemberFromStorage()).getRoleName().toUpperCase();
 
-    // console.log(userRole);
+    if (userRole === 'STUDENT' && !state.url.startsWith('/dashboard/student')) {
+      this._router.navigateByUrl('/dashboard/student');
+      return false;
+    }
 
     // Check if the user's role is allowed to access this page
     if (!allowedRoles.includes(userRole)) {

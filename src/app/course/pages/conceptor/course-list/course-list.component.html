@@ -35,11 +35,15 @@
         </mat-panel-title>
         <mat-panel-description class="flex-row-reverse dark:text-white">
           <ng-container *ngIf="course.modules!.length > 0; else noModules">
-            {{ course.modules!.length }}
-            {{ course.modules!.length <= 1 ? "module" : "modules" }} </ng-container>
-              <mat-icon (click)="openSimpleDialog(template); $event.stopPropagation()" class="visibilityIcon">{{
-                course.published ? "visibility" : "visibility_off" }}</mat-icon>
-              <ng-template #noModules>no module</ng-template>
+            <div class="numberOfModules">
+              {{ course.modules!.length }}
+              {{ course.modules!.length <= 1 ? "module" : "modules" }} </div>
+          </ng-container>
+          <mat-icon (click)="openSimpleDialog(template); $event.stopPropagation()" class="visibilityIcon">{{
+            course.published ? "visibility" : "visibility_off" }}</mat-icon>
+          <ng-template #noModules>
+            <div class="numberOfModules">no module</div>
+          </ng-template>
         </mat-panel-description>
         <mat-action-row>
           <button [ngClass]="{ correctButton: course.modules?.length == 0 }" mat-button color="primary"
@@ -132,9 +136,13 @@
         </mat-panel-title>
         <mat-panel-description class="flex-row-reverse dark:text-white">
           <ng-container *ngIf="course.modules!.length > 0; else noModules">
-            {{ course.modules!.length }}
-            {{ course.modules!.length <= 1 ? "module" : "modules" }} </ng-container>
-              <ng-template #noModules>no module</ng-template>
+            <div class="numberOfModules">
+              {{ course.modules!.length }}
+              {{ course.modules!.length <= 1 ? "module" : "modules" }} </div>
+          </ng-container>
+          <ng-template #noModules>
+            <div class="numberOfModules">no module</div>
+          </ng-template>
         </mat-panel-description>
         <mat-action-row>
           <button mat-button color="primary" class="dark:text-white" mat-icon-button [matMenuTriggerFor]="menu"

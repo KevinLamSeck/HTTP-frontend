@@ -44,6 +44,7 @@ export class CourseListComponent implements OnInit {
       .findFullCourses()
       .pipe(take(1))
       .subscribe((response: CourseListType[]) => {
+        this.courses = response;
         console.log(response);
         this.coursesConceptor = this.coursesConceptor.sort(
           (a: any, b: any) => (a.published - b.published) * -1

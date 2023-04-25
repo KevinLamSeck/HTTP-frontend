@@ -44,7 +44,12 @@ export class CourseListComponent implements OnInit {
       .findFullCourses()
       .pipe(take(1))
       .subscribe((response: CourseListType[]) => {
-        this.courses = response;
+        console.log(response);
+        this.coursesConceptor = this.coursesConceptor.sort(
+          (a: any, b: any) => (a.published - b.published) * -1
+        );
+        console.log(this.courses);
+
         this.coursesConceptor.forEach((c) => {
           c.modules = c.modules?.sort(
             (s1: ModuleType, s2: ModuleType) => (s1.order! - s2.order!) * 1
@@ -73,12 +78,6 @@ export class CourseListComponent implements OnInit {
 
   private _pathForConceptor: String[] = ["/", "dashboard", "conceptor"];
 
-  // goToAddCourse(): void {
-  //   sessionStorage.removeItem('ModifiedCourse');
-  //   console.log('heho');
-  //   this._router.navigate([...this._pathForConceptor, 'course', 'add']);
-  // }
-
   goToUpdateCourse(course: any): void {
     sessionStorage.setItem("ModifiedCourse", JSON.stringify(course));
     this._router.navigate([...this._pathForConceptor, "course", "edit"]);
@@ -106,7 +105,10 @@ export class CourseListComponent implements OnInit {
         },
         complete: () => {
           this.courses.splice(this.courses.indexOf(course), 1);
-          this.coursesConceptor.splice(this.courses.indexOf(course), 1);
+          this.coursesConceptor.splice(
+            this.coursesConceptor.indexOf(course),
+            1
+          );
         },
       });
   }
@@ -130,9 +132,11 @@ export class CourseListComponent implements OnInit {
     course.creator = { id: this.creatorId };
 
     console.log(course);
-    this._courseService
-      .update(course)
-      .subscribe((courseType: CourseType) => {});
+    this._courseService.update(course).subscribe((courseType: CourseType) => {
+      this.coursesConceptor = this.coursesConceptor.sort(
+        (a: any, b: any) => (a.published - b.published) * -1
+      );
+    });
   }
   openSimpleDialog(templateRef: any) {
     this.validationDialog = this._dialog.open(templateRef, {

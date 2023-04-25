@@ -1,4 +1,4 @@
-import { ModuleType } from './module-type';
+import { ModuleType } from "./module-type";
 
 export type CourseType = {
   id?: number;

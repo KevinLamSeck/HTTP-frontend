@@ -230,6 +230,7 @@ export class CourseHandlerComponent implements OnInit {
 
     if (this.updateCourse) {
       course.id = this.course.id;
+      console.log(course);
       this._courseService.update(course).subscribe((courseType: CourseType) => {
         this._router.navigate(["/", "dashboard", "conceptor", "course"]);
       });

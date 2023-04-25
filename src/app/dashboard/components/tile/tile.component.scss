@@ -1,15 +1,16 @@
 .card {
   @apply rounded-xl hover:scale-[1.01] transition-all;
   @apply flex flex-row sm:flex-col gap-2 sm:gap-0;
+  @apply h-fit md:h-[32em] lg:h-fit;
   @apply dark:text-white;
 
   &:focus {
     @apply outline-none;
   }
   &-body {
-    @apply flex flex-auto flex-col space-y-2 items-center text-center p-4 sm:p-0;
+    @apply flex flex-auto flex-col space-y-2 items-center text-center p-4 sm:p-0 my-auto;
     :where(p) {
-      @apply flex-grow;
+      @apply md:flex-grow;
     }
   }
   &-actions {

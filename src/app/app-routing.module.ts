@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardRoutingModule } from './dashboard/dashboard-routing.module';
 import { NotFoundComponent } from './pages/erros/not-found/not-found.component';
 import { AddComponent } from './student/add/add.component';
 import { ListComponent } from './student/list/list.component';
@@ -13,11 +12,15 @@ import { NoAuthGuard } from './user/guards/no-auth.guard';
   exports: [RouterModule],
 })
 export class AppRoutingModule {
+
+  constructor(
+  ) { }
+
   public static readonly routes: Routes = [
     {
       path: '',
       pathMatch: 'full',
-      redirectTo: `/dashboard/${DashboardRoutingModule._currentUser}`
+      redirectTo: 'dashboard'
     },
     {
       path: 'user',
@@ -27,7 +30,8 @@ export class AppRoutingModule {
     },
     {
       path: 'dashboard',
-      loadChildren: () => import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+      loadChildren: () =>
+        import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
       canActivate: [AuthGuard],
     },
     {

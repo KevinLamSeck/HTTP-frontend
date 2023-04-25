@@ -26,13 +26,13 @@ export class ConceptorComponent implements OnInit {
         svg: CourseSVGComponent
       },
       {
-        title: 'My modules',
+        title: 'Modules',
         summary: 'Create, edit or delete your modules',
         action: [...this._rootAction, 'module'],
         svg: ModuleSVGComponent
       },
       {
-        title: 'Media Hub',
+        title: 'Medias Hub',
         summary: 'Create, edit or delete your medias',
         action: [...this._rootAction, 'media'],
         svg: MediaSVGComponent

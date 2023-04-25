@@ -13,6 +13,11 @@
       class="dark:bg-neutral-600"
       *ngFor="let course of coursesConceptor"
     >
+    <mat-expansion-panel
+      [disabled]="course.modules?.length == 0"
+      class="dark:bg-neutral-600"
+      *ngFor="let course of coursesConceptor"
+    >
       <ng-template #template>
         <div class="my-2">
           <p>
@@ -110,8 +115,8 @@
                 <p class="mr-2">{{ media.typeMedia.title }}</p>
                 <p>|</p>
                 <p class="ml-2">
-                  {{ media.duration * 1000 | date : "mm" }} h
-                  {{ media.duration * 1000 | date : "ss" }} min
+                  {{ media.duration * 1000 | date : "mm" }}min
+                  {{ media.duration * 1000 | date : "ss" }}s
                 </p>
               </div>
             </mat-panel-description>
@@ -233,8 +238,8 @@
                 <p class="mr-2">{{ media.typeMedia.title }}</p>
                 <p>|</p>
                 <p class="ml-2">
-                  {{ media.duration * 1000 | date : "mm" }} h
-                  {{ media.duration * 1000 | date : "ss" }} min
+                  {{ media.duration * 1000 | date : "mm" }}min
+                  {{ media.duration * 1000 | date : "ss" }}s
                 </p>
               </div>
             </mat-panel-description>

@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
-import { LocalStorageService } from './core/services/local-storage.service';
-import { Member } from './user/models/member';
 
 @Component({
   selector: 'app-root',
@@ -19,12 +17,12 @@ export class AppComponent {
     private titleService: Title
   ) {
     // navigates to dashboard based on role if the member has field not empty (when refresh on 404)
-    const localMember =
-      LocalStorageService.getInstance().getMemberFromStorage();
-    if (localMember && localMember.role && localMember.role.trim().length > 0) {
-      const userRole = new Member(localMember).getRoleName().toLowerCase();
-      this.router.navigate([`/dashboard/${userRole}`]);
-    }
+    // const localMember =
+    //   LocalStorageService.getInstance().getMemberFromStorage();
+    // if (localMember && localMember.role && localMember.role.trim().length > 0) {
+    //   const userRole = new Member(localMember).getRoleName().toLowerCase();
+    //   this.router.navigate([`/dashboard/${userRole}`]);
+    // }
   }
 
   ngOnInit(): void {

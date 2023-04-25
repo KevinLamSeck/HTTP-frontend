@@ -13,7 +13,8 @@
             <div class="mt-1.5 flex-grow-0">Filter by :</div>
             <div class="chips select-none flex-grow-0" (click)="allMedias()">All</div>
             <ng-container *ngFor="let typeMedia of typeMediasChips">
-                <div class="chips select-none flex-grow-0" (click)="filterByType(typeMedia)">{{ typeMedia }}</div>
+                <div class="chips select-none flex-grow-0" [ngClass]="{hoverChips: selectedType === typeMedia}"
+                    (click)="filterByType(typeMedia)">{{ typeMedia }}</div>
             </ng-container>
         </div>
     </section>

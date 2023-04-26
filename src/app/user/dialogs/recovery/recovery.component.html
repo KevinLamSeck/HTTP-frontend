@@ -1,15 +1,19 @@
 <form class="row" [formGroup]="form" (ngSubmit)="onSubmit()">
   <mat-form-field class="col xs12">
-    <input matInput placeholder="Your login..." formControlName="login">
-    <mat-error *ngIf="form.controls['login'].touched && form.controls['login'].errors">
+    <input matInput placeholder="Your login..." formControlName="login" />
+    <mat-error
+      *ngIf="form.controls['login'].touched && form.controls['login'].errors"
+    >
       Login is required...
     </mat-error>
   </mat-form-field>
 
   <mat-form-field class="col xs12">
     <div class="email">
-      <input matInput placeholder="Your email..." formControlName="email">
-      <mat-error *ngIf="form.controls['email'].touched && form.controls['email'].errors">
+      <input matInput placeholder="Your email..." formControlName="email" />
+      <mat-error
+        *ngIf="form.controls['email'].touched && form.controls['email'].errors"
+      >
         Email is required...
       </mat-error>
     </div>
@@ -17,6 +21,10 @@
 </form>
 
 <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button [disabled]="form.invalid" (click)="onSubmit()">Reset</button>
+  <button mat-button (click)="onNoClick()">
+    <span class="dark:text-primary-50">Cancel</span>
+  </button>
+  <button mat-button [disabled]="form.invalid" (click)="onSubmit()">
+    <span class="text-red-500 dark:text-red-400">Reset</span>
+  </button>
 </div>

@@ -118,8 +118,8 @@ export class CourseHandlerComponent implements OnInit {
   addExistingMedia(parent: ModuleType): void {
     this._dialog
       .open(AddMediaComponent, {
-        height: "flex",
-        width: "flex",
+        height: "600px",
+        width: "300px",
         data: true,
       })
       .afterClosed()
@@ -159,8 +159,8 @@ export class CourseHandlerComponent implements OnInit {
   addExistingModule(): void {
     this._dialog
       .open(ExistingModuleComponent, {
-        height: "flex",
-        width: "flex",
+        height: "600px",
+        width: "300px",
         data: true,
       })
       .afterClosed()

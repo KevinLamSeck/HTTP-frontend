@@ -1,3 +1,4 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -5,10 +6,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { UserService } from '../../services/user.service';
-import { HttpResponse } from '@angular/common/http';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ToastService } from 'src/app/core/toast.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-recovery',
@@ -22,7 +22,7 @@ export class RecoveryComponent implements OnInit {
     private _userService: UserService,
     public dialogRef: MatDialogRef<RecoveryComponent>,
     private _toastService: ToastService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const loginControl: AbstractControl = new FormControl('', [
@@ -39,17 +39,17 @@ export class RecoveryComponent implements OnInit {
   onSubmit(): void {
     this._userService.recovery(this.form.value).subscribe({
       next: (response: HttpResponse<string>) => {
-        console.log(response);
+        // console.log(response);
         this.dialogRef.close(response);
       },
       error: (error: any) => {
-        console.log(error);
+        // console.log(error);
         this.form.controls['login'].setValue('');
         this.form.controls['email'].setValue('');
         const messageErrorLogin: string = `Désolé vous avez rentrer des identifiants incorrects, réesayez pour avoir la banane ! :(`;
         this._toastService.show(messageErrorLogin);
       },
-      complete: () => {},
+      complete: () => { },
     });
   }
 

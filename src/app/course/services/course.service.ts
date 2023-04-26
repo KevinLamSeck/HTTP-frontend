@@ -10,14 +10,14 @@ import { environment } from "./../../../environments/environment";
 export class CourseService {
   private readonly endPoint: string = `${environment.apiRootUri}course`;
 
-  constructor(private _httpClient: HttpClient) {}
+  constructor(private _httpClient: HttpClient) { }
 
   public findFullCourses(): Observable<CourseListType[]> {
     return this._httpClient.get<CourseListType[]>(this.endPoint);
   }
 
   add(value: any): Observable<CourseType> {
-    console.log(value);
+    // console.log(value);
     return this._httpClient.post<any>(this.endPoint, value);
   }
   update(value: any): Observable<CourseType> {
@@ -25,7 +25,7 @@ export class CourseService {
   }
 
   copyCourse(course: CourseListType): Observable<CourseListType[]> {
-    console.log(course);
+    // console.log(course);
     return this._httpClient.post<any>(this.endPoint, course);
   }
 

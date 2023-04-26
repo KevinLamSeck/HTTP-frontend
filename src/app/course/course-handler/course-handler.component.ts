@@ -42,7 +42,7 @@ export class CourseHandlerComponent implements OnInit {
       this.course.modules?.forEach((m) => {
         this.modules.push(m);
       });
-      console.log(this.modules);
+      // console.log(this.modules);
       this.modules.sort(
         (s1: ModuleType, s2: ModuleType) => (s1.order! - s2.order!) * 1
       );
@@ -96,7 +96,7 @@ export class CourseHandlerComponent implements OnInit {
       .afterClosed()
       .subscribe((result: MediaType | undefined) => {
         if (result !== undefined && result?.title !== "") {
-          console.log(result);
+          //// console.log(result);
           let media: MediaType = {
             id: undefined,
             title: result.title,
@@ -122,7 +122,7 @@ export class CourseHandlerComponent implements OnInit {
       .afterClosed()
       .subscribe((result: MediaType | undefined) => {
         if (result !== undefined) {
-          console.log(result);
+          // console.log(result);
           let media: MediaType = {
             id: undefined,
             title: result.title,
@@ -161,7 +161,7 @@ export class CourseHandlerComponent implements OnInit {
       .afterClosed()
       .subscribe((result: ModuleType | undefined) => {
         if (result !== undefined) {
-          console.log(result);
+          // console.log(result);
           let module: ModuleType = {
             id: undefined,
             name: result.name,
@@ -181,11 +181,11 @@ export class CourseHandlerComponent implements OnInit {
     this.modules.splice(this.modules.indexOf(module), 1);
   }
   drop(event: CdkDragDrop<string[]>) {
-    console.log(event);
+    // console.log(event);
     moveItemInArray(this.modules, event.previousIndex, event.currentIndex);
   }
   dropMedia(event: CdkDragDrop<string[]>, module: ModuleType) {
-    console.log(event);
+    // console.log(event);
 
     let i: number = this.modules.indexOf(module);
     moveItemInArray(
@@ -201,7 +201,7 @@ export class CourseHandlerComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.modules);
+    // console.log(this.modules);
 
     let orderedModules: any[] = [];
     let i = 0;
@@ -221,11 +221,11 @@ export class CourseHandlerComponent implements OnInit {
     course.modules = course.modules?.sort(
       (s1: ModuleType, s2: ModuleType) => (s1.order! - s2.order!) * 1
     );
-    console.log(course);
+    // console.log(course);
 
     if (this.updateCourse) {
       course.id = this.course.id;
-      console.log(course);
+      // console.log(course);
       this._courseService.update(course).subscribe((courseType: CourseType) => {
         this._router.navigate(["/", "dashboard", "conceptor", "course"]);
       });

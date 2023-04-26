@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Optional, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Optional, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { take } from 'rxjs';
 import { MediaType } from 'src/app/course/types/media-type';
@@ -34,23 +34,23 @@ export class AddMediaComponent implements OnInit {
   }
 
   public addMedia(id: number) {
-    if(this.onModal){
-    this._service.findOne(id)
-      .pipe(
-        take(1)
-      ).subscribe((media: MediaType) => {
-        
-        this.dialogRef.close(media)
-      })
-    
-    }else{this.idMedia.emit(id)}
-    
+    if (this.onModal) {
+      this._service.findOne(id)
+        .pipe(
+          take(1)
+        ).subscribe((media: MediaType) => {
+
+          this.dialogRef.close(media)
+        })
+
+    } else { this.idMedia.emit(id) }
+
   }
 
 
   public onSearchTextEntered(searchValue: string) {
     this.searchText = searchValue
-    // console.log(this.searchText)
+    // // console.log(this.searchText)
   }
 
 }

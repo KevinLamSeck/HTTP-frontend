@@ -12,6 +12,27 @@
   font-family: $global-font;
 }
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #121212 rgba(12, 12, 12, 0.2);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 15px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(12, 12, 12, 0.2);
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #121212;
+  border-radius: 14px;
+  border: 3px solid #121212;
+}
+
 body {
   font-size: 1em;
   font-variant: normal;

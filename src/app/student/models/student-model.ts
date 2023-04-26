@@ -11,7 +11,7 @@ export class StudentModel {
    * @usage
    *  const student: StudentModel = new StudentModel()
    *  student.id = 10 // magic setter
-   *  console.log(student.id) // magic getter
+   *  // console.log(student.id) // magic getter
    */
   get id() {
     return this._id === undefined ? 0 : this._id

@@ -1,6 +1,6 @@
 <div class="row m-10 justify-between items-center">
   <div class="col xs11 course-title flex items-center">
-    <h1>My own list</h1>
+    <h2>My own list</h2>
   </div>
 
   <div class="col xs1 course-number">{{ coursesConceptor.length }} courses</div>
@@ -152,7 +152,7 @@
 
 <!-- Other list -->
 <div class="row m-10">
-  <div class="col xs11 course-title">Other list</div>
+  <h2 class="col xs11 course-title">Other list</h2>
   <div class="col xs1 course-number">{{ courses.length }} courses</div>
 </div>
 
@@ -240,6 +240,14 @@
             </mat-panel-description>
           </ng-container>
         </mat-expansion-panel>
+
+        <mat-menu class="dark:bg-neutral-600" #menuModule="matMenu">
+          <button mat-menu-item>
+            <span class="dark:text-white" (click)="viewModule(module.id!)"
+              >View module</span
+            >
+          </button>
+        </mat-menu>
       </mat-accordion>
 
       <mat-menu class="dark:bg-neutral-600" #menu="matMenu">
@@ -252,12 +260,6 @@
           (click)="onCopyCourse(course)"
         >
           <span class="">Copy course</span>
-        </button>
-      </mat-menu>
-
-      <mat-menu class="dark:bg-neutral-600" #menuModule="matMenu">
-        <button mat-menu-item>
-          <span class="dark:text-white">View module</span>
         </button>
       </mat-menu>
     </mat-expansion-panel>

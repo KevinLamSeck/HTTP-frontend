@@ -133,7 +133,9 @@ export class CourseListComponent implements OnInit {
       m.medias.forEach((media) => (media.creator = newCreator));
     });
 
-    this._courseService.copyCourse(course).subscribe();
+    this._courseService.copyCourse(course).subscribe(() => {
+      this._snackBar.open(`"${course.title}" was copied.`, "Close");
+    });
   }
   onPublishedCourse(course: CourseListType, published: boolean) {
     course.published = published;

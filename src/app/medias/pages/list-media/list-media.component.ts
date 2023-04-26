@@ -68,6 +68,12 @@ export class ListMediaComponent implements OnInit {
     }
   }
 
+  isTypeMediaHasMedias(type: string): boolean {
+    return this.medias.some(
+      (media) => media.typeMedia.title.toLowerCase() === type.toLowerCase()
+    );
+  }
+
   handleMediaInfoChange(mediaDeleted: MediaType): void {
     this.medias = this.medias.filter((media) => media.id !== mediaDeleted.id);
     this._snackBar.open(`"${mediaDeleted!.title}" was deleted.`, 'Close');

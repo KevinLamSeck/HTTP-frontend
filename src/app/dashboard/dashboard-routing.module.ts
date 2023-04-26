@@ -87,7 +87,8 @@ export class DashboardRoutingModule {
             {
               path: 'student',
               component: ListComponent,
-              data: { title: 'Dashboard | Students List', breadcrumb: 'Students List' },
+              canActivate: [RoleGuard],
+              data: { allowedRoles: ['MANAGER'], title: 'Dashboard | Students List', breadcrumb: 'Students List' },
             },
           ]
         },

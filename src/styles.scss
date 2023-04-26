@@ -271,3 +271,11 @@ mat-panel-description.mat-expansion-panel-header-description .numberOfModules {
 .modalDialog {
   @apply dark:bg-neutral-800 w-3/4;
 }
+
+//checkbox
+[type="checkbox"] {
+  color: rgb(110, 110, 231);
+}
+[type="checkbox"]:focus {
+  --tw-ring-color: rgb(110, 110, 231);
+}

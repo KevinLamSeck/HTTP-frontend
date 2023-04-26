@@ -1,32 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { take } from 'rxjs';
-import { LocalStorageService } from 'src/app/core/services/local-storage.service';
-import { ToastService } from 'src/app/core/toast.service';
-import { MediaType } from 'src/app/course/types/media-type';
-import { Member } from 'src/app/user/models/member';
-import { MediaService } from '../../services/media.service';
+import { Component, OnInit } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { take } from "rxjs";
+import { LocalStorageService } from "src/app/core/services/local-storage.service";
+import { ToastService } from "src/app/core/toast.service";
+import { MediaType } from "src/app/course/types/media-type";
+import { Member } from "src/app/user/models/member";
+import { MediaService } from "../../services/media.service";
 
 @Component({
-  selector: 'app-list-media',
-  templateUrl: './list-media.component.html',
-  styleUrls: ['./list-media.component.scss'],
+  selector: "app-list-media",
+  templateUrl: "./list-media.component.html",
+  styleUrls: ["./list-media.component.scss"],
 })
 export class ListMediaComponent implements OnInit {
   public medias: MediaType[] = [];
   public toggleFilter: boolean = false;
   public mediasFiltered: MediaType[] = [];
   public selectedType: string | null = null;
+  public nameOrder: boolean = true;
 
   public typeMediasChips: string[] = [
-    'Video',
-    'Slide',
-    'Document',
-    'Image',
-    'Audio',
-    'Animation',
-    'Interactive ',
-    'PDF',
+    "Video",
+    "Slide",
+    "Document",
+    "Image",
+    "Audio",
+    "Animation",
+    "Interactive ",
+    "PDF",
   ];
 
   private _localStorageService: LocalStorageService =
@@ -38,7 +39,7 @@ export class ListMediaComponent implements OnInit {
     private _mediaService: MediaService,
     private _toastService: ToastService,
     private _snackBar: MatSnackBar
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this._mediaService
@@ -47,6 +48,9 @@ export class ListMediaComponent implements OnInit {
       .subscribe((response: MediaType[]) => {
         this.medias = response;
         this.mediasFiltered = [...this.medias];
+        this.mediasFiltered = this.mediasFiltered.sort(
+          (a, b) => a.title.localeCompare(b.title) * 1
+        );
       });
   }
 
@@ -75,7 +79,9 @@ export class ListMediaComponent implements OnInit {
   }
 
   handleMediaInfoChange(mediaDeleted: MediaType): void {
-    this.mediasFiltered = this.mediasFiltered.filter((media) => media.id !== mediaDeleted.id);
-    this._snackBar.open(`"${mediaDeleted!.title}" was deleted.`, 'Close');
+    this.mediasFiltered = this.mediasFiltered.filter(
+      (media) => media.id !== mediaDeleted.id
+    );
+    this._snackBar.open(`"${mediaDeleted!.title}" was deleted.`, "Close");
   }
 }

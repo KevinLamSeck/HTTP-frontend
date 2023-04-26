@@ -56,23 +56,28 @@ export class CourseListComponent implements OnInit {
             (s1: ModuleType, s2: ModuleType) => (s1.order! - s2.order!) * 1
           );
         });
+
+        this._studentService
+          .findOne(this.creatorId)
+          .pipe(take(1))
+          .subscribe((response: any) => {
+            this.coursesConceptor = response.courses;
+            // console.log(this.coursesConceptor);
+            this.coursesConceptor = this.coursesConceptor.sort(
+              (a: any, b: any) => (a.published - b.published) * -1
+            );
+            this.coursesConceptor.forEach((c) => {
+              this.courses.splice(this.courses.indexOf(c), 1);
+              console.log(c);
+              console.log(this.courses);
+
+              c.modules = c.modules?.sort(
+                (s1: ModuleType, s2: ModuleType) => (s1.order! - s2.order!) * 1
+              );
+            });
+          });
       });
 
-    this._studentService
-      .findOne(this.creatorId)
-      .pipe(take(1))
-      .subscribe((response: any) => {
-        this.coursesConceptor = response.courses;
-        // console.log(this.coursesConceptor);
-        this.coursesConceptor = this.coursesConceptor.sort(
-          (a: any, b: any) => (a.published - b.published) * -1
-        );
-        this.coursesConceptor.forEach((c) => {
-          c.modules = c.modules?.sort(
-            (s1: ModuleType, s2: ModuleType) => (s1.order! - s2.order!) * 1
-          );
-        });
-      });
     //trie des modules
 
     // console.log(this.coursesConceptor);

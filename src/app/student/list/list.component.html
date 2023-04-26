@@ -3,8 +3,8 @@
     <h1>Students</h1>
   </div>
   <div class="justify-self-end col-span-2">
-    <button mat-flat-button color="warn" class="my-3 mr-3" (click)="multipleDelete()"
-      [disabled]="this.checkedStudents.length === 0">Remove selected</button>
+    <button mat-flat-button color="warn" class="my-3 mr-3 dark:disabled:bg-neutral-900 dark:disabled:text-neutral-400"
+      (click)="multipleDelete()" [disabled]="this.checkedStudents.length === 0">Remove selected</button>
     <button mat-flat-button color="primary" class="my-3" (click)="openForm()">+ Add a new
       Student</button>
   </div>
@@ -48,15 +48,15 @@
       <td>{{ student.firstName }}</td>
       <td>{{ student.email }}</td>
       <td><button mat-button color="primary" mat-icon-button [matMenuTriggerFor]="menuStudent"
-          (click)="$event.stopPropagation()">
+          (click)="$event.stopPropagation()" class="dark:text-white">
           ...
         </button>
-        <mat-menu #menuStudent="matMenu">
+        <mat-menu #menuStudent="matMenu" class="dark:bg-neutral-600">
           <button mat-menu-item (click)="openForm(student)">
-            <span>Update student</span>
+            <span class="dark:text-white">Update student</span>
           </button>
           <button mat-menu-item (click)="delete(student)">
-            <span class="text-red">Delete student</span>
+            <span class="text-red dark:text-white">Delete student</span>
           </button>
         </mat-menu>
 

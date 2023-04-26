@@ -38,8 +38,10 @@ table {
     tr {
       height: 3em;
       border-bottom: solid 1px $line-color;
+
       &:nth-child(odd) {
         background-color: lighten($line-color, 50%);
+        @apply dark:bg-neutral-900;
       }
       td:nth-child(3) {
         font-weight: bold;
@@ -57,6 +59,7 @@ table {
             vertical-align: middle;
             text-align: center;
             color: #fff;
+            @apply dark:text-neutral-900;
           }
         }
       }

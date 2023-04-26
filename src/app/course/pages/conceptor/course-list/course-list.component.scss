@@ -22,3 +22,7 @@
 .hot-action {
   color: red;
 }
+.mat-expansion-panel-header[aria-disabled="true"]
+  .mat-expansion-panel-header-title {
+  color: rgba(0, 0, 0, 1);
+}

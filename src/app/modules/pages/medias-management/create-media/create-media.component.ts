@@ -47,8 +47,8 @@ export class CreateMediaComponent implements OnInit {
 
   public onSelected(value: string): void {
     this.selectedOption = value;
-    // console.log(value)
-    // console.log(this.options.get(value))
+    // // console.log(value)
+    // // console.log(this.options.get(value))
   }
 
 
@@ -101,7 +101,7 @@ export class CreateMediaComponent implements OnInit {
 
   selectFile(event: any): void {
     this.selectedFiles = event.target.files;
-    console.log(this.selectedFiles);
+    // console.log(this.selectedFiles);
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
       if (file) {
@@ -126,7 +126,7 @@ export class CreateMediaComponent implements OnInit {
     this._mediaService.add(media).pipe(take(1)).subscribe({
       next: (response: any) => {
         // TODO Display Success Message
-        console.log(response)
+        // console.log(response)
         this.addNewMedia(response.id!)
       },
       complete: () => {
@@ -145,7 +145,7 @@ export class CreateMediaComponent implements OnInit {
 
         try {
           const response = await lastValueFrom(this._fileUpload.uploadFile(this.currentFile));
-          console.log(response);
+          // console.log(response);
           const mediaUrl = response.toString();
           const typeMediaID = this.options.get(this.mediaForm.value.typeMedia);
           const conceptor: Member = this._localStorageService.getMemberFromStorage()
@@ -162,7 +162,7 @@ export class CreateMediaComponent implements OnInit {
           this._mediaService.add(media).pipe(take(1)).subscribe({
             next: (response: any) => {
               // TODO Display Success Message
-              console.log(response);
+              // console.log(response);
               this.addNewMedia(response.id!)
             },
             complete: () => {

@@ -1,9 +1,8 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { take } from 'rxjs';
 import { StudentFormComponent } from '../dialogs/student-form/student-form.component';
-import { IStudent } from '../interfaces/i-student';
 import { StudentModel } from '../models/student-model';
 import { StudentService } from '../services/student.service';
 import { SimpleStudent } from '../types/simple-student-type';
@@ -141,7 +140,7 @@ export class ListComponent implements OnInit {
         // else add it (and re sort table)
         this.students.sort((s1: SimpleStudent, s2: SimpleStudent) => s1.id - s2.id)
       } else {
-        console.log(`No result, lunch time`)
+        // console.log(`No result, lunch time`)
       }
     })
   }

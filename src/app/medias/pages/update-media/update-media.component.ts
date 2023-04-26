@@ -68,7 +68,7 @@ export class UpdateMediaComponent implements OnInit {
     private _fileUpload: FileUploadService,
     @Optional() @Inject(MAT_DIALOG_DATA) public onModal: boolean,
     @Optional() public dialogRef: MatDialogRef<CreateMediaComponent>
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // Retrive the ID from th query params
@@ -84,7 +84,7 @@ export class UpdateMediaComponent implements OnInit {
         this.mediaForm = this._mediaFormService.form;
       },
       error: (error) => {
-        console.log("Something went wrong");
+        // console.log("Something went wrong");
       },
     });
   }
@@ -103,8 +103,8 @@ export class UpdateMediaComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log("update");
-    console.log(this.mediaForm.value);
+    // console.log("update");
+    // console.log(this.mediaForm.value);
     const typeMediaValue = this.mediaForm.get("typeMedia")?.value;
     if (
       typeMediaValue &&
@@ -124,7 +124,7 @@ export class UpdateMediaComponent implements OnInit {
 
   selectFile(event: any): void {
     this.selectedFiles = event.target.files;
-    console.log(this.selectedFiles);
+    // console.log(this.selectedFiles);
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
       if (file) {
@@ -153,17 +153,17 @@ export class UpdateMediaComponent implements OnInit {
     this.onModal
       ? this.dialogRef.close(media)
       : this._mediaService
-          .update(media)
-          .pipe(take(1))
-          .subscribe({
-            next: (response: any) => {
-              this._router.navigate(["dashboard/conceptor/media"]);
-              this._snackBar.open(`"${media.title}" was created.`, "Close");
-            },
-            complete: () => {
-              this.mediaForm.reset();
-            },
-          });
+        .update(media)
+        .pipe(take(1))
+        .subscribe({
+          next: (response: any) => {
+            this._router.navigate(["dashboard/conceptor/media"]);
+            this._snackBar.open(`"${media.title}" was created.`, "Close");
+          },
+          complete: () => {
+            this.mediaForm.reset();
+          },
+        });
   }
 
   private async submitMediaWithFile(): Promise<void> {
@@ -177,7 +177,7 @@ export class UpdateMediaComponent implements OnInit {
           const response = await lastValueFrom(
             this._fileUpload.uploadFile(this.currentFile)
           );
-          console.log(response);
+          // console.log(response);
           const mediaUrl = response.toString();
           const typeMediaID = this.options.get(this.mediaForm.value.typeMedia);
           const conceptor: Member =
@@ -199,20 +199,20 @@ export class UpdateMediaComponent implements OnInit {
           this.onModal
             ? this.dialogRef.close(media)
             : this._mediaService
-                .update(media)
-                .pipe(take(1))
-                .subscribe({
-                  next: (response: any) => {
-                    this._router.navigate(["dashboard/conceptor/media"]);
-                    this._snackBar.open(
-                      `"${media.title}" was updated.`,
-                      "Close"
-                    );
-                  },
-                  complete: () => {
-                    this.mediaForm.reset();
-                  },
-                });
+              .update(media)
+              .pipe(take(1))
+              .subscribe({
+                next: (response: any) => {
+                  this._router.navigate(["dashboard/conceptor/media"]);
+                  this._snackBar.open(
+                    `"${media.title}" was updated.`,
+                    "Close"
+                  );
+                },
+                complete: () => {
+                  this.mediaForm.reset();
+                },
+              });
           this.fileInfos = this._fileUpload.getFiles();
         } catch (error) {
           this.message = "Could not upload the file!";

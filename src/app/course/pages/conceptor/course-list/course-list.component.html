@@ -109,14 +109,30 @@
               class="grid grid-cols-2 gap-4 dark:text-white mt-4"
             >
               <p>{{ media.title }}</p>
-              <div class="flex justify-end">
+              <div class="flex justify-end items-center">
                 <p class="mr-2">{{ media.typeMedia.title }}</p>
                 <p class="w-10 flex justify-center">|</p>
                 <p class="ml-2 w-20">
                   {{ media.duration * 1000 | date : "mm" }}min
                   {{ media.duration * 1000 | date : "ss" }}s
                 </p>
+                <button
+                  [ngClass]="{ correctButton: course.modules?.length == 0 }"
+                  mat-button
+                  color="primary"
+                  class="dark:text-white"
+                  mat-icon-button
+                  [matMenuTriggerFor]="menuMedia"
+                  (click)="$event.stopPropagation()"
+                >
+                  ...
+                </button>
               </div>
+              <mat-menu #menuMedia="matMenu" class="dark:bg-neutral-600">
+                <button mat-menu-item (click)="viewMedia(media.id!, media)">
+                  <span class="dark:text-white">View media</span>
+                </button>
+              </mat-menu>
             </mat-panel-description>
           </ng-container>
 

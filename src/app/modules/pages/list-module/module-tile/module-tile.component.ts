@@ -29,7 +29,7 @@ export class ModuleTileComponent implements OnInit {
 
   deleteModule(moduleID: number | undefined): void {
     const data: ModuleType | undefined = this.moduleInfo;
-    console.log("delte!")
+    // console.log("delte!")
     this._moduleService
       .delete(moduleID!)
       .pipe(take(1))

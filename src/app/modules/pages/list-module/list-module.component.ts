@@ -1,12 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { LocalStorageService } from "src/app/core/services/local-storage.service";
-import { ModuleType } from "src/app/course/types/module-type";
-import { MediaService } from "src/app/medias/services/media.service";
-import { Member } from "src/app/user/models/member";
-import { ModuleService } from "../../services/module.service";
-import { ToastService } from "src/app/core/toast.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { take } from "rxjs";
+import { LocalStorageService } from "src/app/core/services/local-storage.service";
+import { ToastService } from "src/app/core/toast.service";
+import { ModuleType } from "src/app/course/types/module-type";
+import { Member } from "src/app/user/models/member";
+import { ModuleService } from "../../services/module.service";
 
 @Component({
   selector: "app-list-module",
@@ -27,7 +26,7 @@ export class ListModuleComponent implements OnInit {
     private _moduleService: ModuleService,
     private _toastService: ToastService,
     private _snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this._moduleService
@@ -35,7 +34,7 @@ export class ListModuleComponent implements OnInit {
       .pipe(take(1))
       .subscribe((response: ModuleType[]) => {
         this.modules = response;
-        console.log(this.modules);
+        // console.log(this.modules);
         this.sortByName(this.nameOrder);
         this.sortByModules(this.modulesOrder);
       });

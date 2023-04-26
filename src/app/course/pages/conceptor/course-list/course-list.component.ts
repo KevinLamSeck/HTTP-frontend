@@ -1,23 +1,23 @@
-import { HttpResponse } from "@angular/common/http";
-import { Component, OnInit } from "@angular/core";
-import { MatDialog } from "@angular/material/dialog";
-import { MatExpansionPanel } from "@angular/material/expansion";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { Router } from "@angular/router";
-import { take } from "rxjs";
-import { LocalStorageService } from "src/app/core/services/local-storage.service";
-import { ToastService } from "src/app/core/toast.service";
-import { CourseService } from "src/app/course/services/course.service";
-import { CourseListType } from "src/app/course/types/course-list-type";
-import { CourseType } from "src/app/course/types/course-type";
-import { ModuleType } from "src/app/course/types/module-type";
-import { ModuleService } from "src/app/modules/services/module.service";
-import { StudentService } from "src/app/student/services/student.service";
+import { HttpResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatExpansionPanel } from '@angular/material/expansion';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { take } from 'rxjs';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { ToastService } from 'src/app/core/toast.service';
+import { CourseService } from 'src/app/course/services/course.service';
+import { CourseListType } from 'src/app/course/types/course-list-type';
+import { CourseType } from 'src/app/course/types/course-type';
+import { ModuleType } from 'src/app/course/types/module-type';
+import { ModuleService } from 'src/app/modules/services/module.service';
+import { StudentService } from 'src/app/student/services/student.service';
 
 @Component({
-  selector: "app-course-list",
-  templateUrl: "./course-list.component.html",
-  styleUrls: ["./course-list.component.scss"],
+  selector: 'app-course-list',
+  templateUrl: './course-list.component.html',
+  styleUrls: ['./course-list.component.scss'],
 })
 export class CourseListComponent implements OnInit {
   public courses: Array<CourseListType> = [];
@@ -37,7 +37,7 @@ export class CourseListComponent implements OnInit {
     private _dialog: MatDialog,
     private _router: Router,
     private _snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this._courseService
@@ -45,11 +45,11 @@ export class CourseListComponent implements OnInit {
       .pipe(take(1))
       .subscribe((response: CourseListType[]) => {
         this.courses = response;
-        console.log(response);
+        // console.log(response);
         // this.coursesConceptor = this.coursesConceptor.sort(
         //   (a: any, b: any) => (a.published - b.published) * -1
         // );
-        console.log(this.courses);
+        // console.log(this.courses);
 
         this.coursesConceptor.forEach((c) => {
           c.modules = c.modules?.sort(
@@ -62,14 +62,14 @@ export class CourseListComponent implements OnInit {
           .pipe(take(1))
           .subscribe((response: any) => {
             this.coursesConceptor = response.courses;
-            // console.log(this.coursesConceptor);
+            // // console.log(this.coursesConceptor);
             this.coursesConceptor = this.coursesConceptor.sort(
               (a: any, b: any) => (a.published - b.published) * -1
             );
             this.coursesConceptor.forEach((c) => {
               this.courses.splice(this.courses.indexOf(c), 1);
-              console.log(c);
-              console.log(this.courses);
+              // console.log(c);
+              //console.log(this.courses);
 
               c.modules = c.modules?.sort(
                 (s1: ModuleType, s2: ModuleType) => (s1.order! - s2.order!) * 1
@@ -80,20 +80,20 @@ export class CourseListComponent implements OnInit {
 
     //trie des modules
 
-    // console.log(this.coursesConceptor);
+    // // console.log(this.coursesConceptor);
   }
   // recuperer tous les cours associer aux conceptor et les mettre dans coursesConceptor
 
-  private _pathForConceptor: String[] = ["/", "dashboard", "conceptor"];
+  private _pathForConceptor: String[] = ['/', 'dashboard', 'conceptor'];
 
   goToUpdateCourse(course: any): void {
-    sessionStorage.setItem("ModifiedCourse", JSON.stringify(course));
-    this._router.navigate([...this._pathForConceptor, "course", "edit"]);
+    sessionStorage.setItem('ModifiedCourse', JSON.stringify(course));
+    this._router.navigate([...this._pathForConceptor, 'course', 'edit']);
   }
 
   goToViewCourse(course: any): void {
-    sessionStorage.setItem("ModifiedCourse", JSON.stringify(course));
-    this._router.navigate([...this._pathForConceptor, "course", "view"]);
+    sessionStorage.setItem('ModifiedCourse', JSON.stringify(course));
+    this._router.navigate([...this._pathForConceptor, 'course', 'view']);
   }
 
   doRemoveCourseConceptor(course: CourseListType): void {
@@ -102,9 +102,8 @@ export class CourseListComponent implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: (response: HttpResponse<any>) => {
-          const message: string = `${course.title} was removed. ${
-            course.modules!.length
-          } modules were affected`;
+          const message: string = `${course.title} was removed. ${course.modules!.length
+            } modules were affected`;
           this._toastService.show(message);
         },
         error: (error: any) => {
@@ -141,7 +140,7 @@ export class CourseListComponent implements OnInit {
     course.published = published;
     course.creator = { id: this.creatorId };
 
-    console.log(course);
+    // console.log(course);
     this._courseService.update(course).subscribe((courseType: CourseType) => {
       this.coursesConceptor = this.coursesConceptor.sort(
         (a: any, b: any) => (a.published - b.published) * -1
@@ -150,7 +149,7 @@ export class CourseListComponent implements OnInit {
   }
   openSimpleDialog(templateRef: any) {
     this.validationDialog = this._dialog.open(templateRef, {
-      width: "300px",
+      width: '300px',
     });
   }
   closeSimpleDialog() {
@@ -164,7 +163,7 @@ export class CourseListComponent implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: (response: HttpResponse<any>) => {
-          this._snackBar.open(`The module was deleted.`, "Close");
+          this._snackBar.open(`The module was deleted.`, 'Close');
           this.ngOnInit();
         },
       });
@@ -175,5 +174,9 @@ export class CourseListComponent implements OnInit {
   }
   viewModule(id: number) {
     this._router.navigate([`dashboard/conceptor/module/${id}/view`]);
+  }
+  viewMedia(id: number, media: any) {
+    sessionStorage.setItem('ViewMedia', JSON.stringify(media));
+    this._router.navigate([`dashboard/conceptor/media/${id}/view`]);
   }
 }

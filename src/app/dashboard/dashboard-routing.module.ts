@@ -6,13 +6,11 @@ import { ConceptorComponent } from './pages/conceptor/conceptor.component';
 import { ManagerComponent } from './pages/manager/manager.component';
 import { StudentComponent } from './pages/student/student.component';
 
-
 @NgModule({
   imports: [[RouterModule.forChild(DashboardRoutingModule.routes)]],
   exports: [RouterModule],
 })
 export class DashboardRoutingModule {
-
   // static _currentUser: string = LocalStorageService.getInstance().getMemberFromStorage().getRoleName().toLowerCase();
 
   public static routes: Routes = [
@@ -24,43 +22,60 @@ export class DashboardRoutingModule {
       path: '',
       component: DashboardComponent,
       canActivate: [RoleGuard],
-      data: { allowedRoles: ['CONCEPTOR', 'MANAGER', 'STUDENT'], title: 'Dashboard', breadcrumb: 'Dashboard' },
+      data: {
+        allowedRoles: ['CONCEPTOR', 'MANAGER', 'STUDENT'],
+        title: 'Dashboard',
+        breadcrumb: 'Dashboard',
+      },
       children: [
-        // {
-        //   path: '',
-        //   redirectTo: 'conceptor',
-        //   pathMatch: 'full'
-        // },
         {
           path: 'conceptor',
           component: ConceptorComponent,
           canActivate: [RoleGuard],
-          data: { allowedRoles: ['CONCEPTOR'], title: 'Dashboard | Conceptor', breadcrumb: 'Conceptor' },
+          data: {
+            allowedRoles: ['CONCEPTOR'],
+            title: 'Dashboard | Conceptor',
+            breadcrumb: 'Conceptor',
+          },
           children: [
             {
               path: 'media',
               canActivate: [RoleGuard],
-              data: { allowedRoles: ['CONCEPTOR'], title: 'Dashboard | Managed my medias', breadcrumb: 'Media' },
-              loadChildren: () => import('../medias/medias.module').then((m) => m.MediasModule),
+              data: {
+                allowedRoles: ['CONCEPTOR'],
+                title: 'Dashboard | Managed my medias',
+              },
+              loadChildren: () =>
+                import('../medias/medias.module').then((m) => m.MediasModule),
             },
             {
               path: 'module',
               canActivate: [RoleGuard],
-              data: { allowedRoles: ['CONCEPTOR'], title: 'Dashboard | Managed my modules', breadcrumb: 'Module' },
-              loadChildren: () => import('../modules/modules.module').then((m) => m.ModulesModule),
+              data: {
+                allowedRoles: ['CONCEPTOR'],
+                title: 'Dashboard | Managed my modules',
+              },
+              loadChildren: () =>
+                import('../modules/modules.module').then(
+                  (m) => m.ModulesModule
+                ),
             },
             {
               path: 'course',
               canActivate: [RoleGuard],
-              data: { allowedRoles: ['CONCEPTOR'], title: 'Dashboard | Managed my courses', breadcrumb: 'Course' },
-              loadChildren: () => import('../course/course.module').then((m) => m.CourseModule),
+              data: {
+                allowedRoles: ['CONCEPTOR'],
+                title: 'Dashboard | Managed my courses',
+              },
+              loadChildren: () =>
+                import('../course/course.module').then((m) => m.CourseModule),
             },
             {
               path: '**',
               redirectTo: '/dashboard/conceptor',
-              pathMatch: 'full'
-            }
-          ]
+              pathMatch: 'full',
+            },
+          ],
         },
         {
           path: 'manager',
@@ -73,9 +88,8 @@ export class DashboardRoutingModule {
           component: StudentComponent,
           canActivate: [RoleGuard],
           data: { allowedRoles: ['STUDENT'], title: 'Dashboard | Student' },
-        }
+        },
       ],
     },
   ];
-
 }

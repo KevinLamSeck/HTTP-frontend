@@ -16,6 +16,7 @@ export class ListMediaComponent implements OnInit {
   public medias: MediaType[] = [];
   public toggleFilter: boolean = false;
   public mediasFiltered: MediaType[] = [];
+  public selectedType: string | null = null;
 
   public typeMediasChips: string[] = [
     'Video',
@@ -54,14 +55,27 @@ export class ListMediaComponent implements OnInit {
   }
 
   filterByType(type: string): void {
-    this.mediasFiltered = this.medias;
-    this.mediasFiltered = this.mediasFiltered.filter(
+    if (this.selectedType === type) {
+      // If the clicked type is already selected, toggle the selection off
+      this.selectedType = null;
+      this.mediasFiltered = this.medias;
+    } else {
+      // Otherwise, set the clicked type as selected and filter the medias by type
+      this.selectedType = type;
+      this.mediasFiltered = this.medias.filter(
+        (media) => media.typeMedia.title.toLowerCase() === type.toLowerCase()
+      );
+    }
+  }
+
+  isTypeMediaHasMedias(type: string): boolean {
+    return this.medias.some(
       (media) => media.typeMedia.title.toLowerCase() === type.toLowerCase()
     );
   }
 
   handleMediaInfoChange(mediaDeleted: MediaType): void {
-    this.medias = this.medias.filter((media) => media.id !== mediaDeleted.id);
+    this.mediasFiltered = this.mediasFiltered.filter((media) => media.id !== mediaDeleted.id);
     this._snackBar.open(`"${mediaDeleted!.title}" was deleted.`, 'Close');
   }
 }

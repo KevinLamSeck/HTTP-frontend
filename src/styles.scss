@@ -169,7 +169,7 @@ input:-webkit-autofill:active {
 // Typo styles
 
 h1 {
-  @apply text-4xl font-bold;
+  @apply text-2xl md:text-4xl font-bold;
   @apply dark:text-neutral-200;
 }
 

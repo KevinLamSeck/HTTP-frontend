@@ -12,7 +12,7 @@ import { ToastService } from './../../core/toast.service';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent implements OnInit {
+export default class ListMyCourseComponent implements OnInit {
   public courses: Array<CourseListType> = [];
 
   constructor(

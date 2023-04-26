@@ -15,6 +15,8 @@ import { take } from "rxjs";
 })
 export class ListModuleComponent implements OnInit {
   public modules: ModuleType[] = [];
+  public nameOrder: boolean = true;
+  public modulesOrder: boolean = true;
 
   private _localStorageService: LocalStorageService =
     LocalStorageService.getInstance();
@@ -32,11 +34,26 @@ export class ListModuleComponent implements OnInit {
       .findByCreator(this._currentUser.id!)
       .pipe(take(1))
       .subscribe((response: ModuleType[]) => {
-        this.modules = response.sort(
-          (a, b) => (a.medias.length - b.medias.length) * -1
-        );
+        this.modules = response;
         console.log(this.modules);
+        this.sortByName(this.nameOrder);
+        this.sortByModules(this.modulesOrder);
       });
+  }
+  sortByModules(ASC: boolean): void {
+    console.log(this.modulesOrder + " // " + this.nameOrder);
+    this.modulesOrder = ASC;
+    const orderNumber: number = ASC ? -1 : 1;
+    this.modules = this.modules.sort(
+      (a, b) => (a.medias.length - b.medias.length) * orderNumber
+    );
+  }
+  sortByName(ASC: boolean): void {
+    this.nameOrder = ASC;
+    const orderNumber: number = ASC ? 1 : -1;
+    this.modules = this.modules.sort(
+      (a, b) => a.name.localeCompare(b.name) * orderNumber
+    );
   }
 
   handleModuleInfoChange(moduleDeleted: ModuleType) {

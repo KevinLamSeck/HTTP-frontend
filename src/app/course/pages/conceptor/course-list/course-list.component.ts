@@ -1,23 +1,23 @@
-import { HttpResponse } from "@angular/common/http";
-import { Component, OnInit } from "@angular/core";
-import { MatDialog } from "@angular/material/dialog";
-import { MatExpansionPanel } from "@angular/material/expansion";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { Router } from "@angular/router";
-import { take } from "rxjs";
-import { LocalStorageService } from "src/app/core/services/local-storage.service";
-import { ToastService } from "src/app/core/toast.service";
-import { CourseService } from "src/app/course/services/course.service";
-import { CourseListType } from "src/app/course/types/course-list-type";
-import { CourseType } from "src/app/course/types/course-type";
-import { ModuleType } from "src/app/course/types/module-type";
-import { ModuleService } from "src/app/modules/services/module.service";
-import { StudentService } from "src/app/student/services/student.service";
+import { HttpResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatExpansionPanel } from '@angular/material/expansion';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { take } from 'rxjs';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { ToastService } from 'src/app/core/toast.service';
+import { CourseService } from 'src/app/course/services/course.service';
+import { CourseListType } from 'src/app/course/types/course-list-type';
+import { CourseType } from 'src/app/course/types/course-type';
+import { ModuleType } from 'src/app/course/types/module-type';
+import { ModuleService } from 'src/app/modules/services/module.service';
+import { StudentService } from 'src/app/student/services/student.service';
 
 @Component({
-  selector: "app-course-list",
-  templateUrl: "./course-list.component.html",
-  styleUrls: ["./course-list.component.scss"],
+  selector: 'app-course-list',
+  templateUrl: './course-list.component.html',
+  styleUrls: ['./course-list.component.scss'],
 })
 export class CourseListComponent implements OnInit {
   public courses: Array<CourseListType> = [];
@@ -79,16 +79,16 @@ export class CourseListComponent implements OnInit {
   }
   // recuperer tous les cours associer aux conceptor et les mettre dans coursesConceptor
 
-  private _pathForConceptor: String[] = ["/", "dashboard", "conceptor"];
+  private _pathForConceptor: String[] = ['/', 'dashboard', 'conceptor'];
 
   goToUpdateCourse(course: any): void {
-    sessionStorage.setItem("ModifiedCourse", JSON.stringify(course));
-    this._router.navigate([...this._pathForConceptor, "course", "edit"]);
+    sessionStorage.setItem('ModifiedCourse', JSON.stringify(course));
+    this._router.navigate([...this._pathForConceptor, 'course', 'edit']);
   }
 
   goToViewCourse(course: any): void {
-    sessionStorage.setItem("ModifiedCourse", JSON.stringify(course));
-    this._router.navigate([...this._pathForConceptor, "course", "view"]);
+    sessionStorage.setItem('ModifiedCourse', JSON.stringify(course));
+    this._router.navigate([...this._pathForConceptor, 'course', 'view']);
   }
 
   doRemoveCourseConceptor(course: CourseListType): void {
@@ -143,7 +143,7 @@ export class CourseListComponent implements OnInit {
   }
   openSimpleDialog(templateRef: any) {
     this.validationDialog = this._dialog.open(templateRef, {
-      width: "300px",
+      width: '300px',
     });
   }
   closeSimpleDialog() {
@@ -157,7 +157,7 @@ export class CourseListComponent implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: (response: HttpResponse<any>) => {
-          this._snackBar.open(`The module was deleted.`, "Close");
+          this._snackBar.open(`The module was deleted.`, 'Close');
           this.ngOnInit();
         },
       });
@@ -168,5 +168,9 @@ export class CourseListComponent implements OnInit {
   }
   viewModule(id: number) {
     this._router.navigate([`dashboard/conceptor/module/${id}/view`]);
+  }
+  viewMedia(id: number, media: any) {
+    sessionStorage.setItem('ViewMedia', JSON.stringify(media));
+    this._router.navigate([`dashboard/conceptor/media/${id}/view`]);
   }
 }

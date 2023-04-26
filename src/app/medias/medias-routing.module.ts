@@ -4,6 +4,7 @@ import { RoleGuard } from '../dashboard/guards/role.guard';
 import { CreateMediaComponent } from './pages/create-media/create-media.component';
 import { ListMediaComponent } from './pages/list-media/list-media.component';
 import { UpdateMediaComponent } from './pages/update-media/update-media.component';
+import { ViewMediaComponent } from './pages/view-media/view-media.component';
 
 @NgModule({
   imports: [RouterModule.forChild(MediasRoutingModule.routes)],
@@ -30,6 +31,11 @@ export class MediasRoutingModule {
         title: 'Dashboard | Update Media',
         breadcrumb: 'Update Media',
       },
+    },
+    {
+      path: ':id/view',
+      data: { title: 'Dashboard | View media', breadcrumb: 'View media' },
+      component: ViewMediaComponent,
     },
     {
       path: '',

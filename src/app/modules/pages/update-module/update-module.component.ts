@@ -1,12 +1,12 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MediaType } from 'src/app/course/types/media-type';
+import { ModuleType } from 'src/app/course/types/module-type';
 import { MediaService } from 'src/app/medias/services/media.service';
 import { ModuleService } from '../../services/module.service';
-import { ModuleType } from 'src/app/course/types/module-type';
-import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-update-module',
@@ -34,7 +34,6 @@ export class UpdateModuleComponent implements OnInit {
   /** FORM METHODS */
 
   ngOnInit(): void {
-    console.log(this._route.snapshot.paramMap.get('id'))
     const id: number = +this._route.snapshot.paramMap.get('id')!
     this._moduleService.findOne(id)
       .subscribe({
@@ -43,11 +42,11 @@ export class UpdateModuleComponent implements OnInit {
           this.medias = module.medias
           this.conceptor = module.creator
           this.buildForm()
-          console.log(this.module)
+          // console.log(this.module)
           this.isDataAvailable = true
         },
         error: (error: any) => {
-          console.log('Something went wrong')
+          // console.log('Something went wrong')
         }
       })
 
@@ -88,7 +87,7 @@ export class UpdateModuleComponent implements OnInit {
     }
     this._moduleService.update(module)
       .subscribe((response: HttpResponse<any>) => {
-        console.log(response)
+        // console.log(response)
         this._snackBar.open(`"${module.name}" was updated.`, "Close");
         this._router.navigate(['/'])
       })
@@ -114,7 +113,7 @@ export class UpdateModuleComponent implements OnInit {
           this._snackBar.open(`"${media.title}" was added.`, "Close");
         },
         error: (error: any) => {
-          console.log('Something went wrong')
+          // console.log('Something went wrong')
         }
       })
   }
@@ -145,7 +144,7 @@ export class UpdateModuleComponent implements OnInit {
           this._snackBar.open(`"${media.title}" was created.`, "Close");
         },
         error: (error: any) => {
-          console.log('Something went wrong')
+          // console.log('Something went wrong')
         }
       })
   }

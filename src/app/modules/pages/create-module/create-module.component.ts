@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { MediaType } from 'src/app/course/types/media-type';
 import { ModuleType } from 'src/app/course/types/module-type';
 import { MediaService } from 'src/app/medias/services/media.service';
 import { ModuleService } from '../../services/module.service';
-import { Router } from '@angular/router';
-import { LocalStorageService } from 'src/app/core/services/local-storage.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-module',
@@ -89,7 +89,7 @@ export class CreateModuleComponent implements OnInit {
           this._snackBar.open(`"${media.title}" was added.`, "Close");
         },
         error: (error: any) => {
-          console.log('Something went wrong')
+          // console.log('Something went wrong')
         }
       })
   }
@@ -100,7 +100,6 @@ export class CreateModuleComponent implements OnInit {
       1
     )
   }
-
 
   /** CREATE MEDIA METHOD */
   public showCreateMedia(): void {
@@ -120,7 +119,7 @@ export class CreateModuleComponent implements OnInit {
           this._snackBar.open(`"${media.title}" was created.`, "Close");
         },
         error: (error: any) => {
-          console.log('Something went wrong')
+          // console.log('Something went wrong')
         }
       })
   }

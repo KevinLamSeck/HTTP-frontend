@@ -3,7 +3,10 @@
     <h2>My own list</h2>
   </div>
 
-  <div class="col xs1 course-number">{{ coursesConceptor.length }} courses</div>
+  <div class="col xs1 course-number">
+    {{ coursesConceptor.length }}
+    {{ coursesConceptor.length <= 1 ? " course" : " courses" }}
+  </div>
 </div>
 
 <div class="mx-10">
@@ -169,7 +172,9 @@
 <!-- Other list -->
 <div class="row m-10">
   <h2 class="col xs11 course-title">Other list</h2>
-  <div class="col xs1 course-number">{{ courses.length }} courses</div>
+  <div class="col xs1 course-number">
+    {{ courses.length }} {{ courses.length <= 1 ? " course" : " courses" }}
+  </div>
 </div>
 
 <div class="mx-10">

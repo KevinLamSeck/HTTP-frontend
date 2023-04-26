@@ -1,12 +1,11 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { take } from 'rxjs';
-import { ToastService } from './../../core/toast.service';
 import { CourseService } from '../services/course.service';
 import { CourseListType } from '../types/course-list-type';
 import { ModuleType } from '../types/module-type';
-import { log } from 'console';
-import { Router } from '@angular/router';
+import { ToastService } from './../../core/toast.service';
 
 @Component({
   selector: 'app-list',
@@ -19,8 +18,8 @@ export class ListComponent implements OnInit {
   constructor(
     private _courseService: CourseService,
     private _toastService: ToastService,
-    private _router : Router
-  ) {}
+    private _router: Router
+  ) { }
 
   ngOnInit(): void {
     this._courseService
@@ -30,9 +29,9 @@ export class ListComponent implements OnInit {
         this.courses = response;
       });
   }
-  goToAddCourse():void{
+  goToAddCourse(): void {
     sessionStorage.removeItem("ModifiedCourse");
-    console.log("heho");
+    // console.log("heho");
     this._router.navigate(['/', 'course', 'add']);
   }
 
@@ -58,9 +57,8 @@ export class ListComponent implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: (response: HttpResponse<any>) => {
-          const message: string = `${course.title} was removed. ${
-            course.modules!.length
-          } modules were affected`;
+          const message: string = `${course.title} was removed. ${course.modules!.length
+            } modules were affected`;
           this._toastService.show(message);
         },
         error: (error: any) => {

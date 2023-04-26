@@ -1,12 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { LocalStorageService } from "src/app/core/services/local-storage.service";
-import { ModuleType } from "src/app/course/types/module-type";
-import { MediaService } from "src/app/medias/services/media.service";
-import { Member } from "src/app/user/models/member";
-import { ModuleService } from "../../services/module.service";
-import { ToastService } from "src/app/core/toast.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { take } from "rxjs";
+import { LocalStorageService } from "src/app/core/services/local-storage.service";
+import { ToastService } from "src/app/core/toast.service";
+import { ModuleType } from "src/app/course/types/module-type";
+import { Member } from "src/app/user/models/member";
+import { ModuleService } from "../../services/module.service";
 
 @Component({
   selector: "app-list-module",
@@ -15,6 +14,8 @@ import { take } from "rxjs";
 })
 export class ListModuleComponent implements OnInit {
   public modules: ModuleType[] = [];
+  public nameOrder: boolean = true;
+  public modulesOrder: boolean = true;
 
   private _localStorageService: LocalStorageService =
     LocalStorageService.getInstance();
@@ -25,18 +26,33 @@ export class ListModuleComponent implements OnInit {
     private _moduleService: ModuleService,
     private _toastService: ToastService,
     private _snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this._moduleService
       .findByCreator(this._currentUser.id!)
       .pipe(take(1))
       .subscribe((response: ModuleType[]) => {
-        this.modules = response.sort(
-          (a, b) => (a.medias.length - b.medias.length) * -1
-        );
-        console.log(this.modules);
+        this.modules = response;
+        // console.log(this.modules);
+        this.sortByName(this.nameOrder);
+        this.sortByModules(this.modulesOrder);
       });
+  }
+  sortByModules(ASC: boolean): void {
+    console.log(this.modulesOrder + " // " + this.nameOrder);
+    this.modulesOrder = ASC;
+    const orderNumber: number = ASC ? -1 : 1;
+    this.modules = this.modules.sort(
+      (a, b) => (a.medias.length - b.medias.length) * orderNumber
+    );
+  }
+  sortByName(ASC: boolean): void {
+    this.nameOrder = ASC;
+    const orderNumber: number = ASC ? 1 : -1;
+    this.modules = this.modules.sort(
+      (a, b) => a.name.localeCompare(b.name) * orderNumber
+    );
   }
 
   handleModuleInfoChange(moduleDeleted: ModuleType) {

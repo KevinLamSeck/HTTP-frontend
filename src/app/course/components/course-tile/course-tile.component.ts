@@ -24,7 +24,7 @@ export class CourseTileComponent implements OnInit {
 
   public revealOrHide(course: CourseListType): void {
     course.isSelected = !course.isSelected;
-    console.log(`Course was toggled : ${course.isSelected}`);
+    // console.log(`Course was toggled : ${course.isSelected}`);
     this.onToggleCourse.emit(course);
   }
 
@@ -35,7 +35,7 @@ export class CourseTileComponent implements OnInit {
 
   onUpdateClick(course: any): void {
     sessionStorage.setItem('ModifiedCourse', JSON.stringify(course));
-    console.log('heho2');
+    // console.log('heho2');
     this._router.navigate(['/', 'course', 'add']); //go to course with the modified course stocked
   }
 

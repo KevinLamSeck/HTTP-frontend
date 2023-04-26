@@ -13,7 +13,7 @@ export class TileComponent implements OnInit {
   constructor(private _router: Router) { }
 
   ngOnInit(): void {
-    // console.log(this.tileInfo.svg);
+    // // console.log(this.tileInfo.svg);
   }
 
   public onClick(object: any): void {

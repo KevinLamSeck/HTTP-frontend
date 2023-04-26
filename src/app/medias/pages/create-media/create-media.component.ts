@@ -74,7 +74,7 @@ export class CreateMediaComponent implements OnInit {
     private _fileUpload: FileUploadService,
     @Optional() @Inject(MAT_DIALOG_DATA) public onModal: boolean,
     @Optional() public dialogRef: MatDialogRef<CreateMediaComponent>
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.mediaForm = this._formBuilder.group({
@@ -115,7 +115,7 @@ export class CreateMediaComponent implements OnInit {
 
   selectFile(event: any): void {
     this.selectedFiles = event.target.files;
-    console.log(this.selectedFiles);
+    // console.log(this.selectedFiles);
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
       if (file) {
@@ -143,18 +143,19 @@ export class CreateMediaComponent implements OnInit {
     this.onModal
       ? this.dialogRef.close(media)
       : this._mediaService
-          .add(media)
-          .pipe(take(1))
-          .subscribe({
-            next: (response: any) => {
-              // TODO Display Success Message
-              console.log(response);
-              this._snackBar.open(`"${media.title}" was created.`, "Close");
-            },
-            complete: () => {
-              this.mediaForm.reset();
-            },
-          });
+        .add(media)
+        .pipe(take(1))
+        .subscribe({
+          next: (response: any) => {
+            // TODO Display Success Message
+            // console.log(response);
+            this._snackBar.open(`"${media.title}" was created.`, "Close");
+            this._router.navigate(["/"]);
+          },
+          complete: () => {
+            this.mediaForm.reset();
+          },
+        });
   }
   onBack() {
     this.onModal
@@ -172,7 +173,7 @@ export class CreateMediaComponent implements OnInit {
           const response = await lastValueFrom(
             this._fileUpload.uploadFile(this.currentFile)
           );
-          console.log(response);
+          // console.log(response);
           const mediaUrl = response.toString();
           const typeMediaID = this.options.get(this.mediaForm.value.typeMedia);
           const conceptor: Member =
@@ -193,22 +194,23 @@ export class CreateMediaComponent implements OnInit {
           this.onModal
             ? this.dialogRef.close(media)
             : this._mediaService
-                .add(media)
-                .pipe(take(1))
-                .subscribe({
-                  next: (response: any) => {
-                    // TODO Display Success Message
-                    console.log(response);
+              .add(media)
+              .pipe(take(1))
+              .subscribe({
+                next: (response: any) => {
+                  // TODO Display Success Message
+                  // console.log(response);
 
-                    this._snackBar.open(
-                      `"${media.title}" was created.`,
-                      "Close"
-                    );
-                  },
-                  complete: () => {
-                    this.mediaForm.reset();
-                  },
-                });
+                  this._snackBar.open(
+                    `"${media.title}" was created.`,
+                    "Close"
+                  );
+                  this._router.navigate(["/"]);
+                },
+                complete: () => {
+                  this.mediaForm.reset();
+                },
+              });
           this.fileInfos = this._fileUpload.getFiles();
         } catch (error) {
           this.message = "Could not upload the file!";

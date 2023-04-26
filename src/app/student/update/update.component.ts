@@ -1,6 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { StudentModel } from '../models/student-model';
 import { StudentFormService } from '../services/student-form.service';
@@ -23,7 +23,7 @@ export class UpdateComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this._route.snapshot.paramMap.get('id'))
+    // console.log(this._route.snapshot.paramMap.get('id'))
     const id: number = +this._route.snapshot.paramMap.get('id')!
     this._service.findOne(id)
       .subscribe({
@@ -33,12 +33,12 @@ export class UpdateComponent implements OnInit {
           this.form = this._studentFormService.form
         },
         error: (error: any) => {
-          console.log('Something went wrong')
+          // console.log('Something went wrong')
         }
       })
   }
 
-  get c(): {[key: string]: AbstractControl} {
+  get c(): { [key: string]: AbstractControl } {
     return this._studentFormService.c
   }
 
@@ -53,10 +53,10 @@ export class UpdateComponent implements OnInit {
     this._service.update(this.student!)
       .subscribe({
         next: (response: HttpResponse<any>) => {
-          console.log(`Student was updated ${response.status}`)
+          // console.log(`Student was updated ${response.status}`)
         },
         error: (error: any) => {
-          console.log(JSON.stringify(error))
+          // console.log(JSON.stringify(error))
         }
       })
   }

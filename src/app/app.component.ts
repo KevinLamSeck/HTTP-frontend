@@ -32,7 +32,7 @@ export class AppComponent {
         var rt = this.getChild(this.activatedRoute);
 
         rt.data.subscribe((data: { title: string }) => {
-          // console.log(data);
+          // // console.log(data);
           this.titleService.setTitle(data.title);
         });
       });

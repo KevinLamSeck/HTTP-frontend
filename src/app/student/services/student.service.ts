@@ -39,7 +39,7 @@ export class StudentService {
     )
       .pipe(
         tap((response: any) => {
-          // console.log(JSON.stringify(response))
+          // // console.log(JSON.stringify(response))
         }),
         take(1),
         map((student: any) => student)

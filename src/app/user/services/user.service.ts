@@ -84,7 +84,7 @@ export class UserService {
       .pipe(
         take(1),
         tap((u: HttpResponse<any>) => {
-          console.log(u.body);
+          // console.log(u.body);
         })
       );
   }

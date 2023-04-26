@@ -55,7 +55,7 @@ export class MediaTileComponent implements OnInit {
         id: mediaInfos?.id,
       },
     }
-    console.log('go');
+    // console.log('go');
     // Go to edit page
     this._router.navigate(['/dashboard/conceptor/media/update'], data);
   }

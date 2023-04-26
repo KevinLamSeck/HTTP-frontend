@@ -6,15 +6,15 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { LocalStorageStrategy } from 'src/app/core/store/local-storage-strategy';
 import { SessionStorageStrategy } from 'src/app/core/store/session-storage-strategy';
+import { ToastService } from 'src/app/core/toast.service';
 import { environment } from '../../../../environments/environment';
-import { UserService } from '../../services/user.service';
-import { MatDialog } from '@angular/material/dialog';
 import { RecoveryPasswordComponent } from '../../dialogs/recovery-password/recovery-password.component';
 import { RecoveryComponent } from '../../dialogs/recovery/recovery.component';
-import { ToastService } from 'src/app/core/toast.service';
+import { UserService } from '../../services/user.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     private _router: Router,
     private _dialog: MatDialog,
     private _toastService: ToastService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const loginControl: AbstractControl = new FormControl('', [
@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
   }
 
   changeStrategy(): void {
-    console.log('stayConnected was changed');
+    // console.log('stayConnected was changed');
     if (this.stayConnected) {
       this._userService.storageStrategy = new LocalStorageStrategy();
     } else {
@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
       })
       .afterClosed()
       .subscribe((result: HttpResponse<any> | undefined) => {
-        console.log(result);
+        // console.log(result);
         if (result !== undefined) {
           this._dialog.open(RecoveryPasswordComponent, {
             height: 'flex',
@@ -86,7 +86,10 @@ export class LoginComponent implements OnInit {
       next: (response: HttpResponse<any>) => {
         this._router.navigate(['/']);
       },
-      error: (error: any) => {},
+      error: (error: any) => {
+        const messageErrorLogin: string = `Désolé vous avez rentrer des identifiants incorrects, réesayez pour avoir la banane ! :(`;
+        this._toastService.show(messageErrorLogin);
+      },
       complete: () => {
         this.form.controls['login'].setValue('');
         this.form.controls['password'].setValue('');

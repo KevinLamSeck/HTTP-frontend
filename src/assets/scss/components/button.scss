@@ -1,6 +1,7 @@
 .btn {
     @apply inline-flex cursor-pointer select-none flex-wrap items-center justify-center border-transparent text-center transition duration-200 ease-in-out;
     @apply h-10 px-4 text-sm rounded;
+    @apply rounded-xl;
     line-height: 1em;
 
     &-disabled,
@@ -34,7 +35,7 @@
         }
     }
 
-    .primary {
+    &.primary {
         @apply bg-primary-500 text-white;
         &:hover {
             @apply bg-primary-700;

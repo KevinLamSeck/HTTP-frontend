@@ -31,7 +31,7 @@ export class RoleGuard implements CanActivate {
       return false;
     }
     // The user is allowed to access this page but need to check the member's role
-    // console.log('Authorized but need to check the member\'s role');
+    // // console.log('Authorized but need to check the member\'s role');
 
     // Create a new Map object that maps each role to its corresponding URL
     // Conceptor member should be able to access /dashboard/conceptor
@@ -45,7 +45,7 @@ export class RoleGuard implements CanActivate {
     const correctUrl = urlMap.get(userRole);
     // Check if the correct URL exists and if the current URL does not start with it
     if (correctUrl && !state.url.startsWith(correctUrl)) {
-      // console.log(correctUrl);
+      // // console.log(correctUrl);
       // Navigate to the correct URL
       this._router.navigateByUrl(correctUrl);
       return false;

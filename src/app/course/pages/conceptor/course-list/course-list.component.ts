@@ -37,7 +37,7 @@ export class CourseListComponent implements OnInit {
     private _dialog: MatDialog,
     private _router: Router,
     private _snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this._courseService
@@ -45,37 +45,42 @@ export class CourseListComponent implements OnInit {
       .pipe(take(1))
       .subscribe((response: CourseListType[]) => {
         this.courses = response;
-        console.log(response);
+        // console.log(response);
         // this.coursesConceptor = this.coursesConceptor.sort(
         //   (a: any, b: any) => (a.published - b.published) * -1
         // );
-        console.log(this.courses);
+        // console.log(this.courses);
 
         this.coursesConceptor.forEach((c) => {
           c.modules = c.modules?.sort(
             (s1: ModuleType, s2: ModuleType) => (s1.order! - s2.order!) * 1
           );
         });
+
+        this._studentService
+          .findOne(this.creatorId)
+          .pipe(take(1))
+          .subscribe((response: any) => {
+            this.coursesConceptor = response.courses;
+            // // console.log(this.coursesConceptor);
+            this.coursesConceptor = this.coursesConceptor.sort(
+              (a: any, b: any) => (a.published - b.published) * -1
+            );
+            this.coursesConceptor.forEach((c) => {
+              this.courses.splice(this.courses.indexOf(c), 1);
+              // console.log(c);
+              //console.log(this.courses);
+
+              c.modules = c.modules?.sort(
+                (s1: ModuleType, s2: ModuleType) => (s1.order! - s2.order!) * 1
+              );
+            });
+          });
       });
 
-    this._studentService
-      .findOne(this.creatorId)
-      .pipe(take(1))
-      .subscribe((response: any) => {
-        this.coursesConceptor = response.courses;
-        // console.log(this.coursesConceptor);
-        this.coursesConceptor = this.coursesConceptor.sort(
-          (a: any, b: any) => (a.published - b.published) * -1
-        );
-        this.coursesConceptor.forEach((c) => {
-          c.modules = c.modules?.sort(
-            (s1: ModuleType, s2: ModuleType) => (s1.order! - s2.order!) * 1
-          );
-        });
-      });
     //trie des modules
 
-    // console.log(this.coursesConceptor);
+    // // console.log(this.coursesConceptor);
   }
   // recuperer tous les cours associer aux conceptor et les mettre dans coursesConceptor
 
@@ -97,9 +102,8 @@ export class CourseListComponent implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: (response: HttpResponse<any>) => {
-          const message: string = `${course.title} was removed. ${
-            course.modules!.length
-          } modules were affected`;
+          const message: string = `${course.title} was removed. ${course.modules!.length
+            } modules were affected`;
           this._toastService.show(message);
         },
         error: (error: any) => {
@@ -134,7 +138,7 @@ export class CourseListComponent implements OnInit {
     course.published = published;
     course.creator = { id: this.creatorId };
 
-    console.log(course);
+    // console.log(course);
     this._courseService.update(course).subscribe((courseType: CourseType) => {
       this.coursesConceptor = this.coursesConceptor.sort(
         (a: any, b: any) => (a.published - b.published) * -1

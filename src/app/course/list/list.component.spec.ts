@@ -4,7 +4,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ListComponent } from './list.component';
+import ListComponent from './list.component';
 
 describe('ListComponent', () => {
   let component: ListComponent;

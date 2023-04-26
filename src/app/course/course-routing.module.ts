@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RoleGuard } from '../dashboard/guards/role.guard';
 import { CourseHandlerComponent } from './course-handler/course-handler.component';
-import { ListComponent } from './list/list.component';
+import ListComponent from './list/list.component';
 import { CourseListComponent } from './pages/conceptor/course-list/course-list.component';
 import { ViewCourseComponent } from './pages/view-course/view-course.component';
 
@@ -48,12 +48,12 @@ export class CourseRoutingModule {
       component: CourseListComponent,
       data: { allowedRoles: ['CONCEPTOR'], title: 'Dashboard | Managed my courses', breadcrumb: 'Managed my courses' },
     },
-    {
-      path: 'list',
-      component: ListComponent,
-      canActivate: [RoleGuard],
-      data: { allowedRoles: ['MANAGER'], title: 'Dashboard | All Course', breadcrumb: 'All Course' },
-    },
+    // {
+    //   path: 'dashboard/student/list',
+    //   component: ListComponent,
+    //   // canActivate: [RoleGuard],
+    //   // data: { allowedRoles: ['STU'], title: 'Dashboard | All Course', breadcrumb: 'All Course' },
+    // },
     // {
     //   path: '**',
     //   redirectTo: 'list',

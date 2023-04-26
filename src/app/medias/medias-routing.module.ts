@@ -12,43 +12,34 @@ import { UpdateMediaComponent } from './pages/update-media/update-media.componen
 export class MediasRoutingModule {
   public static routes: Routes = [
     {
-      path: '',
+      path: 'add',
+      component: CreateMediaComponent,
       canActivate: [RoleGuard],
       data: {
         allowedRoles: ['CONCEPTOR', 'MANAGER'],
+        title: 'Dashboard | Add Media',
+        breadcrumb: 'Create Media',
       },
-      children: [
-        {
-          path: 'add',
-          component: CreateMediaComponent,
-          canActivate: [RoleGuard],
-          data: {
-            allowedRoles: ['CONCEPTOR', 'MANAGER'],
-            title: 'Dashboard | Add Media',
-            breadcrumb: 'Create Media',
-          },
-        },
-        {
-          path: 'update',
-          component: UpdateMediaComponent,
-          canActivate: [RoleGuard],
-          data: {
-            allowedRoles: ['CONCEPTOR', 'MANAGER'],
-            title: 'Dashboard | Update Media',
-            breadcrumb: 'Update Media',
-          },
-        },
-        {
-          path: '',
-          component: ListMediaComponent,
-          canActivate: [RoleGuard],
-          data: {
-            allowedRoles: ['CONCEPTOR', 'MANAGER'],
-            title: 'Dashboard | Media Hub',
-            breadcrumb: 'Media Hub',
-          },
-        },
-      ],
+    },
+    {
+      path: 'update',
+      component: UpdateMediaComponent,
+      canActivate: [RoleGuard],
+      data: {
+        allowedRoles: ['CONCEPTOR', 'MANAGER'],
+        title: 'Dashboard | Update Media',
+        breadcrumb: 'Update Media',
+      },
+    },
+    {
+      path: '',
+      component: ListMediaComponent,
+      canActivate: [RoleGuard],
+      data: {
+        allowedRoles: ['CONCEPTOR', 'MANAGER'],
+        title: 'Dashboard | Media Hub',
+        breadcrumb: 'Media Hub',
+      },
     },
   ];
 }

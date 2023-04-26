@@ -46,9 +46,9 @@ export class CourseListComponent implements OnInit {
       .subscribe((response: CourseListType[]) => {
         this.courses = response;
         console.log(response);
-        this.coursesConceptor = this.coursesConceptor.sort(
-          (a: any, b: any) => (a.published - b.published) * -1
-        );
+        // this.coursesConceptor = this.coursesConceptor.sort(
+        //   (a: any, b: any) => (a.published - b.published) * -1
+        // );
         console.log(this.courses);
 
         this.coursesConceptor.forEach((c) => {
@@ -64,7 +64,9 @@ export class CourseListComponent implements OnInit {
       .subscribe((response: any) => {
         this.coursesConceptor = response.courses;
         // console.log(this.coursesConceptor);
-
+        this.coursesConceptor = this.coursesConceptor.sort(
+          (a: any, b: any) => (a.published - b.published) * -1
+        );
         this.coursesConceptor.forEach((c) => {
           c.modules = c.modules?.sort(
             (s1: ModuleType, s2: ModuleType) => (s1.order! - s2.order!) * 1
@@ -125,7 +127,6 @@ export class CourseListComponent implements OnInit {
       m.creator = newCreator;
       m.medias.forEach((media) => (media.creator = newCreator));
     });
-    console.log(course);
 
     this._courseService.copyCourse(course).subscribe();
   }

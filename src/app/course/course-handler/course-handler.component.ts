@@ -25,7 +25,7 @@ export class CourseHandlerComponent implements OnInit {
   public modules: Array<ModuleType> = [];
   public course: CourseType;
   public updateCourse: boolean = false;
-  public updateOrCreate: string = "Add";
+  public updateOrCreate: string = "Create";
 
   constructor(
     private _formBuilder: FormCourseBuilderService,
@@ -65,8 +65,7 @@ export class CourseHandlerComponent implements OnInit {
   addModule(): void {
     this._dialog
       .open(ModuleAddComponent, {
-        height: "flex",
-        width: "flex",
+        panelClass: 'modalDialog',
       })
       .afterClosed()
       .subscribe((result: ModuleType | undefined) => {
@@ -91,8 +90,7 @@ export class CourseHandlerComponent implements OnInit {
   addMedia(parent: ModuleType): void {
     this._dialog
       .open(CreateMediaComponent, {
-        height: "flex",
-        width: "flex",
+        panelClass: 'modalDialog',
         data: true,
       })
       .afterClosed()
@@ -118,8 +116,7 @@ export class CourseHandlerComponent implements OnInit {
   addExistingMedia(parent: ModuleType): void {
     this._dialog
       .open(AddMediaComponent, {
-        height: "flex",
-        width: "flex",
+        panelClass: 'modalDialog',
         data: true,
       })
       .afterClosed()
@@ -146,8 +143,7 @@ export class CourseHandlerComponent implements OnInit {
   updateModule(module: ModuleType): void {
     this._dialog
       .open(ModuleAddComponent, {
-        height: "flex",
-        width: "flex",
+        panelClass: 'modalDialog',
         data: module,
       })
       .afterClosed()
@@ -159,8 +155,7 @@ export class CourseHandlerComponent implements OnInit {
   addExistingModule(): void {
     this._dialog
       .open(ExistingModuleComponent, {
-        height: "flex",
-        width: "flex",
+        panelClass: 'modalDialog',
         data: true,
       })
       .afterClosed()

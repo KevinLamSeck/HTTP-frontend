@@ -38,7 +38,6 @@ export class ConceptorComponent implements OnInit {
         svg: MediaSVGComponent
       }
     )
-    console.log(this.tiles);
   }
 
   isConceptorRoute(): boolean {

@@ -132,7 +132,10 @@ body {
   }
 
   &.success {
-    background: rgba(20, 20, 200, 0.7);
+    background: rgb(110, 110, 231);
+    display: flex;
+    justify-content: center;
+
     .mat-simple-snack-bar-content {
       color: rgb(240, 240, 240);
     }
@@ -261,4 +264,10 @@ mat-expansion-panel.mat-expansion-panel:not([class*="mat-elevation-z"]),
 
 mat-panel-description.mat-expansion-panel-header-description .numberOfModules {
   width: 82px !important;
+}
+
+// panel class for dialogs
+
+.modalDialog {
+  @apply dark:bg-neutral-800 w-3/4;
 }

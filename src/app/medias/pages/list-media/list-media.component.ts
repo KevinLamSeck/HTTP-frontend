@@ -75,7 +75,7 @@ export class ListMediaComponent implements OnInit {
   }
 
   handleMediaInfoChange(mediaDeleted: MediaType): void {
-    this.medias = this.medias.filter((media) => media.id !== mediaDeleted.id);
+    this.mediasFiltered = this.mediasFiltered.filter((media) => media.id !== mediaDeleted.id);
     this._snackBar.open(`"${mediaDeleted!.title}" was deleted.`, 'Close');
   }
 }

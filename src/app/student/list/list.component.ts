@@ -104,7 +104,7 @@ export class ListComponent implements OnInit {
 
   public onCheckUncheckAll(): void {
     this.students = this.students.map((s) => {
-      return {...s, isSelected: this.checkUncheckAll}
+      return { ...s, isSelected: this.checkUncheckAll }
     })
 
     this.checkedStudents = this.students.filter((s: SimpleStudent) => s.isSelected);
@@ -112,10 +112,9 @@ export class ListComponent implements OnInit {
 
   private _openDialog(student: StudentModel): void {
     const dialogRef = this._matDialog.open(StudentFormComponent, {
-      width: '500px',
-      height: '500px',
+      panelClass: "modalDialog",
       hasBackdrop: false,
-      data: {student} // student is passed to dialog => {student: student}
+      data: { student } // student is passed to dialog => {student: student}
     })
 
     dialogRef.afterClosed().subscribe((result: any) => { // student was received from dialog

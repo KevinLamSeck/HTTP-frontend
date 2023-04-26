@@ -1,90 +1,70 @@
-<div class="row">
-    <div class="col xs12">
-        <ng-container *ngIf="student">
-            <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                <fieldset>
-                    <legend>Student infos</legend>
-                    <div class="row">
-                        <div class="col xs12 md6">
-                            <mat-form-field>
-                                <input matInput placeholder="Student name..." formControlName="lastName">
-                                <mat-error *ngIf="c['lastName'].errors && c['lastName'].touched">
-                                    Lastname is required
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-                        <div class="col xs12 md6">
-                            <mat-form-field>
-                                <input matInput placeholder="Student firstname..." formControlName="firstName">
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col xs12 md6">
-                            <mat-form-field>
-                                <input matInput placeholder="Student email..." formControlName="email">
-                                <mat-error *ngIf="c['email'].errors && c['email'].touched">
-                                    <span *ngIf="c['email'].hasError('required')">
-                                        Email is required
-                                    </span>
-                                    <span *ngIf="c['email'].hasError('pattern')">
-                                        Email doesn't match email pattern
-                                    </span>
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-                        <div class="col xs12 md6">
-                            <mat-form-field>
-                                <input matInput placeholder="Student phone number..." formControlName="phoneNumber">
-                            </mat-form-field>
-                        </div>
-                    </div>
-                </fieldset>
+<div>
+  <ng-container *ngIf="student">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <fieldset>
+        <legend>Student infos</legend>
 
-                <fieldset>
-                    <legend>Student credentials</legend>
-                    <div class="row">
-                        <div class="col xs12 md6">
-                            <mat-form-field>
-                                <input matInput placeholder="Student login..." formControlName="login">
-                                <mat-error *ngIf="c['login'].errors && c['login'].touched">
-                                    <span *ngIf="c['login'].hasError('required')">
-                                        Login cannot be empty
-                                    </span>
-                                    <span *ngIf="c['login'].hasError('minlength')">
-                                        Not enough chars (at least 8)
-                                    </span>
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-                        <div class="col xs12 md6">
-                            <mat-form-field>
-                                <input matInput type="password" placeholder="Student password..." formControlName="password">
-                                <mat-error *ngIf="c['password'].errors && c['password'].touched">
-                                    <span *ngIf="c['password'].hasError('required')">
-                                        Password cannot be empty
-                                    </span>
-                                    <span *ngIf="c['password'].hasError('minlength')">
-                                        Not enough chars (at least 8)
-                                    </span>
-                                    <span *ngIf="c['password'].hasError('pattern')">
-                                        Password must have upperchar, digit
-                                    </span>
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                </fieldset>
-                <div class="row">
-                    <div class="col xs5"></div>
-                    <div class="col xs2">
-                        <button mat-raised-button color="primary" [disabled]="form.invalid">Add</button>
-                    </div>
-                    <div class="col xs5"></div>
-                </div>
-                
-            </form>
-        </ng-container>
-    </div>
+
+        <mat-form-field>
+          <input matInput placeholder="Student name..." formControlName="lastName">
+          <mat-error *ngIf="c['lastName'].errors && c['lastName'].touched">
+            Lastname is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Student firstname..." formControlName="firstName">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Student email..." formControlName="email">
+          <mat-error *ngIf="c['email'].errors && c['email'].touched">
+            <span *ngIf="c['email'].hasError('required')">
+              Email is required
+            </span>
+            <span *ngIf="c['email'].hasError('pattern')">
+              Email doesn't match email pattern
+            </span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Student phone number..." formControlName="phoneNumber">
+        </mat-form-field>
+      </fieldset>
+
+      <fieldset>
+        <legend>Student credentials</legend>
+
+        <mat-form-field>
+          <input matInput placeholder="Student login..." formControlName="login">
+          <mat-error *ngIf="c['login'].errors && c['login'].touched">
+            <span *ngIf="c['login'].hasError('required')">
+              Login cannot be empty
+            </span>
+            <span *ngIf="c['login'].hasError('minlength')">
+              Not enough chars (at least 8)
+            </span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="password" placeholder="Student password..." formControlName="password">
+          <mat-error *ngIf="c['password'].errors && c['password'].touched">
+            <span *ngIf="c['password'].hasError('required')">
+              Password cannot be empty
+            </span>
+            <span *ngIf="c['password'].hasError('minlength')">
+              Not enough chars (at least 8)
+            </span>
+            <span *ngIf="c['password'].hasError('pattern')">
+              Password must have upperchar, digit
+            </span>
+          </mat-error>
+        </mat-form-field>
+      </fieldset>
+
+      <div class="col xs2">
+        <button mat-raised-button color="primary" [disabled]="form.invalid">Add</button>
+      </div>
+
+    </form>
+  </ng-container>
 </div>

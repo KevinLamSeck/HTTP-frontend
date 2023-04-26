@@ -17,9 +17,14 @@
 </div>
 <div class="mt-10 mx-28">
   <h2 class="mb-10">Course content</h2>
-  <p class="mb-5">
-    {{ course.modules?.length }} modules | 5h23min total length
-  </p>
+  <span *ngIf="course.modules?.length == 0; else timeModule"
+    >This course does'nt have modules.</span
+  >
+  <ng-template #timeModule>
+    <p class="mb-5 text-slate-400">
+      {{ course.modules?.length }} modules | {{ totalTime }} total length
+    </p>
+  </ng-template>
 
   <mat-accordion *ngFor="let module of course.modules">
     <mat-expansion-panel
@@ -38,6 +43,7 @@
           <ng-template #noMedias>no media</ng-template>
         </mat-panel-description>
       </mat-expansion-panel-header>
+
       <ng-container *ngFor="let media of module.medias">
         <mat-panel-description class="grid grid-cols-2 gap-4 dark:text-white">
           <p>{{ media.title }}</p>

@@ -132,7 +132,10 @@ body {
   }
 
   &.success {
-    background: rgba(20, 20, 200, 0.7);
+    background: rgb(110, 110, 231);
+    display: flex;
+    justify-content: center;
+
     .mat-simple-snack-bar-content {
       color: rgb(240, 240, 240);
     }

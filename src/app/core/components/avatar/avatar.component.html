@@ -1,44 +1,76 @@
 <div class="flex items-center dark:text-white">
-    <!-- AVATAR -->
-    <div mat-button class="flex flex-row items-center align-middlew-10 h-10 bg-cover rounded gap-4"
-        [matMenuTriggerFor]="menu">
-        <img src="https://source.unsplash.com/random/300x300/?portrait,beauty"
-            class="rounded w-10 h-10 overflow-hidden bg-indigo-900" alt="" />
-        <!-- <span class="text-white">{{ memberData.firstName }}</span> -->
-    </div>
-    <!-- MENU -->
-    <mat-menu #menu="matMenu" xPosition="before" class="no-styles mt-4">
-        <div class=" divide-y divide-neutral-600 my-4 px-4 py-6 rounded-md bg-white dark:bg-neutral-800 ring-1 ring-black ring-opacity-5 focus:outline-none shadow-md"
-            role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-            <div class="flex flex-row px-2 py-4 items-center align-middle gap-2" role="none">
-                <img src="https://source.unsplash.com/random/300x300/?portrait,beauty" class="rounded-full h-16 w-16"
-                    alt="" />
-                <div class="flex flex-col text-sm">
-                    <span class="">{{ memberData.firstName }}</span>
-                    <span class="dark:text-neutral-400">{{
-                        memberData.getRoleName()
-                        }}</span>
-                    <span class="truncate font-light text-neutral-400 flex flex-row align-middle items-center"
-                        role="none">
-                        {{ memberData.email }}
-                    </span>
-                </div>
-            </div>
-            <div class="p-2" role="none">
-                <button (click)="toggleTheme()"
-                    class="btn block w-full text-left text-sm font-medium hover:bg-primary-100">
-                    <span class="flex flex-row gap-2 align-middle" *ngIf="(theme$ | async) === 'light'"><i
-                            class="material-icons">light_mode</i> Light Mode</span>
-                    <span class="flex flex-row gap-2 align-middle" *ngIf="(theme$ | async) === 'dark'"><i
-                            class="material-icons">dark_mode</i> Dark Mode</span>
-                </button>
-                <button class="btn w-full !block text-left text-sm font-medium hover:bg-primary-100" role="menuitem"
-                    tabindex="-1" id="menu-item-3" (click)="signOut()">
-                    <span class="flex flex-row gap-2 align-middle">
-                        <i class="material-icons">logout</i>Sign out
-                    </span>
-                </button>
-            </div>
+  <!-- AVATAR -->
+  <div
+    mat-button
+    class="flex flex-row items-center align-middlew-10 h-10 bg-cover rounded gap-4"
+    [matMenuTriggerFor]="menu"
+  >
+    <img
+      src="https://i.imgur.com/Qa3b8mb.gif"
+      class="rounded w-10 h-10 overflow-hidden bg-indigo-900"
+      alt=""
+    />
+    <!-- <span class="text-white">{{ memberData.firstName }}</span> -->
+  </div>
+  <!-- MENU -->
+  <mat-menu #menu="matMenu" xPosition="before" class="no-styles mt-4">
+    <div
+      class="divide-y divide-neutral-600 my-4 px-4 py-6 rounded-md bg-white dark:bg-neutral-800 ring-1 ring-black ring-opacity-5 focus:outline-none shadow-md"
+      role="menu"
+      aria-orientation="vertical"
+      aria-labelledby="menu-button"
+      tabindex="-1"
+    >
+      <div
+        class="flex flex-row px-2 py-4 items-center align-middle gap-2"
+        role="none"
+      >
+        <img
+          src="https://i.imgur.com/Qa3b8mb.gif"
+          class="rounded-full h-16 w-16"
+          alt=""
+        />
+        <div class="flex flex-col text-sm">
+          <span class="">{{ memberData.firstName }}</span>
+          <span class="dark:text-neutral-400">{{
+            memberData.getRoleName()
+          }}</span>
+          <span
+            class="truncate font-light text-neutral-400 flex flex-row align-middle items-center"
+            role="none"
+          >
+            {{ memberData.email }}
+          </span>
         </div>
-    </mat-menu>
+      </div>
+      <div class="p-2" role="none">
+        <button
+          (click)="toggleTheme()"
+          class="btn block w-full text-left text-sm font-medium hover:bg-primary-100"
+        >
+          <span
+            class="flex flex-row gap-2 align-middle"
+            *ngIf="(theme$ | async) === 'light'"
+            ><i class="material-icons">light_mode</i> Light Mode</span
+          >
+          <span
+            class="flex flex-row gap-2 align-middle"
+            *ngIf="(theme$ | async) === 'dark'"
+            ><i class="material-icons">dark_mode</i> Dark Mode</span
+          >
+        </button>
+        <button
+          class="btn w-full !block text-left text-sm font-medium hover:bg-primary-100"
+          role="menuitem"
+          tabindex="-1"
+          id="menu-item-3"
+          (click)="signOut()"
+        >
+          <span class="flex flex-row gap-2 align-middle">
+            <i class="material-icons">logout</i>Sign out
+          </span>
+        </button>
+      </div>
+    </div>
+  </mat-menu>
 </div>

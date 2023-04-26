@@ -26,7 +26,7 @@
     }
 
     &.outlined {
-        @apply border border-white text-white;
+        @apply border border-primary-300 text-primary-300;
         &:hover {
             @apply bg-primary-400;
         }

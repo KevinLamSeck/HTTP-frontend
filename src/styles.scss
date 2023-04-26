@@ -300,3 +300,9 @@ mat-panel-description.mat-expansion-panel-header-description .numberOfModules {
 [type="checkbox"]:focus {
   --tw-ring-color: rgb(110, 110, 231);
 }
+
+.mat-expansion-panel-header[aria-disabled="true"]
+  .mat-expansion-panel-header-title {
+  @apply dark:text-white;
+  color: rgba(0, 0, 0, 1);
+}

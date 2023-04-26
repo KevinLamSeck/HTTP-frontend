@@ -1,56 +1,68 @@
-<div class="grid grid-cols-2 gap-2">
-
-  <div class="flex flex-col  justify-start lg:items-center h-ful">
-
-    <div class="pt-0 px-2 flex flex-col items-center justify-center">
-      <h2 class="text-4xl leading-tight pt-8">Update a module</h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+  <div class="flex flex-col lg:items-center md:align-middle p-16 bg-neutral-50 rounded-2xl w-full">
+    <div class="text-center">
+      <h1 class="mb-4">Update a module</h1>
     </div>
-    <ng-container *ngIf="isDataAvailable">
-      <div class="pt-10 px-2 flex flex-col items-center justify-center">
-        <form [formGroup]="moduleForm" mat-dialog-content>
-
+    <div class="flex flex-col items-center justify-center min-w-full space-y-4">
+      <ng-container *ngIf="isDataAvailable">
+        <form [formGroup]="moduleForm" mat-dialog-content class="w-full">
           <mat-form-field class="w-full">
-            <input matInput formControlName="name" placeholder="Module name...">
+            <input matInput formControlName="name" placeholder="Module name..." />
             <mat-error *ngIf="c['name'].errors && c['name'].touched">
               Name is required
             </mat-error>
           </mat-form-field>
-
           <mat-form-field class="w-full">
-            <input matInput formControlName="objective" placeholder="Objective...">
+            <input matInput formControlName="objective" placeholder="Objective..." />
           </mat-form-field>
         </form>
 
         <div class="w-full space-y-2">
           <ng-container *ngIf="medias">
+            <div class="text-neutral-400  rounded-xl px-6 py-4 border border-dashed"
+              [ngClass]="{hidden: medias.length >= 1}">Don't have media yet</div>
             <ul *ngFor="let media of medias" class="list-none w-full">
-              <li class="bg-slate-100 px-6 py-4 flex flex-row justify-between dark:bg-neutral-700">{{media.title}}
-                <mat-icon (click)="removeMedia(media)" color="primary">delete</mat-icon></li>
+              <li class="bg-neutral-100 px-6 py-4 rounded-xl flex flex-row justify-between dark:bg-neutral-700">
+                {{ media.title }}
+                <mat-icon (click)="removeMedia(media)" color="primary">delete</mat-icon>
+              </li>
             </ul>
           </ng-container>
         </div>
 
-        <button mat-flat-button color="primary" class="w-full my-4" (click)="showAddMedia()">Add an existing
-          media</button>
-        <button mat-flat-button color="primary" class="w-full my-3" (click)="showCreateMedia()">Create a media</button>
-
-        <div mat-dialog-actions class="mt-20">
-          <button mat-flat-button color="warn" (click)="onNoClick()" class="mx-4">Cancel</button>
-          <button cdkFocusInitial mat-flat-button color="primary" [disabled]="moduleForm.invalid" (click)="onSubmit()"
-            class="mx-4">Update</button>
+        <div class="flex flex-row gap-2 w-full mt-4">
+          <button class="w-full btn primary" (click)="showAddMedia()">
+            Import media
+          </button>
+          <button class="w-full btn primary" (click)="showCreateMedia()">
+            Create a media
+          </button>
         </div>
 
-      </div>
-    </ng-container>
+        <div mat-dialog-actions class="flex flex-row gap-2">
+          <button mat-flat-button color="warn" (click)="onNoClick()" class="">
+            Cancel
+          </button>
+          <button cdkFocusInitial mat-flat-button color="primary" [disabled]="moduleForm.invalid" (click)="onSubmit()"
+            class="">
+            Update
+          </button>
+        </div>
+
+      </ng-container>
+    </div>
   </div>
 
   <ng-container *ngIf="addMediaVisible">
-    <app-add-media (idMedia)="addMedia($event)"></app-add-media>
+    <div class="p-8 bg-neutral-50 rounded-2xl h-full">
+      <app-add-media (idMedia)="addMedia($event)"></app-add-media>
+    </div>
   </ng-container>
 
   <ng-container *ngIf="createMediaVisible">
-    <app-create-media [visibility]="createMediaVisible" (newItemEvent)="closeCreate($event)"
-      (idNewMedia)="addNewMedia($event)"></app-create-media>
+    <div class="p-8 bg-neutral-50 rounded-2xl h-full">
+      <app-create-media [visibility]="createMediaVisible" (newItemEvent)="closeCreate($event)"
+        (idNewMedia)="addNewMedia($event)"></app-create-media>
+    </div>
   </ng-container>
-
 </div>

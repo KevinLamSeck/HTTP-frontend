@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ModuleService } from '../../services/module.service';
 import { ModuleType } from 'src/app/course/types/module-type';
+import { ModuleService } from '../../services/module.service';
 
 @Component({
   selector: 'app-view-module',
@@ -27,11 +27,11 @@ export class ViewModuleComponent implements OnInit {
           this.module = module
           this.medias = module.medias
           this.conceptor = module.creator
-          console.log(this.module)
+          // console.log(this.module)
           this.isDataAvailable = true
         },
         error: (error: any) => {
-          console.log('Something went wrong')
+          // console.log('Something went wrong')
         }
       })
   }

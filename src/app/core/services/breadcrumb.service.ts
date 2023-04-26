@@ -48,7 +48,7 @@ export class BreadcrumbService {
           label: this.getLabel(route.data),
           url: 'http://localhost:4200/' + routeUrl.join('/'),
         };
-        // console.log(breadcrumb);
+        // // console.log(breadcrumb);
         breadcrumbs.push(breadcrumb);
       }
 

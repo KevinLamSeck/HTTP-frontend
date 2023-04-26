@@ -32,7 +32,7 @@ export class MediaService {
     )
       .pipe(
         tap((response: any) => {
-          // console.log(JSON.stringify(response))
+          // // console.log(JSON.stringify(response))
         }),
         take(1),
         map((media: any) => media)

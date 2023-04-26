@@ -89,7 +89,7 @@ export class CreateModuleComponent implements OnInit {
           this._snackBar.open(`"${media.title}" was added.`, "Close");
         },
         error: (error: any) => {
-          console.log('Something went wrong')
+          // console.log('Something went wrong')
         }
       })
   }
@@ -119,7 +119,7 @@ export class CreateModuleComponent implements OnInit {
           this._snackBar.open(`"${media.title}" was created.`, "Close");
         },
         error: (error: any) => {
-          console.log('Something went wrong')
+          // console.log('Something went wrong')
         }
       })
   }

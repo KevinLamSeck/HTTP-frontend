@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ListComponent } from '../student/list/list.component';
 import { DashboardComponent } from './dashboard.component';
 import { RoleGuard } from './guards/role.guard';
 import { ConceptorComponent } from './pages/conceptor/conceptor.component';
@@ -82,6 +83,13 @@ export class DashboardRoutingModule {
           component: ManagerComponent,
           canActivate: [RoleGuard],
           data: { allowedRoles: ['MANAGER'], title: 'Dashboard | Manager' },
+          children: [
+            {
+              path: 'student',
+              component: ListComponent,
+              data: { title: 'Dashboard | Students List', breadcrumb: 'Students List' },
+            },
+          ]
         },
         {
           path: 'student',

@@ -1,16 +1,16 @@
-import { HttpResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { take } from 'rxjs';
-import { CourseService } from '../services/course.service';
-import { CourseListType } from '../types/course-list-type';
-import { ModuleType } from '../types/module-type';
-import { ToastService } from './../../core/toast.service';
+import { HttpResponse } from "@angular/common/http";
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { take } from "rxjs";
+import { CourseService } from "../services/course.service";
+import { CourseListType } from "../types/course-list-type";
+import { ModuleType } from "../types/module-type";
+import { ToastService } from "./../../core/toast.service";
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss'],
+  selector: "app-list",
+  templateUrl: "./list.component.html",
+  styleUrls: ["./list.component.scss"],
 })
 export default class ListMyCourseComponent implements OnInit {
   public courses: Array<CourseListType> = [];
@@ -19,7 +19,7 @@ export default class ListMyCourseComponent implements OnInit {
     private _courseService: CourseService,
     private _toastService: ToastService,
     private _router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this._courseService
@@ -32,7 +32,7 @@ export default class ListMyCourseComponent implements OnInit {
   goToAddCourse(): void {
     sessionStorage.removeItem("ModifiedCourse");
     // console.log("heho");
-    this._router.navigate(['/', 'course', 'add']);
+    this._router.navigate(["/", "course", "add"]);
   }
 
   onCourseToggle(course: CourseListType): void {
@@ -57,8 +57,9 @@ export default class ListMyCourseComponent implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: (response: HttpResponse<any>) => {
-          const message: string = `${course.title} was removed. ${course.modules!.length
-            } modules were affected`;
+          const message: string = `${course.title} was removed. ${
+            course.modules!.length
+          } modules were affected`;
           this._toastService.show(message);
         },
         error: (error: any) => {

@@ -1,19 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Member } from 'src/app/user/models/member';
-import { UserService } from 'src/app/user/services/user.service';
-import { DarkModeService } from '../../services/dark-mode.service';
-import { LocalStorageService } from '../../services/local-storage.service';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { BehaviorSubject, Observable } from "rxjs";
+import { Member } from "src/app/user/models/member";
+import { UserService } from "src/app/user/services/user.service";
+import { DarkModeService } from "../../services/dark-mode.service";
+import { LocalStorageService } from "../../services/local-storage.service";
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  selector: "app-header",
+  templateUrl: "./header.component.html",
+  styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit {
   public user$: BehaviorSubject<any | undefined>;
-  public theme$: Observable<any> = this._darkModeService.theme
+  public theme$: Observable<any> = this._darkModeService.theme;
 
   public user: any;
 
@@ -26,7 +26,11 @@ export class HeaderComponent implements OnInit {
     this._localStorageService.getMemberFromStorage()
   );
 
-  constructor(private _userService: UserService, private _router: Router, private _darkModeService: DarkModeService) {
+  constructor(
+    private _userService: UserService,
+    private _router: Router,
+    private _darkModeService: DarkModeService
+  ) {
     this.user$ = this._userService.user$;
   }
 
@@ -42,7 +46,7 @@ export class HeaderComponent implements OnInit {
 
   public goToDashboard(): void {
     const role = this._member.getRoleName();
-    this._router.navigate(['/dashboard', role.toLowerCase()]);
+    this._router.navigate(["/dashboard", role.toLowerCase()]);
   }
 
   public signOut(): void {

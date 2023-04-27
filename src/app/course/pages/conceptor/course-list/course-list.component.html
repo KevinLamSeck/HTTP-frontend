@@ -33,7 +33,7 @@
         </ng-template>
         <mat-expansion-panel-header>
           <mat-panel-title class="dark:text-white">
-            <span> {{ course.title }}</span>
+            <span class="dark:text-white"> {{ course.title }}</span>
           </mat-panel-title>
           <mat-panel-description class="flex-row-reverse dark:text-white">
             <ng-container *ngIf="course.modules!.length > 0; else noModules">

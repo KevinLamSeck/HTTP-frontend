@@ -8,7 +8,7 @@
     <app-search-bar (searchTextChange)="onSearchTextEntered($event)"></app-search-bar>
   </div>
 
-  <div class="max-h-64 overflow-auto w-full">
+  <div class="min-h-64 max-h-96 overflow-auto w-full">
     <ul role="list" class="list-none space-y-2 ">
       <ng-container *ngFor="let media of medias">
         <ng-container *ngIf="searchText === '' || media.title.toLowerCase().includes(searchText) ">

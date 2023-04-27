@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
         this._router.navigate(['/']);
       },
       error: (error: any) => {
-        const messageErrorLogin: string = `Désolé vous avez rentrer des identifiants incorrects, réesayez pour avoir la banane ! :(`;
+        const messageErrorLogin: string = `Désolé vous avez rentrer des identifiants incorrects !`;
         this._toastService.show(messageErrorLogin);
       },
       complete: () => {

@@ -20,6 +20,18 @@ describe('MediaTileComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MediaTileComponent);
     component = fixture.componentInstance;
+    component.mediaInfo =
+    {
+      "id": 87,
+      "title": "The Lion King",
+      "summary": "An animated musical drama film produced by Walt Disney Feature Animation and released by Walt Disney Pictures in 1994.",
+      "duration": 298.0,
+      "url": "https://www.imdb.com/title/tt0110357/",
+      "typeMedia": {
+        "id": 6,
+        "title": "Animation"
+      }
+    }
     fixture.detectChanges();
   });
 

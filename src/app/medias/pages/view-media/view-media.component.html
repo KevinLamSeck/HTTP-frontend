@@ -1,0 +1,30 @@
+<div
+  class="bg-neutral-100 flex justify-between mt-10 mx-28 px-10 rounded py-10 shadow-md dark:bg-neutral-600"
+>
+  <div class="flex-col gap-2 flex">
+    <h2>{{ medias?.title }}</h2>
+    <h3>{{ medias?.summary }}</h3>
+
+    <p>Created at : {{ course.createdAt }}</p>
+    <p>Created by : {{ user.firstName }} {{ user.lastName }}</p>
+  </div>
+  <div>
+    <img
+      src="https://placekitten.com/300/150"
+      class="rounded h-full w-full overflow-hidden shadow"
+      alt=""
+    />
+  </div>
+</div>
+<div class="flex gap-3 ml-28 mt-10 text-slate-400">
+  <p>
+    {{ medias?.duration * 1000 | date : "mm" }}min
+    {{ medias?.duration * 1000 | date : "ss" }}s
+  </p>
+  <p>|</p>
+  <p>{{ medias?.typeMedia.title }}</p>
+</div>
+
+<div class="mt-10 flex justify-center">
+  <app-player></app-player>
+</div>

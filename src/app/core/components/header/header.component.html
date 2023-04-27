@@ -9,6 +9,13 @@
       </div>
       <div class="hidden sm:flex flex-row space-x-4">
         <member-avatar *ngIf="user$ | async"></member-avatar>
+        <button (click)="toggleTheme()"
+          class="text-left text-sm font-medium hover:text-primary-800 text-primary-200 dark:text-primary-200 transition-all ease-in-out">
+          <span class="flex flex-row gap-2 align-middle" *ngIf="(theme$ | async) === 'light'"><i
+              class="material-icons">light_mode</i></span>
+          <span class="flex flex-row gap-2 align-middle" *ngIf="(theme$ | async) === 'dark'"><i
+              class="material-icons">dark_mode</i></span>
+        </button>
         <!-- <button class="btn outlined dark:border-header dark:border-color" *ngIf="user$ | async" (click)="signOut()">
           Sign Out
         </button> -->

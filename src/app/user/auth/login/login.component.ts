@@ -93,7 +93,7 @@ export class LoginComponent implements OnInit {
       complete: () => {
         this.form.controls['login'].setValue('');
         this.form.controls['password'].setValue('');
-        const messageSucessLogin: string = `Welcome`;
+        const messageSucessLogin: string = `Welcome !`;
         this._toastService.show(messageSucessLogin);
       },
     });

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Member } from 'src/app/user/models/member';
 import { UserService } from 'src/app/user/services/user.service';
+import { DarkModeService } from '../../services/dark-mode.service';
 import { LocalStorageService } from '../../services/local-storage.service';
-import { ToastService } from '../../toast.service';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +13,8 @@ import { ToastService } from '../../toast.service';
 })
 export class HeaderComponent implements OnInit {
   public user$: BehaviorSubject<any | undefined>;
+  public theme$: Observable<any> = this._darkModeService.theme
+
   public user: any;
 
   public menu: boolean = false;
@@ -24,7 +26,7 @@ export class HeaderComponent implements OnInit {
     this._localStorageService.getMemberFromStorage()
   );
 
-  constructor(private _userService: UserService, private _router: Router) {
+  constructor(private _userService: UserService, private _router: Router, private _darkModeService: DarkModeService) {
     this.user$ = this._userService.user$;
   }
 
@@ -45,5 +47,9 @@ export class HeaderComponent implements OnInit {
 
   public signOut(): void {
     this._userService.logout();
+  }
+
+  public toggleTheme(): void {
+    this._darkModeService.toggleTheme();
   }
 }

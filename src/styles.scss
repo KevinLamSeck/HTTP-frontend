@@ -184,8 +184,12 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+  -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
 }
+
+// input:autofill {
+//   @apply dark:bg-transparent;
+// }
 
 // Typo styles
 
@@ -299,4 +303,10 @@ mat-panel-description.mat-expansion-panel-header-description .numberOfModules {
 }
 [type="checkbox"]:focus {
   --tw-ring-color: rgb(110, 110, 231);
+}
+
+.mat-expansion-panel-header[aria-disabled="true"]
+  .mat-expansion-panel-header-title {
+  @apply dark:text-white;
+  color: rgba(0, 0, 0, 1);
 }

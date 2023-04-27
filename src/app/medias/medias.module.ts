@@ -7,6 +7,8 @@ import { MediasRoutingModule } from './medias-routing.module';
 import { CreateMediaComponent } from './pages/create-media/create-media.component';
 import { ListMediaComponent } from './pages/list-media/list-media.component';
 import { UpdateMediaComponent } from './pages/update-media/update-media.component';
+import { ViewMediaComponent } from './pages/view-media/view-media.component';
+import { PlayerComponent } from './components/player/player.component';
 
 
 
@@ -16,6 +18,8 @@ import { UpdateMediaComponent } from './pages/update-media/update-media.componen
     UpdateMediaComponent,
     ListMediaComponent,
     MediaTileComponent,
+    ViewMediaComponent,
+    PlayerComponent,
 
   ],
   imports: [

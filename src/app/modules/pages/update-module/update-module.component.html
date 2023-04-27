@@ -1,8 +1,8 @@
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-  <div class="flex flex-col lg:items-center md:align-middle p-16 rounded-2xl w-full bg-neutral-100 dark:bg-neutral-700">
-    <div class="text-center">
-      <h1 class="mb-4">Update a module</h1>
-    </div>
+
+  <div class="flex flex-col lg:items-center md:align-middle p-16 rounded-2xl w-full bg-neutral-50 dark:bg-neutral-700">
+    <h1 class="mb-8">Update a module</h1>
+
     <div class="flex flex-col items-center justify-center min-w-full space-y-4">
       <ng-container *ngIf="isDataAvailable">
         <form [formGroup]="moduleForm" mat-dialog-content class="w-full">
@@ -54,13 +54,13 @@
   </div>
 
   <ng-container *ngIf="addMediaVisible">
-    <div class="p-8  bg-neutral-100 dark:bg-neutral-700 rounded-2xl h-full">
+    <div class="p-8  bg-neutral-50 dark:bg-neutral-700 rounded-2xl h-max">
       <app-add-media (idMedia)="addMedia($event)"></app-add-media>
     </div>
   </ng-container>
 
   <ng-container *ngIf="createMediaVisible">
-    <div class="p-8  bg-neutral-100 dark:bg-neutral-700 rounded-2xl h-full">
+    <div class="p-8  bg-neutral-50 dark:bg-neutral-700 rounded-2xl h-max">
       <app-create-media [visibility]="createMediaVisible" (newItemEvent)="closeCreate($event)"
         (idNewMedia)="addNewMedia($event)"></app-create-media>
     </div>

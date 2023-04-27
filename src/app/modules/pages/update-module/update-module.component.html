@@ -1,5 +1,5 @@
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-  <div class="flex flex-col lg:items-center md:align-middle p-16 bg-neutral-50 rounded-2xl w-full">
+  <div class="flex flex-col lg:items-center md:align-middle p-16 rounded-2xl w-full bg-neutral-100 dark:bg-neutral-700">
     <div class="text-center">
       <h1 class="mb-4">Update a module</h1>
     </div>
@@ -17,20 +17,20 @@
           </mat-form-field>
         </form>
 
-        <div class="w-full space-y-2">
+        <div cdkDropList (cdkDropListDropped)="drop($event)" class="w-full space-y-2">
           <ng-container *ngIf="medias">
             <div class="text-neutral-400  rounded-xl px-6 py-4 border border-dashed"
               [ngClass]="{hidden: medias.length >= 1}">Don't have media yet</div>
-            <ul *ngFor="let media of medias" class="list-none w-full">
-              <li class="bg-neutral-100 px-6 py-4 rounded-xl flex flex-row justify-between dark:bg-neutral-700">
-                {{ media.title }}
+            <ul *ngFor="let media of medias" class="list-none w-full ">
+              <li cdkDrag class="bg-neutral-100 px-6 py-4 rounded-xl flex flex-row justify-between dark:bg-neutral-800">
+                <mat-icon class="dragIco dark:text-white" color="primary">drag_indicator</mat-icon> {{ media.title }}
                 <mat-icon (click)="removeMedia(media)" color="primary">delete</mat-icon>
               </li>
             </ul>
           </ng-container>
         </div>
 
-        <div class="flex flex-row gap-2 w-full mt-4">
+        <div class="flex flex-row gap-2 w-full mt-10">
           <button class="w-full btn primary" (click)="showAddMedia()">
             Import media
           </button>
@@ -54,13 +54,13 @@
   </div>
 
   <ng-container *ngIf="addMediaVisible">
-    <div class="p-8 bg-neutral-50 rounded-2xl h-full">
+    <div class="p-8  bg-neutral-100 dark:bg-neutral-700 rounded-2xl h-full">
       <app-add-media (idMedia)="addMedia($event)"></app-add-media>
     </div>
   </ng-container>
 
   <ng-container *ngIf="createMediaVisible">
-    <div class="p-8 bg-neutral-50 rounded-2xl h-full">
+    <div class="p-8  bg-neutral-100 dark:bg-neutral-700 rounded-2xl h-full">
       <app-create-media [visibility]="createMediaVisible" (newItemEvent)="closeCreate($event)"
         (idNewMedia)="addNewMedia($event)"></app-create-media>
     </div>

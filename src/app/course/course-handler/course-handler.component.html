@@ -1,5 +1,5 @@
 <div
-  class="flex flex-col mx-auto justify-center space-y-8 max-w-2xl p-16 rounded-xl bg-neutral-100 dark:bg-neutral-700">
+  class="flex flex-col mx-auto justify-center space-y-8 max-w-6xl p-16 rounded-xl bg-neutral-100 dark:bg-neutral-700">
 
   <div class="text-center">
     <h2 class="text-2xl sm:text-4xl leading-tight">
@@ -25,7 +25,7 @@
       <mat-accordion *ngIf="modules.length" class="ModuleList">
         <div cdkDropList class="module-list" (cdkDropListDropped)="drop($event)">
           <mat-expansion-panel [disabled]="module.medias.length == 0" *ngFor="let module of modules"
-            class="dark:bg-neutral-600" cdkDrag>
+            class="dark:bg-neutral-600 dark:text-white" cdkDrag>
             <mat-expansion-panel-header>
               <mat-panel-title>
                 <mat-icon class="dragIcon" color="primary">drag_indicator</mat-icon><span

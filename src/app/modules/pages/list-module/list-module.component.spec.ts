@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ListModuleComponent } from './list-module.component';
 
@@ -11,7 +12,7 @@ describe('ListModuleComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ListModuleComponent],
-      imports: [HttpClientTestingModule, MatSnackBarModule]
+      imports: [HttpClientTestingModule, MatSnackBarModule, MatMenuModule]
     })
       .compileComponents();
   });

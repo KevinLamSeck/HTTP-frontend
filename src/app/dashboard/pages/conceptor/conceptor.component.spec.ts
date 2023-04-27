@@ -25,4 +25,8 @@ describe('ConceptorComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have 3 tiles', () => {
+    expect(component.tiles.length).toEqual(3);
+  })
 });

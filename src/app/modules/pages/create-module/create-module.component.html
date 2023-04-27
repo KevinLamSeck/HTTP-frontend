@@ -9,7 +9,7 @@
         <mat-form-field class="w-full">
           <input matInput formControlName="name" placeholder="Module name...">
           <mat-error *ngIf="c['name'].errors && c['name'].touched">
-            Name is required
+            Name must be at least 8 characters
           </mat-error>
         </mat-form-field>
         <mat-form-field class="w-full">

@@ -43,7 +43,11 @@ export class AddMediaComponent implements OnInit {
           this.dialogRef.close(media)
         })
 
-    } else { this.idMedia.emit(id) }
+    } else {
+      this.idMedia.emit(id)
+      let removeIndex = this.medias.map(item => item.id).indexOf(id);
+      (removeIndex >= 0) && this.medias.splice(removeIndex, 1);
+    }
 
   }
 

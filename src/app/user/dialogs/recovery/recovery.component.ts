@@ -22,7 +22,7 @@ export class RecoveryComponent implements OnInit {
     private _userService: UserService,
     public dialogRef: MatDialogRef<RecoveryComponent>,
     private _toastService: ToastService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     const loginControl: AbstractControl = new FormControl('', [
@@ -46,10 +46,10 @@ export class RecoveryComponent implements OnInit {
         // console.log(error);
         this.form.controls['login'].setValue('');
         this.form.controls['email'].setValue('');
-        const messageErrorLogin: string = `Désolé vous avez rentrer des identifiants incorrects, réesayez pour avoir la banane ! :(`;
+        const messageErrorLogin: string = `Désolé vous avez rentrer des identifiants incorrects !`;
         this._toastService.show(messageErrorLogin);
       },
-      complete: () => { },
+      complete: () => {},
     });
   }
 

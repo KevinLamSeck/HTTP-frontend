@@ -13,6 +13,8 @@ import { CourseService } from "../services/course.service";
 import { CourseType } from "../types/course-type";
 import { MediaType } from "../types/media-type";
 import { ModuleType } from "../types/module-type";
+import { ToastService } from "src/app/core/toast.service";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-course-handler",
@@ -32,7 +34,8 @@ export class CourseHandlerComponent implements OnInit {
     private _courseService: CourseService,
     private _router: Router,
     private _dialog: MatDialog,
-    private _localStorageService: LocalStorageService
+    private _localStorageService: LocalStorageService,
+    private _snackBar: MatSnackBar
   ) {
     this.course = JSON.parse(sessionStorage.getItem("ModifiedCourse") + "");
     this._formBuilder.buildForm(this.course);
@@ -65,7 +68,7 @@ export class CourseHandlerComponent implements OnInit {
   addModule(): void {
     this._dialog
       .open(ModuleAddComponent, {
-        panelClass: 'modalDialog',
+        panelClass: "modalDialog",
       })
       .afterClosed()
       .subscribe((result: ModuleType | undefined) => {
@@ -90,7 +93,7 @@ export class CourseHandlerComponent implements OnInit {
   addMedia(parent: ModuleType): void {
     this._dialog
       .open(CreateMediaComponent, {
-        panelClass: 'modalDialog',
+        panelClass: "modalDialog",
         data: true,
       })
       .afterClosed()
@@ -116,7 +119,7 @@ export class CourseHandlerComponent implements OnInit {
   addExistingMedia(parent: ModuleType): void {
     this._dialog
       .open(AddMediaComponent, {
-        panelClass: 'modalDialog',
+        panelClass: "modalDialog",
         data: true,
       })
       .afterClosed()
@@ -143,7 +146,7 @@ export class CourseHandlerComponent implements OnInit {
   updateModule(module: ModuleType): void {
     this._dialog
       .open(ModuleAddComponent, {
-        panelClass: 'modalDialog',
+        panelClass: "modalDialog",
         data: module,
       })
       .afterClosed()
@@ -155,7 +158,7 @@ export class CourseHandlerComponent implements OnInit {
   addExistingModule(): void {
     this._dialog
       .open(ExistingModuleComponent, {
-        panelClass: 'modalDialog',
+        panelClass: "modalDialog",
         data: true,
       })
       .afterClosed()
@@ -227,10 +230,12 @@ export class CourseHandlerComponent implements OnInit {
       course.id = this.course.id;
       // console.log(course);
       this._courseService.update(course).subscribe((courseType: CourseType) => {
+        this._snackBar.open(`"${course.title}" was created.`, "Close");
         this._router.navigate(["/", "dashboard", "conceptor", "course"]);
       });
     } else {
       this._courseService.add(course).subscribe((courseType: CourseType) => {
+        this._snackBar.open(`"${course.title}" was updated.`, "Close");
         this._router.navigate(["/", "dashboard", "conceptor", "course"]);
       });
     }

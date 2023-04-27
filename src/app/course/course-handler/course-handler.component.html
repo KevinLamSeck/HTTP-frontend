@@ -1,9 +1,9 @@
 <div
-  class="flex flex-col mx-auto justify-center space-y-8 max-w-6xl p-16 rounded-xl bg-neutral-100 dark:bg-neutral-700">
-
+  class="flex flex-col mx-auto justify-center space-y-8 max-w-6xl p-16 rounded-xl bg-neutral-100 dark:bg-neutral-700"
+>
   <div class="text-center">
     <h2 class="text-2xl sm:text-4xl leading-tight">
-      {{updateOrCreate}} a course
+      {{ updateOrCreate }} a course
     </h2>
   </div>
 
@@ -16,39 +16,65 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field class="w-full">
-        <input matInput formControlName="objective" placeholder="Objective..." />
+        <input
+          matInput
+          formControlName="objective"
+          placeholder="Objective..."
+        />
       </mat-form-field>
     </div>
 
     <h4 class="mb-4">List of Modules :</h4>
     <ng-container *ngIf="useModule">
       <mat-accordion *ngIf="modules.length" class="ModuleList">
-        <div cdkDropList class="module-list" (cdkDropListDropped)="drop($event)">
-          <mat-expansion-panel [disabled]="module.medias.length == 0" *ngFor="let module of modules"
-            class="dark:bg-neutral-600 dark:text-white" cdkDrag>
+        <div
+          cdkDropList
+          class="module-list"
+          (cdkDropListDropped)="drop($event)"
+        >
+          <mat-expansion-panel
+            [disabled]="module.medias.length == 0"
+            *ngFor="let module of modules"
+            class="dark:bg-neutral-600 dark:text-white"
+            cdkDrag
+          >
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <mat-icon class="dragIcon" color="primary">drag_indicator</mat-icon><span
-                  class="flex ml-3 dark:text-white">{{
+                <mat-icon class="dragIcon" color="primary"
+                  >drag_indicator</mat-icon
+                ><span class="flex ml-3 dark:text-white">{{
                   module.name
-                  }}</span>
+                }}</span>
               </mat-panel-title>
               <mat-panel-description class="flex-row-reverse dark:text-white">
                 {{ module.medias!.length }} items
               </mat-panel-description>
               <mat-action-row>
-                <button [ngClass]="{ correctButton: module.medias.length == 0 }" mat-button color="primary"
-                  mat-icon-button [matMenuTriggerFor]="menuModule" type="button" (click)="$event.stopPropagation()"
-                  class="dark:text-white">
+                <button
+                  [ngClass]="{ correctButton: module.medias.length == 0 }"
+                  mat-button
+                  color="primary"
+                  mat-icon-button
+                  [matMenuTriggerFor]="menuModule"
+                  type="button"
+                  (click)="$event.stopPropagation()"
+                  class="dark:text-white"
+                >
                   ...
                 </button>
               </mat-action-row>
             </mat-expansion-panel-header>
 
-            <div cdkDropList class="media-list" (cdkDropListDropped)="dropMedia($event, module)">
+            <div
+              cdkDropList
+              class="media-list"
+              (cdkDropListDropped)="dropMedia($event, module)"
+            >
               <mat-accordion *ngFor="let media of module.medias" cdkDrag>
                 <mat-panel-description class="flex-row dark:text-white">
-                  <mat-icon class="dragIcon" color="primary">drag_indicator</mat-icon>{{ media.title }}
+                  <mat-icon class="dragIcon" color="primary"
+                    >drag_indicator</mat-icon
+                  >{{ media.title }}
 
                   <p class="flex-grow text-left ml-2 mr-4">
                     | Duration : {{ media.duration }} min
@@ -56,14 +82,25 @@
 
                   <p class="mr-4">Type media : {{ media.typeMedia.title }}</p>
 
-                  <button mat-button color="primary" mat-icon-button [matMenuTriggerFor]="menuMedia" type="button"
-                    (click)="$event.stopPropagation()" class="dark:text-white">
+                  <button
+                    mat-button
+                    color="primary"
+                    mat-icon-button
+                    [matMenuTriggerFor]="menuMedia"
+                    type="button"
+                    (click)="$event.stopPropagation()"
+                    class="dark:text-white"
+                  >
                     ...
                   </button>
                 </mat-panel-description>
 
                 <mat-menu #menuMedia="matMenu" class="dark:bg-neutral-600">
-                  <button mat-menu-item class="hot-action" (click)="removeMedia(module, media)">
+                  <button
+                    mat-menu-item
+                    class="hot-action"
+                    (click)="removeMedia(module, media)"
+                  >
                     <span class="hot-action dark:text-white">Remove media</span>
                   </button>
                 </mat-menu>
@@ -82,7 +119,11 @@
               <button mat-menu-item (click)="updateModule(module)">
                 <span class="dark:text-white">Update module</span>
               </button>
-              <button mat-menu-item class="hot-action" (click)="removeModule(module)">
+              <button
+                mat-menu-item
+                class="hot-action"
+                (click)="removeModule(module)"
+              >
                 <span class="dark:text-white">Remove module</span>
               </button>
             </mat-menu>
@@ -101,17 +142,34 @@
 
         </ng-container>  -->
       <div class="flex flex-row gap-2">
-        <button class="w-full" mat-flat-button type="button" color="primary" (click)="addModule()">
+        <button
+          class="w-full"
+          mat-flat-button
+          type="button"
+          color="primary"
+          (click)="addModule()"
+        >
           Add new module
         </button>
-        <button class="w-full" mat-flat-button type="button" color="primary" (click)="addExistingModule()">
+        <button
+          class="w-full"
+          mat-flat-button
+          type="button"
+          color="primary"
+          (click)="addExistingModule()"
+        >
           Add an existing module
         </button>
       </div>
     </ng-container>
 
     <div class="flex justify-center">
-      <button class="flex w-1/3 justify-center h-15 my-8" mat-raised-button color="primary" [disabled]="form.invalid">
+      <button
+        class="flex w-1/3 justify-center h-15 my-8"
+        mat-raised-button
+        color="primary"
+        [disabled]="form.invalid"
+      >
         {{ updateOrCreate }}
       </button>
     </div>

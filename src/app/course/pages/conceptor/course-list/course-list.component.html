@@ -5,218 +5,300 @@
 
   <div class="col xs1 course-number">
     {{ coursesConceptor.length }}
-    {{ coursesConceptor.length <= 1 ? " course" : " courses" }} </div>
+    {{ coursesConceptor.length <= 1 ? " course" : " courses" }}
   </div>
+</div>
 
-  <div class="mx-10">
-    <mat-accordion *ngIf="coursesConceptor.length">
-      <mat-expansion-panel [disabled]="course.modules?.length == 0" class="dark:bg-neutral-600"
-        *ngFor="let course of coursesConceptor">
-        <ng-template #template>
-          <div class="my-2 dark:text-white">
-            <p>
-              Do you want to {{ course.published ? "un" : "" }}publish the course
-              "{{ course.title }}"
-            </p>
-            <div mat-dialog-actions class="grid grid-cols-2">
-              <button class="btn primary mx-2" (click)="closeSimpleDialog()">
-                No Thanks
-              </button>
-              <button class="btn primary mx-2" (click)="
+<div class="mx-10">
+  <mat-accordion *ngIf="coursesConceptor.length">
+    <mat-expansion-panel
+      [disabled]="course.modules?.length == 0"
+      class="dark:bg-neutral-600"
+      *ngFor="let course of coursesConceptor"
+    >
+      <ng-template #template>
+        <div class="my-2 dark:text-white">
+          <p>
+            Do you want to {{ course.published ? "un" : "" }}publish the course
+            "{{ course.title }}"
+          </p>
+          <div mat-dialog-actions class="grid grid-cols-2">
+            <button class="btn primary mx-2" (click)="closeSimpleDialog()">
+              No Thanks
+            </button>
+            <button
+              class="btn primary mx-2"
+              (click)="
                 onPublishedCourse(course, !course.published);
                 closeSimpleDialog()
-              ">
-                Ok
-              </button>
-            </div>
-          </div>
-        </ng-template>
-        <mat-expansion-panel-header>
-          <mat-panel-title class="dark:text-white">
-            <span> {{ course.title }}</span>
-          </mat-panel-title>
-          <mat-panel-description class="flex-row-reverse dark:text-white">
-            <ng-container *ngIf="course.modules!.length > 0; else noModules">
-              <div class="numberOfModules">
-                {{ course.modules!.length }}
-                {{ course.modules!.length <= 1 ? "module" : "modules" }} </div>
-            </ng-container>
-            <mat-icon (click)="openSimpleDialog(template); $event.stopPropagation()" class="visibilityIcon">{{
-              course.published ? "visibility" : "visibility_off" }}</mat-icon>
-            <ng-template #noModules>
-              <div class="numberOfModules">no module</div>
-            </ng-template>
-          </mat-panel-description>
-          <mat-action-row>
-            <button [ngClass]="{ correctButton: course.modules?.length == 0 }" mat-button color="primary"
-              class="dark:text-white" mat-icon-button [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()">
-              ...
+              "
+            >
+              Ok
             </button>
-          </mat-action-row>
-        </mat-expansion-panel-header>
-        <!-- MODULE MY LIST -->
-        <mat-accordion *ngFor="let module of course.modules">
-          <mat-expansion-panel [disabled]="module.medias.length == 0" class="dark:bg-neutral-600 mt-4">
-            <mat-expansion-panel-header>
-              <mat-panel-title class="dark:text-white">
-                {{ module.name }}
-              </mat-panel-title>
-              <mat-panel-description class="flex-row-reverse dark:text-white">
-                <ng-container *ngIf="module.medias.length > 0; else noMedias">
-                  {{ module.medias.length }}
-                  {{ module.medias.length <= 1 ? "media" : "medias" }} </ng-container>
-                    <ng-template #noMedias>no media</ng-template>
-              </mat-panel-description>
-              <mat-action-row>
-                <button [ngClass]="{ correctButton: module.medias.length == 0 }" mat-button color="primary"
-                  class="dark:text-white" mat-icon-button [matMenuTriggerFor]="menuModule"
-                  (click)="$event.stopPropagation()">
-                  ...
-                </button>
-              </mat-action-row>
-            </mat-expansion-panel-header>
-            <!-- MEDIA MY LIST -->
-            <ng-container *ngFor="let media of module.medias">
-              <mat-panel-description class="grid grid-cols-2 gap-4 dark:text-white mt-4">
-                <p>{{ media.title }}</p>
-                <div class="flex justify-end items-center">
-                  <p class="mr-2">{{ media.typeMedia.title }}</p>
-                  <p class="w-10 flex justify-center">|</p>
-                  <p class="ml-2 w-20">
-                    {{ media.duration * 1000 | date : "mm" }}min
-                    {{ media.duration * 1000 | date : "ss" }}s
-                  </p>
-                  <button [ngClass]="{ correctButton: course.modules?.length == 0 }" mat-button color="primary"
-                    class="dark:text-white" mat-icon-button [matMenuTriggerFor]="menuMedia"
-                    (click)="$event.stopPropagation()">
-                    ...
-                  </button>
-                </div>
-                <mat-menu #menuMedia="matMenu" class="dark:bg-neutral-600">
-                  <button mat-menu-item (click)="viewMedia(media.id!, media)">
-                    <span class="dark:text-white">View media</span>
-                  </button>
-                </mat-menu>
-              </mat-panel-description>
-            </ng-container>
-
-            <mat-menu #menuModule="matMenu" class="dark:bg-neutral-600">
-              <button mat-menu-item (click)="viewModule(module.id!)">
-                <span class="dark:text-white">View module</span>
-              </button>
-              <button mat-menu-item (click)="editModule(module.id!)">
-                <span class="dark:text-white">Update module</span>
-              </button>
-              <button mat-menu-item (click)="deleteModule(module.id!)">
-                <span class="dark:text-red-500 hot-action">Remove module</span>
-              </button>
-            </mat-menu>
-          </mat-expansion-panel>
-        </mat-accordion>
-
-        <mat-menu #menu="matMenu" class="dark:bg-neutral-600">
-          <button mat-menu-item (click)="goToViewCourse(course)">
-            <span class="dark:text-white">View course</span>
+          </div>
+        </div>
+      </ng-template>
+      <mat-expansion-panel-header>
+        <mat-panel-title class="dark:text-white">
+          <span> {{ course.title }}</span>
+        </mat-panel-title>
+        <mat-panel-description class="flex-row-reverse dark:text-white">
+          <ng-container *ngIf="course.modules!.length > 0; else noModules">
+            <div class="numberOfModules">
+              {{ course.modules!.length }}
+              {{ course.modules!.length <= 1 ? "module" : "modules" }}
+            </div>
+          </ng-container>
+          <mat-icon
+            (click)="openSimpleDialog(template); $event.stopPropagation()"
+            class="visibilityIcon"
+            >{{ course.published ? "visibility" : "visibility_off" }}</mat-icon
+          >
+          <ng-template #noModules>
+            <div class="numberOfModules">no module</div>
+          </ng-template>
+        </mat-panel-description>
+        <mat-action-row>
+          <button
+            [ngClass]="{ correctButton: course.modules?.length == 0 }"
+            mat-button
+            color="primary"
+            class="dark:text-white"
+            mat-icon-button
+            [matMenuTriggerFor]="menu"
+            (click)="$event.stopPropagation()"
+          >
+            ...
           </button>
-          <button mat-menu-item (click)="goToUpdateCourse(course)">
-            <span class="dark:text-white"> Update course </span>
-          </button>
-          <button mat-menu-item (click)="onCopyCourse(course)">
-            <span class="dark:text-white">Copy course</span>
-          </button>
-
-          <button mat-menu-item (click)="doRemoveCourseConceptor(course)">
-            <span class="dark:text-red-500 hot-action">Remove course</span>
-          </button>
-        </mat-menu>
-      </mat-expansion-panel>
-    </mat-accordion>
-  </div>
-
-  <!-- Other list -->
-  <div class="row m-10">
-    <h2 class="col xs11 course-title">Other list</h2>
-    <div class="col xs1 course-number">
-      {{ courses.length }} {{ courses.length <= 1 ? " course" : " courses" }} </div>
-    </div>
-
-    <div class="mx-10">
-      <mat-accordion *ngIf="courses.length">
-        <mat-expansion-panel [disabled]="course.modules?.length == 0" class="dark:bg-neutral-600"
-          *ngFor="let course of courses">
+        </mat-action-row>
+      </mat-expansion-panel-header>
+      <!-- MODULE MY LIST -->
+      <mat-accordion *ngFor="let module of course.modules">
+        <mat-expansion-panel
+          [disabled]="module.medias.length == 0"
+          class="dark:bg-neutral-600 mt-4"
+        >
           <mat-expansion-panel-header>
             <mat-panel-title class="dark:text-white">
-              {{ course.title }}
+              {{ module.name }}
             </mat-panel-title>
             <mat-panel-description class="flex-row-reverse dark:text-white">
-              <ng-container *ngIf="course.modules!.length > 0; else noModules">
-                <div class="numberOfModules">
-                  {{ course.modules!.length }}
-                  {{ course.modules!.length <= 1 ? "module" : "modules" }} </div>
+              <ng-container *ngIf="module.medias.length > 0; else noMedias">
+                {{ module.medias.length }}
+                {{ module.medias.length <= 1 ? "media" : "medias" }}
               </ng-container>
-              <ng-template #noModules>
-                <div class="numberOfModules">no module</div>
-              </ng-template>
+              <ng-template #noMedias>no media</ng-template>
             </mat-panel-description>
             <mat-action-row>
-              <button [ngClass]="{ correctButton: course.modules?.length == 0 }" mat-button color="primary"
-                class="dark:text-white" mat-icon-button [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()">
+              <button
+                [ngClass]="{ correctButton: module.medias.length == 0 }"
+                mat-button
+                color="primary"
+                class="dark:text-white"
+                mat-icon-button
+                [matMenuTriggerFor]="menuModule"
+                (click)="$event.stopPropagation()"
+              >
                 ...
               </button>
             </mat-action-row>
           </mat-expansion-panel-header>
-          <mat-accordion *ngFor="let module of course.modules">
-            <!-- MODULE OTHER LIST -->
-            <mat-expansion-panel [disabled]="module.medias.length == 0" class="mt-4 dark:bg-neutral-600">
-              <mat-expansion-panel-header>
-                <mat-panel-title class="dark:text-white">
-                  {{ module.name }}
-                </mat-panel-title>
-                <mat-panel-description class="flex-row-reverse dark:text-white">
-                  <ng-container *ngIf="module.medias.length > 0; else noMedias">
-                    {{ module.medias.length }}
-                    {{ module.medias.length <= 1 ? "media" : "medias" }} </ng-container>
-                      <ng-template #noMedias>no media</ng-template>
-                </mat-panel-description>
-                <mat-action-row>
-                  <button [ngClass]="{ correctButton: course.modules?.length == 0 }" mat-button color="primary"
-                    class="dark:text-white" mat-icon-button [matMenuTriggerFor]="menuModule"
-                    (click)="$event.stopPropagation()">
-                    ...
-                  </button>
-                </mat-action-row>
-              </mat-expansion-panel-header>
-              <!-- MEDIA OTHER LIST -->
-              <ng-container *ngFor="let media of module.medias">
-                <mat-panel-description class="grid grid-cols-2 gap-4 dark:text-white mt-4">
-                  <p>{{ media.title }}</p>
-                  <div class="flex justify-end">
-                    <p class="mr-2">{{ media.typeMedia.title }}</p>
-                    <p class="w-10 flex justify-center">|</p>
-                    <p class="ml-2 w-20">
-                      {{ media.duration * 1000 | date : "mm" }}min
-                      {{ media.duration * 1000 | date : "ss" }}s
-                    </p>
-                  </div>
-                </mat-panel-description>
-              </ng-container>
-            </mat-expansion-panel>
+          <!-- MEDIA MY LIST -->
+          <ng-container *ngFor="let media of module.medias">
+            <mat-panel-description
+              class="grid grid-cols-2 gap-4 dark:text-white mt-4"
+            >
+              <p>{{ media.title }}</p>
+              <div class="flex justify-end items-center">
+                <p class="mr-2">{{ media.typeMedia.title }}</p>
+                <p class="w-10 flex justify-center">|</p>
+                <p class="ml-2 w-20">
+                  {{ media.duration * 1000 | date : "mm" }}min
+                  {{ media.duration * 1000 | date : "ss" }}s
+                </p>
+                <button
+                  [ngClass]="{ correctButton: course.modules?.length == 0 }"
+                  mat-button
+                  color="primary"
+                  class="dark:text-white"
+                  mat-icon-button
+                  [matMenuTriggerFor]="menuMedia"
+                  (click)="$event.stopPropagation()"
+                >
+                  ...
+                </button>
+              </div>
+              <mat-menu #menuMedia="matMenu" class="dark:bg-neutral-600">
+                <button mat-menu-item (click)="viewMedia(media.id!, media)">
+                  <span class="dark:text-white">View media</span>
+                </button>
+              </mat-menu>
+            </mat-panel-description>
+          </ng-container>
 
-            <mat-menu class="dark:bg-neutral-600" #menuModule="matMenu">
-              <button mat-menu-item>
-                <span class="dark:text-white" (click)="viewModule(module.id!)">View module</span>
-              </button>
-            </mat-menu>
-          </mat-accordion>
-
-          <mat-menu class="dark:bg-neutral-600" #menu="matMenu">
-            <button mat-menu-item (click)="goToViewCourse(course)">
-              <span class="dark:text-white">View course</span>
+          <mat-menu #menuModule="matMenu" class="dark:bg-neutral-600">
+            <button mat-menu-item (click)="viewModule(module.id!)">
+              <span class="dark:text-white">View module</span>
             </button>
-            <button class="dark:text-white" mat-menu-item (click)="onCopyCourse(course)">
-              <span class="">Copy course</span>
+            <button mat-menu-item (click)="editModule(module.id!)">
+              <span class="dark:text-white">Update module</span>
+            </button>
+            <button mat-menu-item (click)="deleteModule(module.id!)">
+              <span class="dark:text-red-500 hot-action">Remove module</span>
             </button>
           </mat-menu>
         </mat-expansion-panel>
       </mat-accordion>
-    </div>
+
+      <mat-menu #menu="matMenu" class="dark:bg-neutral-600">
+        <button mat-menu-item (click)="goToViewCourse(course)">
+          <span class="dark:text-white">View course</span>
+        </button>
+        <button mat-menu-item (click)="goToUpdateCourse(course)">
+          <span class="dark:text-white"> Update course </span>
+        </button>
+        <button mat-menu-item (click)="onCopyCourse(course)">
+          <span class="dark:text-white">Copy course</span>
+        </button>
+
+        <button mat-menu-item (click)="doRemoveCourseConceptor(course)">
+          <span class="dark:text-red-500 hot-action">Remove course</span>
+        </button>
+      </mat-menu>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+<!-- Other list -->
+<div class="row m-10">
+  <h2 class="col xs11 course-title">Other list</h2>
+  <div class="col xs1 course-number">
+    {{ courses.length }} {{ courses.length <= 1 ? " course" : " courses" }}
+  </div>
+</div>
+
+<div class="mx-10">
+  <mat-accordion *ngIf="courses.length">
+    <mat-expansion-panel
+      [disabled]="course.modules?.length == 0"
+      class="dark:bg-neutral-600"
+      *ngFor="let course of courses"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title class="dark:text-white">
+          {{ course.title }}
+        </mat-panel-title>
+        <mat-panel-description class="flex-row-reverse dark:text-white">
+          <ng-container *ngIf="course.modules!.length > 0; else noModules">
+            <div class="numberOfModules">
+              {{ course.modules!.length }}
+              {{ course.modules!.length <= 1 ? "module" : "modules" }}
+            </div>
+          </ng-container>
+          <ng-template #noModules>
+            <div class="numberOfModules">no module</div>
+          </ng-template>
+        </mat-panel-description>
+        <mat-action-row>
+          <button
+            [ngClass]="{ correctButton: course.modules?.length == 0 }"
+            mat-button
+            color="primary"
+            class="dark:text-white"
+            mat-icon-button
+            [matMenuTriggerFor]="menu"
+            (click)="$event.stopPropagation()"
+          >
+            ...
+          </button>
+        </mat-action-row>
+      </mat-expansion-panel-header>
+      <mat-accordion *ngFor="let module of course.modules">
+        <!-- MODULE OTHER LIST -->
+        <mat-expansion-panel
+          [disabled]="module.medias.length == 0"
+          class="mt-4 dark:bg-neutral-600"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title class="dark:text-white">
+              {{ module.name }}
+            </mat-panel-title>
+            <mat-panel-description class="flex-row-reverse dark:text-white">
+              <ng-container *ngIf="module.medias.length > 0; else noMedias">
+                {{ module.medias.length }}
+                {{ module.medias.length <= 1 ? "media" : "medias" }}
+              </ng-container>
+              <ng-template #noMedias>no media</ng-template>
+            </mat-panel-description>
+            <mat-action-row>
+              <button
+                [ngClass]="{ correctButton: course.modules?.length == 0 }"
+                mat-button
+                color="primary"
+                class="dark:text-white"
+                mat-icon-button
+                [matMenuTriggerFor]="menuModule"
+                (click)="$event.stopPropagation()"
+              >
+                ...
+              </button>
+            </mat-action-row>
+          </mat-expansion-panel-header>
+          <!-- MEDIA OTHER LIST -->
+          <ng-container *ngFor="let media of module.medias">
+            <mat-panel-description
+              class="grid grid-cols-2 gap-4 dark:text-white mt-4"
+            >
+              <p>{{ media.title }}</p>
+              <div class="flex justify-end items-center">
+                <p class="mr-2">{{ media.typeMedia.title }}</p>
+                <p class="w-10 flex justify-center">|</p>
+                <p class="ml-2 w-20">
+                  {{ media.duration * 1000 | date : "mm" }}min
+                  {{ media.duration * 1000 | date : "ss" }}s
+                </p>
+                <button
+                  [ngClass]="{ correctButton: course.modules?.length == 0 }"
+                  mat-button
+                  color="primary"
+                  class="dark:text-white"
+                  mat-icon-button
+                  [matMenuTriggerFor]="menuMedia"
+                  (click)="$event.stopPropagation()"
+                >
+                  ...
+                </button>
+              </div>
+              <mat-menu #menuMedia="matMenu" class="dark:bg-neutral-600">
+                <button mat-menu-item (click)="viewMedia(media.id!, media)">
+                  <span class="dark:text-white">View media</span>
+                </button>
+              </mat-menu>
+            </mat-panel-description>
+          </ng-container>
+        </mat-expansion-panel>
+
+        <mat-menu class="dark:bg-neutral-600" #menuModule="matMenu">
+          <button mat-menu-item>
+            <span class="dark:text-white" (click)="viewModule(module.id!)"
+              >View module</span
+            >
+          </button>
+        </mat-menu>
+      </mat-accordion>
+
+      <mat-menu class="dark:bg-neutral-600" #menu="matMenu">
+        <button mat-menu-item (click)="goToViewCourse(course)">
+          <span class="dark:text-white">View course</span>
+        </button>
+        <button
+          class="dark:text-white"
+          mat-menu-item
+          (click)="onCopyCourse(course)"
+        >
+          <span class="">Copy course</span>
+        </button>
+      </mat-menu>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

@@ -25,9 +25,9 @@ export class MediaTileComponent implements OnInit {
     pdf: 'picture_as_pdf',
   };
 
-  constructor(private _mediaService: MediaService, private _router: Router) { }
+  constructor(private _mediaService: MediaService, private _router: Router) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   getIcon(type: string | undefined): string {
     const t = type!.toLowerCase();
@@ -54,13 +54,13 @@ export class MediaTileComponent implements OnInit {
       queryParams: {
         id: mediaInfos?.id,
       },
-    }
+    };
     // console.log('go');
     // Go to edit page
     this._router.navigate(['/dashboard/conceptor/media/update'], data);
   }
 
-  viewMedia(arg0: number | undefined) {
-    throw new Error('Method not implemented.');
+  viewMedia(id: number | undefined) {
+    this._router.navigate([`dashboard/conceptor/media/${id}/view`]);
   }
 }

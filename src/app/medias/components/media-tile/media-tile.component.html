@@ -1,31 +1,55 @@
-<div class="media-tile ">
-    <div class="flex flex-row justify-between items-center w-full">
-        <span class="media-tile-badge min-w-fit select-none">
-            {{mediaInfo?.typeMedia?.title}}
-        </span>
+<div class="media-tile">
+  <div class="flex flex-row justify-between items-center w-full">
+    <span class="media-tile-badge min-w-fit select-none">
+      {{ mediaInfo?.typeMedia?.title }}
+    </span>
+  </div>
+  <div class="flex flex-1 items-end justify-between w-full space-x-2">
+    <h4 class="dark:text-neutral-300">
+      {{ mediaInfo?.title }}
+    </h4>
+    <div
+      class="p-4 rounded-xl bg-primary-400 flex items-center align-middle select-none"
+    >
+      <i class="material-icons text-4xl text-primary-200">{{
+        getIcon(mediaInfo?.typeMedia?.title)
+      }}</i>
     </div>
-    <div class="flex flex-1 items-end  justify-between w-full space-x-2">
-        <h4 class="dark:text-neutral-300">
-            {{mediaInfo?.title}}
-        </h4>
-        <div class="p-4 rounded-xl bg-primary-400 flex items-center align-middle select-none"><i
-                class="material-icons text-4xl text-primary-200">{{getIcon(mediaInfo?.typeMedia?.title)}}</i>
-        </div>
+  </div>
+
+  <button
+    mat-button
+    [matMenuTriggerFor]="beforeMenu"
+    class="absolute top-0 right-2"
+  >
+    <i class="material-icons">more_horiz</i>
+  </button>
+
+  <mat-menu #beforeMenu="matMenu" xPosition="before" class="no-styles mt-1">
+    <div
+      class="divide-y rounded-xl dark:bg-neutral-700/95 bg-neutral-100 dark:text-white flex flex-row items-center align-middle"
+    >
+      <button
+        mat-button
+        class="p-2 hover:bg-teal-400 transition-all"
+        (click)="viewMedia(mediaInfo?.id)"
+      >
+        <i class="material-icons">open_in_new</i>
+      </button>
+      <button
+        mat-button
+        class="p-2 hover:bg-sky-400 transition-all"
+        (click)="goToEditMedia(mediaInfo)"
+      >
+        <i class="material-icons">edit</i>
+      </button>
+      <button
+        mat-button
+        class="p-2 hover:bg-red-500 transition-all"
+        (click)="deleteMedia(mediaInfo?.id)"
+      >
+        <i class="material-icons">delete_forever</i>
+      </button>
     </div>
-
-    <button mat-button [matMenuTriggerFor]="beforeMenu" class="absolute top-0 right-2"><i
-            class="material-icons">more_horiz</i></button>
-
-    <mat-menu #beforeMenu="matMenu" xPosition="before" class="no-styles mt-1">
-        <div
-            class="divide-y rounded-xl dark:bg-neutral-700/95 bg-neutral-100 dark:text-white flex flex-row items-center align-middle">
-            <!-- <button mat-button class="p-2 hover:bg-teal-400 transition-all" (click)="viewMedia(mediaInfo?.id)"><i
-                    class="material-icons">open_in_new</i></button> -->
-            <button mat-button class="p-2 hover:bg-sky-400 transition-all" (click)="goToEditMedia(mediaInfo)"><i
-                    class="material-icons">edit</i></button>
-            <button mat-button class="p-2 hover:bg-red-500 transition-all" (click)="deleteMedia(mediaInfo?.id)"><i
-                    class="material-icons ">delete_forever</i></button>
-        </div>
-    </mat-menu>
-
+  </mat-menu>
 </div>

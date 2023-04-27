@@ -20,7 +20,6 @@ export class PlayerComponent implements OnInit {
     this._mediaService.findOne(id).subscribe({
       next: (media: any) => {
         this.medias = media;
-        console.log(this.medias);
       },
       error: (error: any) => {
         console.log('Something went wrong');

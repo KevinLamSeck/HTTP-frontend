@@ -7,6 +7,7 @@ import { MediaType } from 'src/app/course/types/media-type';
 import { ModuleType } from 'src/app/course/types/module-type';
 import { MediaService } from 'src/app/medias/services/media.service';
 import { ModuleService } from '../../services/module.service';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-update-module',
@@ -153,6 +154,11 @@ export class UpdateModuleComponent implements OnInit {
     this.createMediaVisible = value
   }
 
+
+  //DRAG AND DROP FEATURE
+  public drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.medias, event.previousIndex, event.currentIndex)
+  }
 
 
 

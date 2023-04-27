@@ -1,4 +1,5 @@
-<div class="rounded-xl flex flex-col items-center justify-center w-full" [ngClass]="{'w-3/4 mt-10':!onModal}">
+<div class="rounded-xl flex flex-col items-center justify-center w-full bg-neutral-100 dark:bg-neutral-700"
+  [ngClass]="{'w-3/4 mt-10':!onModal}">
   <div class="w-full">
     <h3 class="text-3xl leading-tight text-center">Add media</h3>
   </div>
@@ -11,7 +12,7 @@
     <ul role="list" class="list-none space-y-2 ">
       <ng-container *ngFor="let media of medias">
         <ng-container *ngIf="searchText === '' || media.title.toLowerCase().includes(searchText) ">
-          <li class="bg-neutral-100 px-6 py-4 rounded-xl dark:bg-neutral-700 dark:text-white"
+          <li class="bg-neutral-100 px-6 py-4 rounded-xl dark:bg-neutral-800 dark:text-white"
             (click)="addMedia(media.id!)">
             {{media.title}}</li>
         </ng-container>

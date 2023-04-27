@@ -18,14 +18,13 @@
     "importHelpers": true,
     "target": "es2017",
     "module": "es2020",
-    "lib": [
-      "es2020",
-      "dom"
-    ]
+    "lib": ["es2020", "dom"]
   },
   "exclude": [
-    "cypress.config.ts",
-    "cypress"
+    "../cypress.config.ts",
+    "../cypress",
+    "../../cypress.config.ts",
+    "../../cypress"
   ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -19,37 +19,6 @@
   allow="autoplay"
   src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/360226709&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
 ></iframe>
-<div
-  style="
-    font-size: 10px;
-    color: #cccccc;
-    line-break: anywhere;
-    word-break: normal;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
-      Garuda, Verdana, Tahoma, sans-serif;
-    font-weight: 100;
-  "
->
-  <a
-    href="https://soundcloud.com/mr-frontend-community"
-    title="Mr Frontend Community"
-    target="_blank"
-    style="color: #cccccc; text-decoration: none"
-    >Mr Frontend Community</a
-  >
-  ·
-  <a
-    href="https://soundcloud.com/mr-frontend-community/mr-frontend-podcast-6-web-dev-news-smashing-magazine-vuejs-frontend-love-conference-2018"
-    title="Mr Frontend Podcast #6: Web Dev news, Smashing Magazine, VueJS &amp; Frontend Love Conference 2018"
-    target="_blank"
-    style="color: #cccccc; text-decoration: none"
-    >Mr Frontend Podcast #6: Web Dev news, Smashing Magazine, VueJS &amp;
-    Frontend Love Conference 2018</a
-  >
-</div>
 
 <iframe
   *ngIf="medias?.typeMedia?.title == 'PDF'"
@@ -73,3 +42,8 @@
   width="100%"
   height="100%"
 />
+<ng-container *ngIf="medias?.typeMedia?.title == 'Animation'">
+  <img
+    src="https://aircodr.com/9d643f53934a11f35e1824df87fdbe33/illustration.gif"
+  />
+</ng-container>

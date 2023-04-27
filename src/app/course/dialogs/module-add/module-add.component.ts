@@ -17,11 +17,12 @@ export class ModuleAddComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<ModuleAddComponent>
   ) {
+    console.log(data);
     this.addOrUpdate = data == null;
     this.form =
       data == null ? this._formBuilder.form : this._formBuilder.buildForm(data);
-    this.c["name"].setValue("");
-    this.c["objective"].setValue("");
+    this.c["name"].setValue(!this.addOrUpdate ? data.name : "");
+    this.c["objective"].setValue(!this.addOrUpdate ? data.objective : "");
   }
 
   ngOnInit(): void {}

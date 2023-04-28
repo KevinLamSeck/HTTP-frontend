@@ -173,7 +173,6 @@ describe('MediaService', () => {
     testRequest.flush(mockMediasList);
 
     httpTestingController.verify();
-
   })
 
 });

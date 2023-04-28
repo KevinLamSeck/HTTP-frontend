@@ -178,6 +178,10 @@ body {
   @apply mx-auto max-w-7xl p-6 lg:px-8;
 }
 
+.layout-center {
+  @apply flex flex-col items-center align-middle justify-center;
+}
+
 // Remove the background color on webkit browser (Chrome, Safari..)
 
 input:-webkit-autofill,

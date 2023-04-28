@@ -1,14 +1,14 @@
 <ng-container *ngIf="isDataAvailable">
   <div class="space-y-4">
     <div
-      class="bg-neutral-100 flex flex-col md:flex-row justify-between mt-10 mx-28 p-10 rounded shadow-md dark:bg-neutral-600"
+      class="bg-neutral-100 flex flex-col md:flex-row justify-between rounded shadow-md p-10 dark:bg-neutral-600"
     >
-      <div class="flex-col gap-2 flex">
+      <div class="flex-col gap-2 flex items-center">
         <h2>{{ module.name }}</h2>
         <h4>{{ module.objective }}</h4>
         <p>Created by : {{ conceptor.firstName }} {{ conceptor.lastName }}</p>
       </div>
-      <div>
+      <div class="mt-2 md:mt-0">
         <img
           src="https://placekitten.com/300/150"
           class="rounded h-full w-full overflow-hidden shadow ml-2"
@@ -17,8 +17,8 @@
       </div>
     </div>
 
-    <div class="mx-28">
-      <div class="flex flex-col justify-start lg:items-center h-ful mt-10">
+    <div>
+      <div class="flex flex-col justify-start lg:items-center h-ful">
         <div class="w-full space-y-2">
           <span *ngIf="medias.length > 0">Medias in this module :</span>
           <span *ngIf="medias.length == 0"
@@ -27,10 +27,10 @@
           <ng-container *ngIf="medias">
             <ul *ngFor="let media of medias" class="list-none w-full">
               <li
-                class="bg-neutral-100 px-6 py-4 flex flex-col md:flex-row justify-between dark:bg-neutral-600"
+                class="bg-neutral-100 p-3 flex flex-col md:flex-row justify-between items-center dark:bg-neutral-600"
               >
                 <span class="grow">{{ media.title }}</span>
-                <div class="">
+                <div>
                   <span class="mx-2"
                     >{{ media.typeMedia.title }} ·
                     {{ media.duration * 1000 | date : "mm" }}min

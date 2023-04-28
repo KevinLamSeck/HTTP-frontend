@@ -61,15 +61,4 @@ describe('CourseListComponent', () => {
     const h2 = titleElement.querySelector('#otherList')!;
     expect(h2.textContent).toEqual('Other list');
   });
-
-  /* it('should call openSimpleDialog when clicking the publish button', () => {
-    fixture.detectChanges();
-
-    spyOn(component, 'openSimpleDialog');
-    const button =
-      fixture.debugElement.nativeElement.querySelector('#buttonPublish')!;
-    button.click();
-    fixture.detectChanges();
-    expect(component.openSimpleDialog).toHaveBeenCalled();
-  }); */
 });

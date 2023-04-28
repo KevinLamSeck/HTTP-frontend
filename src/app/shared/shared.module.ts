@@ -1,16 +1,18 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { UiModule } from '../ui/ui.module';
+import { NumberOnlyInputDirective } from './directives/number-only-input.directive';
 import { ToggleDirective } from './directives/toggle.directive';
 
 
 
 @NgModule({
   declarations: [
-    ToggleDirective
+    ToggleDirective,
+    NumberOnlyInputDirective
   ],
   imports: [
     CommonModule
@@ -22,7 +24,8 @@ import { ToggleDirective } from './directives/toggle.directive';
     RouterModule,
     UiModule,
     ReactiveFormsModule,
-    ToggleDirective
+    ToggleDirective,
+    NumberOnlyInputDirective
   ]
 })
 export class SharedModule { }

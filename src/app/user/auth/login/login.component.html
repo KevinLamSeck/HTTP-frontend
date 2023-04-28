@@ -74,15 +74,24 @@
               </mat-error>
             </mat-form-field>
             <div class="pt-6 w-full flex justify-between items-center">
-              <div class="flex items-center gap-4">
-                <mat-label> Stay connected ? </mat-label>
-                <mat-slide-toggle
+              <div class="flex items-center align-middle gap-4">
+                <!-- <mat-slide-toggle
                   [(ngModel)]="stayConnected"
                   [ngModelOptions]="{ standalone: true }"
                   (ngModelChange)="changeStrategy()"
                 >
                   {{ stayConnected ? "Yes" : "No" }}
-                </mat-slide-toggle>
+                </mat-slide-toggle> -->
+                <div class="flex items-center gap-2">
+                  <span class="text-sm">Stay connected ?</span>
+                  <mat-checkbox
+                    class="-mt-1"
+                    [(ngModel)]="stayConnected"
+                    (ngModelChange)="changeStrategy()"
+                    [ngModelOptions]="{ standalone: true }"
+                  >
+                  </mat-checkbox>
+                </div>
               </div>
               <a
                 class="text-xs"

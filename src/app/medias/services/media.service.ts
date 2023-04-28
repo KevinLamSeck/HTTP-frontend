@@ -52,4 +52,16 @@ export class MediaService {
       observe: 'response',
     });
   }
+
+  public getFileByName(name: string): Observable<Blob> {
+    const options = {
+      responseType: 'blob'
+    };
+    const url = `http://127.0.0.1:5000/files/${name}`;
+
+    return this._httpClient.get<ArrayBuffer>(url).pipe(
+      map(response => new Blob([response]))
+    );
+
+  }
 }

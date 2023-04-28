@@ -62,8 +62,7 @@ export class UpdateModuleComponent implements OnInit {
       name: [
         this.module?.name,
         [
-          Validators.required,
-          Validators.minLength(8)
+          Validators.required
         ]
       ],
       objective: [
@@ -89,7 +88,7 @@ export class UpdateModuleComponent implements OnInit {
     this._moduleService.update(module)
       .subscribe((response: HttpResponse<any>) => {
         // console.log(response)
-        this._snackBar.open(`"${module.name}" was updated.`, "Close");
+        this._snackBar.open(`"${module.name}" was updated.`, "Close", { duration: 2000 });
         this._router.navigate(['/'])
       })
   }
@@ -111,7 +110,7 @@ export class UpdateModuleComponent implements OnInit {
       .subscribe({
         next: (media: MediaType) => {
           this.medias.push(media)
-          this._snackBar.open(`"${media.title}" was added.`, "Close");
+          this._snackBar.open(`"${media.title}" was added.`, "Close", { duration: 2000 });
         },
         error: (error: any) => {
           // console.log('Something went wrong')
@@ -142,7 +141,7 @@ export class UpdateModuleComponent implements OnInit {
       .subscribe({
         next: (media: MediaType) => {
           this.medias.push(media)
-          this._snackBar.open(`"${media.title}" was created.`, "Close");
+          this._snackBar.open(`"${media.title}" was created.`, "Close", { duration: 2000 });
         },
         error: (error: any) => {
           // console.log('Something went wrong')

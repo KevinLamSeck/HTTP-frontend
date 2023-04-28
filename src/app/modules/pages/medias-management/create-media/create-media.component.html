@@ -10,7 +10,7 @@
         <mat-select #types formControlName="typeMedia" required>
           <mat-option *ngFor="let key of optionsMethod" [value]="key">{{
             key
-            }}</mat-option>
+          }}</mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -26,15 +26,26 @@
       </mat-form-field>
 
       <mat-form-field class="w-full">
-        <input matInput formControlName="duration" placeholder="Media duration in seconds..." type="number" />
+        <input
+          matInput
+          formControlName="duration"
+          placeholder="Media duration in seconds..."
+          type="number"
+          min="0"
+          step="1"
+          value="0"
+        />
         <mat-error *ngIf="c['duration'].errors && c['duration'].touched">
-          Duration is required
+          Duration is required in positive integer
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field class="w-full" *ngIf="
+      <mat-form-field
+        class="w-full"
+        *ngIf="
           !['Document', 'Image', 'Slide', 'PDF'].includes(c['typeMedia'].value)
-        ">
+        "
+      >
         <input matInput formControlName="url" placeholder="Media url..." />
         <mat-error *ngIf="c['url'].errors && c['url'].touched">
           Url is required
@@ -45,17 +56,32 @@
     </form>
 
     <div class="text-center">
-      <input type="file" class="" (change)="selectFile($event)" *ngIf="
+      <input
+        type="file"
+        class=""
+        (change)="selectFile($event)"
+        *ngIf="
           ['Document', 'Image', 'Slide', 'PDF'].includes(c['typeMedia'].value)
-        " />
+        "
+      />
     </div>
 
     <div mat-dialog-actions class="flex justify-center">
-      <button mat-flat-button color="warn" class="mx-2 btn" (click)="onNoClick()">
+      <button
+        mat-flat-button
+        color="warn"
+        class="mx-2 btn"
+        (click)="onNoClick()"
+      >
         Cancel
       </button>
-      <button mat-flat-button color="primary" [disabled]="mediaForm.invalid" (click)="onSubmit()"
-        class="mx-4 btn primary">
+      <button
+        mat-flat-button
+        color="primary"
+        [disabled]="mediaForm.invalid"
+        (click)="onSubmit()"
+        class="mx-4 btn primary"
+      >
         Create
       </button>
     </div>

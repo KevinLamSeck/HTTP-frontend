@@ -110,7 +110,7 @@ export class MediaFormService {
     // // console.log(this.optionsMethod[this._options.get(this._media.typeMedia.title)]);
 
     this._form = this._formBuilder.group({
-      title: [this._media.title, [Validators.required, Validators.minLength(8)]],
+      title: [this._media.title, [Validators.required, Validators.maxLength(50)]],
       summary: [this._media.summary],
       duration: [this._media.duration, [Validators.required]],
       url: [this._media.url],

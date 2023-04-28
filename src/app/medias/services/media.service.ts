@@ -8,9 +8,9 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class MediaService {
-  private readonly endpoint: string = `${environment.apiRootUri}medias`;
+  public readonly endpoint: string = `${environment.apiRootUri}medias`;
 
-  constructor(private _httpClient: HttpClient) {}
+  constructor(private _httpClient: HttpClient) { }
 
   public findAll(): Observable<MediaType[]> {
     return this._httpClient.get<MediaType[]>(this.endpoint);

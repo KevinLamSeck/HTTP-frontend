@@ -101,7 +101,7 @@ export class UserService {
         : new LocalStorageStrategy();
     this._router.navigate(['/', 'user']);
 
-    const messageSucessLogin: string = `Disconnect`;
+    const messageSucessLogin: string = `Disconnected`;
     this._toastService.show(messageSucessLogin);
   }
 }

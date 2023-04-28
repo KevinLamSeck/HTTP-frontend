@@ -34,9 +34,10 @@
           min="0"
           step="1"
           value="0"
+          onchange="updateValue()"
         />
         <mat-error *ngIf="c['duration'].errors && c['duration'].touched">
-          Duration is required
+          Duration is required in positive integer
         </mat-error>
       </mat-form-field>
 

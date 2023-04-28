@@ -172,7 +172,7 @@ export class CreateMediaComponent implements OnInit {
           this.fileInfos = this._fileUpload.getFiles();
         } catch (error) {
           this.message = 'Could not upload the file!';
-          this._snackBar.open(`"${this.message}"`, "Close");
+          this._snackBar.open(`"${this.message}"`, "Close", { duration: 2000 });
 
           this.currentFile = undefined;
         }

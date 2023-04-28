@@ -67,7 +67,7 @@ export class CreateModuleComponent implements OnInit {
     }
     this._moduleService.add(module)
       .subscribe((moduleType: ModuleType) => {
-        this._snackBar.open(`"${module.name}" was created.`, "Close");
+        this._snackBar.open(`"${module.name}" was created.`, "Close", { duration: 2000 });
         this._router.navigate(['/'])
       })
   }
@@ -87,7 +87,7 @@ export class CreateModuleComponent implements OnInit {
       .subscribe({
         next: (media: MediaType) => {
           this.medias.push(media)
-          this._snackBar.open(`"${media.title}" was added.`, "Close");
+          this._snackBar.open(`"${media.title}" was added.`, "Close", { duration: 2000 });
         },
         error: (error: any) => {
           // console.log('Something went wrong')
@@ -117,7 +117,7 @@ export class CreateModuleComponent implements OnInit {
       .subscribe({
         next: (media: MediaType) => {
           this.medias.push(media)
-          this._snackBar.open(`"${media.title}" was created.`, "Close");
+          this._snackBar.open(`"${media.title}" was created.`, "Close", { duration: 2000 });
         },
         error: (error: any) => {
           // console.log('Something went wrong')

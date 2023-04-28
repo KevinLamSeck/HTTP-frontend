@@ -22,7 +22,13 @@
   >
   <ng-template #timeModule>
     <p class="mb-5 text-slate-400">
-      {{ course.modules?.length }} modules | {{ totalTime }} total length
+      {{ course.modules?.length }}
+      {{
+        course && course.modules && course.modules.length <= 1
+          ? " module"
+          : " modules"
+      }}
+      | {{ totalTime }} total length
     </p>
   </ng-template>
 

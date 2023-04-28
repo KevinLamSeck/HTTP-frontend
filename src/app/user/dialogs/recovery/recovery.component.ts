@@ -1,19 +1,19 @@
-import { HttpResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { HttpResponse } from "@angular/common/http";
+import { Component, OnInit } from "@angular/core";
 import {
   AbstractControl,
   FormControl,
   FormGroup,
   Validators,
-} from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
-import { ToastService } from 'src/app/core/toast.service';
-import { UserService } from '../../services/user.service';
+} from "@angular/forms";
+import { MatDialogRef } from "@angular/material/dialog";
+import { ToastService } from "src/app/core/toast.service";
+import { UserService } from "../../services/user.service";
 
 @Component({
-  selector: 'app-recovery',
-  templateUrl: './recovery.component.html',
-  styleUrls: ['./recovery.component.scss'],
+  selector: "app-recovery",
+  templateUrl: "./recovery.component.html",
+  styleUrls: ["./recovery.component.scss"],
 })
 export class RecoveryComponent implements OnInit {
   public form: FormGroup = new FormGroup({});
@@ -25,15 +25,15 @@ export class RecoveryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const loginControl: AbstractControl = new FormControl('', [
+    const loginControl: AbstractControl = new FormControl("", [
       Validators.required,
     ]);
-    const emailControl: AbstractControl = new FormControl('', [
+    const emailControl: AbstractControl = new FormControl("", [
       Validators.required,
     ]);
 
-    this.form.addControl('login', loginControl);
-    this.form.addControl('email', emailControl);
+    this.form.addControl("login", loginControl);
+    this.form.addControl("email", emailControl);
   }
 
   onSubmit(): void {
@@ -44,9 +44,9 @@ export class RecoveryComponent implements OnInit {
       },
       error: (error: any) => {
         // console.log(error);
-        this.form.controls['login'].setValue('');
-        this.form.controls['email'].setValue('');
-        const messageErrorLogin: string = `Désolé vous avez rentrer des identifiants incorrects !`;
+        this.form.controls["login"].setValue("");
+        this.form.controls["email"].setValue("");
+        const messageErrorLogin: string = `Sorry, you should enter login and email`;
         this._toastService.show(messageErrorLogin);
       },
       complete: () => {},

@@ -230,12 +230,12 @@ export class CourseHandlerComponent implements OnInit {
       course.id = this.course.id;
       // console.log(course);
       this._courseService.update(course).subscribe((courseType: CourseType) => {
-        this._snackBar.open(`"${course.title}" was created.`, "Close");
+        this._snackBar.open(`"${course.title}" was updated.`, "Close");
         this._router.navigate(["/", "dashboard", "conceptor", "course"]);
       });
     } else {
       this._courseService.add(course).subscribe((courseType: CourseType) => {
-        this._snackBar.open(`"${course.title}" was updated.`, "Close");
+        this._snackBar.open(`"${course.title}" was created.`, "Close");
         this._router.navigate(["/", "dashboard", "conceptor", "course"]);
       });
     }

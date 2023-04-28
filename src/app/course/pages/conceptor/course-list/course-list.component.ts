@@ -135,6 +135,7 @@ export class CourseListComponent implements OnInit {
 
     this._courseService.copyCourse(course).subscribe(() => {
       this._snackBar.open(`"${course.title}" was copied.`, "Close");
+      this.ngOnInit();
     });
   }
   onPublishedCourse(course: CourseListType, published: boolean) {

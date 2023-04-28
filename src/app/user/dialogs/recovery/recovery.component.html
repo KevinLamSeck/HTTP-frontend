@@ -9,22 +9,22 @@
   </mat-form-field>
 
   <mat-form-field class="col xs12">
-    <div class="email">
-      <input matInput placeholder="Your email..." formControlName="email" />
-      <mat-error
-        *ngIf="form.controls['email'].touched && form.controls['email'].errors"
-      >
-        Email is required...
-      </mat-error>
-    </div>
+    <!-- <div class="email"> -->
+    <input matInput placeholder="Your email..." formControlName="email" />
+    <mat-error
+      *ngIf="form.controls['email'].touched && form.controls['email'].errors"
+    >
+      Email is required...
+    </mat-error>
+    <!-- </div> -->
   </mat-form-field>
 </form>
 
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">
-    <span class="dark:text-primary-50">Cancel</span>
+    <span color="primary" class="btn primary dark:text-primary-50">Cancel</span>
   </button>
   <button mat-button [disabled]="form.invalid" (click)="onSubmit()">
-    <span class="text-red-500 dark:text-red-400">Reset</span>
+    <span class="btn primary dark:text-primary-50">Reset</span>
   </button>
 </div>

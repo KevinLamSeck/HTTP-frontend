@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { AbstractControl, Form, FormGroup } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { FormModuleBuilderService } from "../../services/course-handler/form-module-builder.service";
+import { ModuleType } from "../../types/module-type";
 
 @Component({
   selector: "app-module-add",
@@ -36,6 +37,13 @@ export class ModuleAddComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.dialogRef.close(this.form.value);
+    let module: ModuleType = {
+      id: undefined,
+      name: this.c["name"].value,
+      objective: this.c["objective"].value,
+      selected: false,
+      medias: this.data ? this.data.medias : [],
+    };
+    this.dialogRef.close(module);
   }
 }

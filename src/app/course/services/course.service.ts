@@ -8,9 +8,9 @@ import { environment } from "./../../../environments/environment";
   providedIn: "root",
 })
 export class CourseService {
-  private readonly endPoint: string = `${environment.apiRootUri}course`;
+  public readonly endPoint: string = `${environment.apiRootUri}course`;
 
-  constructor(private _httpClient: HttpClient) { }
+  constructor(private _httpClient: HttpClient) {}
 
   public findFullCourses(): Observable<CourseListType[]> {
     return this._httpClient.get<CourseListType[]>(this.endPoint);

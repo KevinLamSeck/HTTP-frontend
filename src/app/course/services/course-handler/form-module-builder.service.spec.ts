@@ -15,7 +15,6 @@ describe('FormModuleBuilderService', () => {
   });
 
   it('should be created', () => {
-    // expect(service).toBeTruthy();
-    true
+    expect(service).toBeTruthy();
   });
 });

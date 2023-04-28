@@ -89,9 +89,13 @@ export class DashboardRoutingModule {
               path: 'student',
               component: ListComponent,
               canActivate: [RoleGuard],
-              data: { allowedRoles: ['MANAGER'], title: 'Dashboard | Students List', breadcrumb: 'Students List' },
+              data: {
+                allowedRoles: ['MANAGER'],
+                title: 'Dashboard | Students List',
+                breadcrumb: 'Students List',
+              },
             },
-          ]
+          ],
         },
         {
           path: 'student',
@@ -103,10 +107,13 @@ export class DashboardRoutingModule {
               path: 'list',
               component: ListMyCourseComponent,
               canActivate: [RoleGuard],
-              data: { allowedRoles: ['STUDENT'], title: 'Dashboard | My courses', breadcrumb: 'My courses' },
-
-            }
-          ]
+              data: {
+                allowedRoles: ['STUDENT'],
+                title: 'Dashboard | My courses',
+                breadcrumb: 'My courses',
+              },
+            },
+          ],
         },
       ],
     },

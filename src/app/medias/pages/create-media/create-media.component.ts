@@ -80,7 +80,7 @@ export class CreateMediaComponent implements OnInit {
     this.mediaForm = this._formBuilder.group({
       title: ['', [Validators.required, Validators.maxLength(50)]],
       summary: [''],
-      duration: ['', [Validators.required, Validators.min(0)]],
+      duration: ['', [Validators.required, Validators.min(0), Validators.pattern(/^[1-9]\d*$/),]],
       url: [''],
       typeMedia: [this.optionsMethod[2], [Validators.required]],
       file: [null],
@@ -161,11 +161,13 @@ export class CreateMediaComponent implements OnInit {
           },
         });
   }
+
   onBack() {
     this.onModal
       ? this.dialogRef.close(this.mediaForm.value)
       : this._router.navigate(['../']);
   }
+
   private async submitMediaWithFile(): Promise<void> {
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);

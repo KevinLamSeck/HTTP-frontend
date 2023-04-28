@@ -1,6 +1,6 @@
 <div class="row m-10 justify-between items-center">
   <div class="col xs9 course-title flex items-center">
-    <h2>My own list</h2>
+    <h2 class="h2">My own list</h2>
   </div>
 
   <div class="col xs3 course-number flex items-end justify-end content-end">
@@ -27,6 +27,7 @@
               No Thanks
             </button>
             <button
+              id="button"
               class="btn primary mx-2"
               (click)="
                 onPublishedCourse(course, !course.published);
@@ -50,6 +51,7 @@
             </div>
           </ng-container>
           <mat-icon
+            id="buttonPublish"
             (click)="openSimpleDialog(template); $event.stopPropagation()"
             class="visibilityIcon"
             >{{ course.published ? "visibility" : "visibility_off" }}</mat-icon
@@ -171,7 +173,7 @@
 
 <!-- Other list -->
 <div class="row m-10">
-  <h2 class="col xs11 course-title">Other list</h2>
+  <h2 id="otherList" class="col xs11 course-title">Other list</h2>
   <div class="col xs1 course-number">
     {{ courses.length }} {{ courses.length <= 1 ? " course" : " courses" }}
   </div>

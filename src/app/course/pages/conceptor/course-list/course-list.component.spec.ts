@@ -1,10 +1,21 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+  async,
+  fakeAsync,
+  tick,
+} from '@angular/core/testing';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CourseListComponent } from './course-list.component';
+import { AppComponent } from 'src/app/app.component';
 
 describe('CourseListComponent', () => {
   let component: CourseListComponent;
@@ -13,16 +24,20 @@ describe('CourseListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CourseListComponent],
-      imports: [HttpClientTestingModule, RouterTestingModule, MatSnackBarModule],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        MatSnackBarModule,
+      ],
       providers: [
         { provide: MatDialog, useValue: {} },
         { provide: MatDialogRef, useValue: {} },
         {
-          provide: MAT_DIALOG_DATA, useValue: {
-          }
-        }],
-    })
-      .compileComponents();
+          provide: MAT_DIALOG_DATA,
+          useValue: {},
+        },
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -34,4 +49,27 @@ describe('CourseListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render title "My own list"', () => {
+    const titleElement: HTMLElement = fixture.nativeElement;
+    const h2 = titleElement.querySelector('.h2')!;
+    expect(h2.textContent).toEqual('My own list');
+  });
+
+  it('should render title "Other list"', () => {
+    const titleElement: HTMLElement = fixture.nativeElement;
+    const h2 = titleElement.querySelector('#otherList')!;
+    expect(h2.textContent).toEqual('Other list');
+  });
+
+  /* it('should call openSimpleDialog when clicking the publish button', () => {
+    fixture.detectChanges();
+
+    spyOn(component, 'openSimpleDialog');
+    const button =
+      fixture.debugElement.nativeElement.querySelector('#buttonPublish')!;
+    button.click();
+    fixture.detectChanges();
+    expect(component.openSimpleDialog).toHaveBeenCalled();
+  }); */
 });

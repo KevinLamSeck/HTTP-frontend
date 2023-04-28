@@ -89,6 +89,7 @@ describe('ModuleService', () => {
 
   it('should delete a module', () => {
     moduleService.delete(1).subscribe((response: HttpResponse<any>) => {
+      console.log(response.status)
       expect(response.status).toEqual(200);
     })
 

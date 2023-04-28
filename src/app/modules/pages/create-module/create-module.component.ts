@@ -99,6 +99,7 @@ export class CreateModuleComponent implements OnInit {
       this.medias.indexOf(media),
       1
     )
+    this._snackBar.open(`"${media.title}" was removed from this module.`, "Close", { duration: 2000 });
   }
 
   /** CREATE MEDIA METHOD */

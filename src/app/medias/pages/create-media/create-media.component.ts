@@ -150,7 +150,7 @@ export class CreateMediaComponent implements OnInit {
             // TODO Display Success Message
             // console.log(response);
             this._snackBar.open(`"${media.title}" was created.`, "Close");
-            this._router.navigate(["/"]);
+            this._router.navigate(["dashboard/conceptor/media"]);
           },
           complete: () => {
             this.mediaForm.reset();

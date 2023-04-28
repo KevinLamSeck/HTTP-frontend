@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -7,7 +8,6 @@ import { MediaType } from 'src/app/course/types/media-type';
 import { ModuleType } from 'src/app/course/types/module-type';
 import { MediaService } from 'src/app/medias/services/media.service';
 import { ModuleService } from '../../services/module.service';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-create-module',
@@ -68,7 +68,7 @@ export class CreateModuleComponent implements OnInit {
     this._moduleService.add(module)
       .subscribe((moduleType: ModuleType) => {
         this._snackBar.open(`"${module.name}" was created.`, "Close");
-        this._router.navigate(['/'])
+        this._router.navigate(["/dashboard/conceptor/module"]);
       })
   }
 

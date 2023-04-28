@@ -35,6 +35,7 @@ export class CreateMediaComponent implements OnInit {
   @Output() newItemEvent = new EventEmitter<boolean>();
 
   public actionTitle: string = 'Create';
+  public fileName!: string
 
   // Need this to wait display the form
   public media: MediaModel = new MediaModel({
@@ -42,6 +43,7 @@ export class CreateMediaComponent implements OnInit {
     _summary: 'My Summary',
     _duration: 120,
     _typeMedia: { id: 1, title: 'Video' },
+
   });
 
   public mediaForm: FormGroup = new FormGroup({});
@@ -81,7 +83,7 @@ export class CreateMediaComponent implements OnInit {
       title: ['', [Validators.required, Validators.maxLength(50)]],
       summary: [''],
       duration: ['', [Validators.required, Validators.min(0), Validators.pattern(/^[1-9]\d*$/),]],
-      url: [''],
+      url: ['', [Validators.pattern(/^(http|https):\/\/[^ "]+$/)]],
       typeMedia: [this.optionsMethod[2], [Validators.required]],
       file: [null],
     });
@@ -111,6 +113,10 @@ export class CreateMediaComponent implements OnInit {
       this.submitMediaWithURL();
     }
     // this.mediaForm.reset();
+  }
+
+  hasFile(): boolean {
+    return true
   }
 
   onNoClick() {
@@ -153,7 +159,7 @@ export class CreateMediaComponent implements OnInit {
           next: (response: any) => {
             // TODO Display Success Message
             // console.log(response);
-            this._snackBar.open(`"${media.title}" was created.`, 'Close');
+            this._snackBar.open(`"${media.title}" was created.`, 'Close', { duration: 1500 });
             this._router.navigate(['dashboard/conceptor/media']);
           },
           complete: () => {
@@ -165,7 +171,7 @@ export class CreateMediaComponent implements OnInit {
   onBack() {
     this.onModal
       ? this.dialogRef.close(this.mediaForm.value)
-      : this._router.navigate(['../']);
+      : this._router.navigate(['dashboard/conceptor/media']);
   }
 
   private async submitMediaWithFile(): Promise<void> {
@@ -209,9 +215,10 @@ export class CreateMediaComponent implements OnInit {
 
                   this._snackBar.open(
                     `"${media.title}" was created.`,
-                    'Close'
+                    'Close',
+                    { duration: 1500 }
                   );
-                  this._router.navigate(['/']);
+                  this._router.navigate(['dashboard/conceptor/media']);
                 },
                 complete: () => {
                   this.mediaForm.reset();

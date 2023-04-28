@@ -76,8 +76,10 @@
         <!-- Upload file UI -->
       </form>
       <div class="text-center">
+        <label for="file">{{ fileName }}</label>
         <input
           type="file"
+          name="file"
           class=""
           (change)="selectFile($event)"
           *ngIf="
@@ -97,10 +99,10 @@
           color="primary"
           [disabled]="
             mediaForm.invalid ||
-            (['Document', 'Image', 'Slide', 'PDF'].includes(
-              c['typeMedia'].value
-            ) &&
-              !mediaForm.get('file')?.value)
+            (!hasFile() &&
+              ['Document', 'Image', 'Slide', 'PDF'].includes(
+                c['typeMedia'].value
+              ))
           "
           (click)="onSubmit()"
           class="mx-4 btn primary"

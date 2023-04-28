@@ -12,6 +12,7 @@ import { MediaService } from './media.service';
 export class MediaFormService {
   private _form: FormGroup = new FormGroup({});
   public media!: MediaType;
+  public filenameWithExtension!: string;
 
   private readonly conceptor: Member = this._localStorageService.getMemberFromStorage();
   private readonly conceptorID: any = { id: this.conceptor.id };
@@ -101,13 +102,16 @@ export class MediaFormService {
   }
 
   private _buildForm(): void {
+    let file;
 
-    // // console.log(this._options.get(this._media.typeMedia.title))
-    // // console.log(this._media.typeMedia.title);
+    // Check si dans l'URL si il commence par http://127.0.0.1:5000/files/ et load le file
+    if (this._media.url.startsWith('http://127.0.0.1:5000/files/')) {
+      const urlOfMedia = this._media.url
+      this.filenameWithExtension = urlOfMedia.substring(urlOfMedia.lastIndexOf('/') + 1);
+    }
+
     const optionsArray = Array.from(this._options.entries());
     const index = optionsArray.findIndex(([key, value]) => key === this._media.typeMedia.title);
-    // console.log(index);
-    // // console.log(this.optionsMethod[this._options.get(this._media.typeMedia.title)]);
 
     this._form = this._formBuilder.group({
       title: [this._media.title, [Validators.required, Validators.maxLength(50)]],
@@ -115,7 +119,7 @@ export class MediaFormService {
       duration: [this._media.duration, [Validators.required]],
       url: [this._media.url],
       typeMedia: [this.optionsMethod[index], [Validators.required]],
-      file: [null],
+      // file: [],
     })
   }
 }

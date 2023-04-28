@@ -1,0 +1,4 @@
+.btn-menu {
+    @apply block w-full text-left text-sm font-medium hover:bg-primary-100;
+    @apply dark:hover:bg-primary-800;
+}

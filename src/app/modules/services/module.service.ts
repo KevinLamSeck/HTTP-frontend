@@ -55,9 +55,12 @@ export class ModuleService {
     )
   }
 
-  public delete(id: number): any {
+  public delete(id: number): Observable<HttpResponse<any>> {
     return this._httpClient.delete<ModuleType>(
-      this.endpoint + '/' + id
+      this.endpoint + '/' + id,
+      {
+        observe: 'response'
+      }
     )
   }
 }

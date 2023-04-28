@@ -62,8 +62,7 @@ export class UpdateModuleComponent implements OnInit {
       name: [
         this.module?.name,
         [
-          Validators.required,
-          Validators.minLength(8)
+          Validators.required
         ]
       ],
       objective: [

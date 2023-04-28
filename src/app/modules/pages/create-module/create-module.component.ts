@@ -35,8 +35,7 @@ export class CreateModuleComponent implements OnInit {
       name: [
         '',
         [
-          Validators.required,
-          Validators.minLength(8)
+          Validators.required
         ]
       ],
       objective: [

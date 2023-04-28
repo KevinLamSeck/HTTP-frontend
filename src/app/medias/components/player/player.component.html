@@ -1,6 +1,6 @@
-<ng-container *ngIf="medias?.typeMedia?.title == 'Video'">
+<ng-container class="md:w-300" *ngIf="medias?.typeMedia?.title == 'Video'">
   <iframe
-    width="700"
+    width="100%"
     height="400"
     src="https://www.youtube.com/embed/dQw4w9WgXcQ"
     title="Rick Astley - Never Gonna Give You Up (Official Music Video)"
@@ -12,8 +12,9 @@
 
 <iframe
   *ngIf="medias?.typeMedia?.title == 'Audio'"
-  width="750px"
-  height="450"
+  width="100%"
+  padding="11px"
+  height="450px"
   scrolling="no"
   frameborder="no"
   allow="autoplay"
@@ -21,19 +22,17 @@
 ></iframe>
 
 <iframe
-  downlaod
   *ngIf="medias?.typeMedia?.title == 'PDF'"
   src="../../../../assets/medias/pdf/Streamer_Projet_Final.pdf"
-  width="900px"
+  width="100%"
   height="800px"
 >
 </iframe>
 
 <iframe
-  downlaod
   *ngIf="medias?.typeMedia?.title == 'Document'"
   src="../../../../assets/medias/pdf/Streamer_Projet_Final.pdf"
-  width="900px"
+  width="100%"
   height="800px"
 >
 </iframe>

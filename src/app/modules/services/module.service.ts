@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ModuleService {
 
-  private readonly endpoint: string = `${environment.apiRootUri}modules`
+  public readonly endpoint: string = `${environment.apiRootUri}modules`
 
   constructor(private _httpClient: HttpClient) { }
 

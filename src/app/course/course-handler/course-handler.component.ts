@@ -152,6 +152,17 @@ export class CourseHandlerComponent implements OnInit {
       .afterClosed()
       .subscribe((result: ModuleType | undefined) => {
         if (result !== undefined) {
+          this.modules.splice(this.modules.indexOf(module), 1);
+          console.log(result);
+
+          let updatedModule: ModuleType = {
+            id: undefined,
+            name: result.name,
+            objective: result.objective,
+            selected: false,
+            medias: result.medias,
+          };
+          this.modules.push(updatedModule);
         }
       });
   }
@@ -165,14 +176,7 @@ export class CourseHandlerComponent implements OnInit {
       .subscribe((result: ModuleType | undefined) => {
         if (result !== undefined) {
           // console.log(result);
-          let module: ModuleType = {
-            id: undefined,
-            name: result.name,
-            objective: result.objective,
-            selected: false,
-            medias: result.medias,
-          };
-          this.modules.push(module);
+          this.modules.push(result);
 
           // result.medias = [];
           // this.modules.push(result);

@@ -22,7 +22,7 @@ export class CreateMediaComponent implements OnInit {
   @Input() visibility: boolean = false;
   @Output() newItemEvent = new EventEmitter<boolean>();
   @Output()
-  public idNewMedia: EventEmitter<number> = new EventEmitter<number>()
+  public idNewMedia: EventEmitter<number> = new EventEmitter<number>();
 
   public mediaForm: FormGroup = new FormGroup({});
   public selectedOption: string = '';
@@ -38,7 +38,6 @@ export class CreateMediaComponent implements OnInit {
     ['PDF', 8],
   ]);
 
-
   selectedFiles?: FileList;
   currentFile?: File;
   progress = 0;
@@ -51,23 +50,22 @@ export class CreateMediaComponent implements OnInit {
     // // console.log(this.options.get(value))
   }
 
-
   constructor(
     private _formBuilder: FormBuilder,
     private _mediaService: MediaService,
     private _localStorageService: LocalStorageService,
     private _snackBar: MatSnackBar,
-    private _fileUpload: FileUploadService,
-  ) { }
+    private _fileUpload: FileUploadService
+  ) {}
 
   ngOnInit(): void {
     this.mediaForm = this._formBuilder.group({
-      title: ['', [Validators.required, Validators.minLength(8)]],
+      title: ['', [Validators.required]],
       summary: [''],
-      duration: ['', [Validators.required]],
+      duration: ['', [Validators.required, Validators.min(0)]],
       url: [''],
       typeMedia: [this.optionsMethod[2], [Validators.required]],
-      file: [null]
+      file: [null],
     });
     this.fileInfos = this._fileUpload.getFiles();
   }
@@ -80,14 +78,20 @@ export class CreateMediaComponent implements OnInit {
     return Array.from(this.options.keys());
   }
 
+  updateValue() {
+    this.mediaForm.updateValueAndValidity();
+  }
 
   public addNewMedia(id: number) {
-    this.idNewMedia.emit(id)
+    this.idNewMedia.emit(id);
   }
 
   onSubmit(): void {
     const typeMediaValue = this.mediaForm.get('typeMedia')?.value;
-    if (typeMediaValue && ['Document', 'Image', 'Slide', 'PDF'].includes(typeMediaValue)) {
+    if (
+      typeMediaValue &&
+      ['Document', 'Image', 'Slide', 'PDF'].includes(typeMediaValue)
+    ) {
       this.submitMediaWithFile();
     } else {
       this.submitMediaWithURL();
@@ -112,9 +116,12 @@ export class CreateMediaComponent implements OnInit {
 
   private submitMediaWithURL() {
     const typeMediaID = this.options.get(this.mediaForm.value.typeMedia);
-    const conceptor: Member = this._localStorageService.getMemberFromStorage()
-    const newConceptor: any = { id: conceptor.id }
-    const typeMedia: any = { id: typeMediaID, value: this.mediaForm.value.typeMedia }
+    const conceptor: Member = this._localStorageService.getMemberFromStorage();
+    const newConceptor: any = { id: conceptor.id };
+    const typeMedia: any = {
+      id: typeMediaID,
+      value: this.mediaForm.value.typeMedia,
+    };
     const media: MediaType = {
       title: this.c['title'].value,
       summary: this.c['summary'].value,
@@ -122,18 +129,20 @@ export class CreateMediaComponent implements OnInit {
       url: this.c['url'].value,
       typeMedia: typeMedia,
       creator: newConceptor,
-    }
-    this._mediaService.add(media).pipe(take(1)).subscribe({
-      next: (response: any) => {
-        // TODO Display Success Message
-        // console.log(response)
-        this.addNewMedia(response.id!)
-      },
-      complete: () => {
-
-        this.mediaForm.reset();
-      }
-    });
+    };
+    this._mediaService
+      .add(media)
+      .pipe(take(1))
+      .subscribe({
+        next: (response: any) => {
+          // TODO Display Success Message
+          // console.log(response)
+          this.addNewMedia(response.id!);
+        },
+        complete: () => {
+          this.mediaForm.reset();
+        },
+      });
   }
 
   private async submitMediaWithFile(): Promise<void> {
@@ -144,13 +153,19 @@ export class CreateMediaComponent implements OnInit {
         this.currentFile = file;
 
         try {
-          const response = await lastValueFrom(this._fileUpload.uploadFile(this.currentFile));
+          const response = await lastValueFrom(
+            this._fileUpload.uploadFile(this.currentFile)
+          );
           // console.log(response);
           const mediaUrl = response.toString();
           const typeMediaID = this.options.get(this.mediaForm.value.typeMedia);
-          const conceptor: Member = this._localStorageService.getMemberFromStorage()
-          const newConceptor: any = { id: conceptor.id }
-          const typeMedia: any = { id: typeMediaID, value: this.mediaForm.value.typeMedia }
+          const conceptor: Member =
+            this._localStorageService.getMemberFromStorage();
+          const newConceptor: any = { id: conceptor.id };
+          const typeMedia: any = {
+            id: typeMediaID,
+            value: this.mediaForm.value.typeMedia,
+          };
           const media: MediaType = {
             title: this.c['title'].value,
             summary: this.c['summary'].value,
@@ -159,20 +174,23 @@ export class CreateMediaComponent implements OnInit {
             typeMedia: typeMedia,
             creator: newConceptor,
           };
-          this._mediaService.add(media).pipe(take(1)).subscribe({
-            next: (response: any) => {
-              // TODO Display Success Message
-              // console.log(response);
-              this.addNewMedia(response.id!)
-            },
-            complete: () => {
-              this.mediaForm.reset();
-            }
-          });
+          this._mediaService
+            .add(media)
+            .pipe(take(1))
+            .subscribe({
+              next: (response: any) => {
+                // TODO Display Success Message
+                // console.log(response);
+                this.addNewMedia(response.id!);
+              },
+              complete: () => {
+                this.mediaForm.reset();
+              },
+            });
           this.fileInfos = this._fileUpload.getFiles();
         } catch (error) {
           this.message = 'Could not upload the file!';
-          this._snackBar.open(`"${this.message}"`, "Close", { duration: 2000 });
+          this._snackBar.open(`"${this.message}"`, 'Close', { duration: 2000 });
 
           this.currentFile = undefined;
         }
@@ -181,9 +199,4 @@ export class CreateMediaComponent implements OnInit {
       this.selectedFiles = undefined;
     }
   }
-
-
-
-
-
 }

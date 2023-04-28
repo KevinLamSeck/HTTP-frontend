@@ -1,11 +1,16 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpResponse } from "@angular/common/http";
 import { TestBed } from "@angular/core/testing";
 import { SharedModule } from "src/app/shared/shared.module";
 
 import { CourseService } from "./course.service";
-import { HttpTestingController } from "@angular/common/http/testing";
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from "@angular/common/http/testing";
 import { Member } from "src/app/user/models/member";
 import { CourseType } from "../types/course-type";
+import { RouterTestingModule } from "@angular/router/testing";
+import { CourseListType } from "../types/course-list-type";
 
 describe("CourseService", () => {
   let service: CourseService;
@@ -13,10 +18,11 @@ describe("CourseService", () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [SharedModule],
+      imports: [SharedModule, HttpClientTestingModule, RouterTestingModule],
       providers: [HttpClient],
     });
     service = TestBed.inject(CourseService);
+    httpTestingController = TestBed.inject(HttpTestingController);
   });
 
   const mockMember: Member = new Member({
@@ -31,7 +37,7 @@ describe("CourseService", () => {
   });
 
   const mockCourse: CourseType = {
-    id: 2,
+    id: 11,
     title: "Apprendre le Java avec Spring Boot",
     objective:
       "Reussir a passer un diplome certifiant une conaissance approdondis de l'environement Java Spring boot",
@@ -91,13 +97,12 @@ describe("CourseService", () => {
     expect(service.remove).toBeTruthy();
   });
 
-  it("should add a new media", () => {
+  it("should add a new course", () => {
     service.add(mockCourseAdd).subscribe((course: CourseType) => {
       expect(course).toEqual(mockCourseAdd);
     });
 
     const testRequest = httpTestingController.expectOne(`${service.endPoint}`);
-    console.log("fesses" + testRequest);
     expect(testRequest.request.method).toEqual("POST");
 
     testRequest.flush(mockCourseAdd);
@@ -107,16 +112,47 @@ describe("CourseService", () => {
 
   it("should update a course", () => {
     service.update(mockCourse).subscribe((response: any) => {
-      expect(response.status).toEqual(200);
+      //console.log(response);
+      expect(response.title).toEqual(mockCourse.title);
+    });
+
+    const testRequest = httpTestingController.expectOne(
+      `${service.endPoint}/update`
+    );
+
+    expect(testRequest.request.method).toEqual("POST");
+
+    testRequest.flush(mockCourse);
+
+    httpTestingController.verify();
+  });
+
+  it("should copy a course", () => {
+    let mockCopyCourse = { isSelected: false, ...mockCourse };
+    service.copyCourse(mockCopyCourse).subscribe((course: CourseType) => {
+      expect(course.title).toEqual(mockCopyCourse.title);
+    });
+
+    const testRequest = httpTestingController.expectOne(`${service.endPoint}`);
+    expect(testRequest.request.method).toEqual("POST");
+
+    testRequest.flush(mockCourseAdd);
+
+    httpTestingController.verify();
+  });
+
+  it("should delete a course", () => {
+    service.remove(1).subscribe((response: HttpResponse<any>) => {
+      expect(response.status).toEqual(204);
     });
 
     const testRequest = httpTestingController.expectOne(
       `${service.endPoint}/1`
     );
 
-    expect(testRequest.request.method).toEqual("PUT");
+    expect(testRequest.request.method).toEqual("DELETE");
 
-    testRequest.flush(mockCourse);
+    testRequest.flush(null, { status: 204, statusText: "No Content" });
 
     httpTestingController.verify();
   });

@@ -38,6 +38,10 @@ body {
   font-variant: normal;
 }
 
+body * {
+  @apply transition-colors duration-300 ease-in-out;
+}
+
 /**
 * Helpers
 **/

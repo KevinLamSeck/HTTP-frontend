@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -6,13 +7,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MediaType } from 'src/app/course/types/media-type';
 import { ModuleType } from 'src/app/course/types/module-type';
 import { MediaService } from 'src/app/medias/services/media.service';
+import { fadeInOut } from 'src/app/shared/animations/fadeInOut';
 import { ModuleService } from '../../services/module.service';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-update-module',
   templateUrl: './update-module.component.html',
-  styleUrls: ['./update-module.component.scss']
+  styleUrls: ['./update-module.component.scss'],
+  animations: [fadeInOut]
 })
 export class UpdateModuleComponent implements OnInit {
 

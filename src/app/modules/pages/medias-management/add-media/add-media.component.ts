@@ -3,11 +3,13 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { take } from 'rxjs';
 import { MediaType } from 'src/app/course/types/media-type';
 import { MediaService } from 'src/app/medias/services/media.service';
+import { fadeInOut } from 'src/app/shared/animations/fadeInOut';
 
 @Component({
   selector: 'app-add-media',
   templateUrl: './add-media.component.html',
-  styleUrls: ['./add-media.component.scss']
+  styleUrls: ['./add-media.component.scss'],
+  animations: [fadeInOut]
 })
 export class AddMediaComponent implements OnInit {
 

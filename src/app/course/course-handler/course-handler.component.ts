@@ -2,24 +2,25 @@ import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 import { Component, HostListener, OnInit } from "@angular/core";
 import { AbstractControl, FormGroup } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
 import { LocalStorageService } from "src/app/core/services/local-storage.service";
 import { CreateMediaComponent } from "src/app/medias/pages/create-media/create-media.component";
 import { ExistingModuleComponent } from "src/app/modules/module-management/existing-module/existing-module.component";
 import { AddMediaComponent } from "src/app/modules/pages/medias-management/add-media/add-media.component";
+import { fadeInOut } from "src/app/shared/animations/fadeInOut";
 import { ModuleAddComponent } from "../dialogs/module-add/module-add.component";
 import { FormCourseBuilderService } from "../services/course-handler/form-course-builder.service";
 import { CourseService } from "../services/course.service";
 import { CourseType } from "../types/course-type";
 import { MediaType } from "../types/media-type";
 import { ModuleType } from "../types/module-type";
-import { ToastService } from "src/app/core/toast.service";
-import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-course-handler",
   templateUrl: "./course-handler.component.html",
   styleUrls: ["./course-handler.component.scss"],
+  animations: [fadeInOut]
 })
 export class CourseHandlerComponent implements OnInit {
   public form: FormGroup;

@@ -7,12 +7,14 @@ import { LocalStorageService } from 'src/app/core/services/local-storage.service
 import { MediaType } from 'src/app/course/types/media-type';
 import { ModuleType } from 'src/app/course/types/module-type';
 import { MediaService } from 'src/app/medias/services/media.service';
+import { fadeInOut } from 'src/app/shared/animations/fadeInOut';
 import { ModuleService } from '../../services/module.service';
 
 @Component({
   selector: 'app-create-module',
   templateUrl: './create-module.component.html',
-  styleUrls: ['./create-module.component.scss']
+  styleUrls: ['./create-module.component.scss'],
+  animations: [fadeInOut]
 })
 export class CreateModuleComponent implements OnInit {
 

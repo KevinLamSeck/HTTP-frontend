@@ -44,11 +44,16 @@ export class ListMediaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._mediaService
-      .findByCreator(this._currentUser.id!)
+    this._loadMediasFromService();
+  }
+
+  private _loadMediasFromService(): void {
+    this._mediaService.findByCreator(this._currentUser.id!)
       .pipe(take(1))
       .subscribe((response: MediaType[]) => {
         this.medias = response;
+        const mediaTypes = new Set<string>(this.medias.map(media => media.typeMedia.title));
+        this.typeMediasChips = Array.from(mediaTypes);
         this.mediasFiltered = [...this.medias];
         this.mediasFiltered = this.mediasFiltered.sort(
           (a, b) => a.title.localeCompare(b.title) * 1
@@ -62,11 +67,9 @@ export class ListMediaComponent implements OnInit {
 
   filterByType(type: string): void {
     if (this.selectedType === type) {
-      // If the clicked type is already selected, toggle the selection off
       this.selectedType = null;
       this.mediasFiltered = this.medias;
     } else {
-      // Otherwise, set the clicked type as selected and filter the medias by type
       this.selectedType = type;
       this.mediasFiltered = this.medias.filter(
         (media) => media.typeMedia.title.toLowerCase() === type.toLowerCase()
@@ -84,6 +87,13 @@ export class ListMediaComponent implements OnInit {
     this.mediasFiltered = this.mediasFiltered.filter(
       (media) => media.id !== mediaDeleted.id
     );
+    this.medias = this.medias.filter(
+      (media) => media.id !== mediaDeleted.id
+    );
+    const mediaTypes = new Set<string>(this.medias.map(media => media.typeMedia.title));
+    this.typeMediasChips = Array.from(mediaTypes);
     this._snackBar.open(`"${mediaDeleted!.title}" was deleted.`, "Close");
   }
+
+
 }

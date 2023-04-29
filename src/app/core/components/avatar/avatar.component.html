@@ -45,6 +45,14 @@
       <div class="p-2 space-y-1">
         <div *ngIf="currentMemberRoleName() === 'conceptor'" class="space-y-1">
           <button
+            [routerLink]="['/dashboard/conceptor']"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLinkActive="bg-primary-100 dark:bg-primary-800"
+            class="btn btn-menu"
+          >
+            Dashboard
+          </button>
+          <button
             [routerLink]="['/dashboard/conceptor/course']"
             routerLinkActive="bg-primary-100 dark:bg-primary-800"
             class="btn btn-menu"
@@ -66,7 +74,15 @@
             Medias Hub
           </button>
         </div>
-        <div *ngIf="currentMemberRoleName() === 'student'">
+        <div *ngIf="currentMemberRoleName() === 'student'" class="space-y-1">
+          <button
+            [routerLink]="['/dashboard/student']"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLinkActive="bg-primary-100 dark:bg-primary-800"
+            class="btn btn-menu"
+          >
+            Dashboard
+          </button>
           <button
             [routerLink]="['/dashboard/student/list']"
             routerLinkActive="bg-primary-100 dark:bg-primary-800"
@@ -75,7 +91,15 @@
             My Courses
           </button>
         </div>
-        <div *ngIf="currentMemberRoleName() === 'manager'">
+        <div *ngIf="currentMemberRoleName() === 'manager'" class="space-y-1">
+          <button
+            [routerLink]="['/dashboard/student']"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLinkActive="bg-primary-100 dark:bg-primary-800"
+            class="btn btn-menu"
+          >
+            Dashboard
+          </button>
           <button
             [routerLink]="['/dashboard/manager/student']"
             routerLinkActive="bg-primary-100 dark:bg-primary-800"

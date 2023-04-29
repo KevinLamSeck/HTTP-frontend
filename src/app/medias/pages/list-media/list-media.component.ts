@@ -4,6 +4,7 @@ import { take } from "rxjs";
 import { LocalStorageService } from "src/app/core/services/local-storage.service";
 import { ToastService } from "src/app/core/toast.service";
 import { MediaType } from "src/app/course/types/media-type";
+import { fadeInOut } from "src/app/shared/animations/fadeInOut";
 import { Member } from "src/app/user/models/member";
 import { MediaService } from "../../services/media.service";
 
@@ -11,6 +12,7 @@ import { MediaService } from "../../services/media.service";
   selector: "app-list-media",
   templateUrl: "./list-media.component.html",
   styleUrls: ["./list-media.component.scss"],
+  animations: [fadeInOut]
 })
 export class ListMediaComponent implements OnInit {
   public medias: MediaType[] = [];
@@ -39,7 +41,7 @@ export class ListMediaComponent implements OnInit {
     private _mediaService: MediaService,
     private _toastService: ToastService,
     private _snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this._mediaService

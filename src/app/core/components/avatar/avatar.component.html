@@ -43,7 +43,7 @@
         </div>
       </div>
       <div class="p-2 space-y-1">
-        <div *ngIf="currentMemberRoleName() === 'conceptor'">
+        <div *ngIf="currentMemberRoleName() === 'conceptor'" class="space-y-1">
           <button
             [routerLink]="['/dashboard/conceptor/course']"
             routerLinkActive="bg-primary-100 dark:bg-primary-800"

@@ -11,11 +11,12 @@ import { AbstractControl, FormBuilder, FormGroup } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Observable, lastValueFrom, take } from "rxjs";
+import { Observable, lastValueFrom, take, tap } from "rxjs";
 import { FileUploadService } from "src/app/core/services/file-upload.service";
 import { LocalStorageService } from "src/app/core/services/local-storage.service";
 import { MediaType } from "src/app/course/types/media-type";
 import { ModuleService } from "src/app/modules/services/module.service";
+import { fadeInOut } from "src/app/shared/animations/fadeInOut";
 import { Member } from "src/app/user/models/member";
 import { MediaFormService } from "../../services/media-form.service";
 import { MediaService } from "../../services/media.service";
@@ -25,6 +26,7 @@ import { CreateMediaComponent } from "../create-media/create-media.component";
   selector: "app-update-media",
   templateUrl: "../create-media/create-media.component.html",
   styleUrls: ["./update-media.component.scss"],
+  animations: [fadeInOut]
 })
 export class UpdateMediaComponent implements OnInit {
   @Input() visibility: boolean = false;
@@ -73,26 +75,28 @@ export class UpdateMediaComponent implements OnInit {
 
   ngOnInit(): void {
     // Retrive the ID from th query params
-    this._activatedRoute.queryParams.subscribe((params) => {
-      this._mediaID = params["id"];
-    });
+    this._mediaID = this._activatedRoute.snapshot.queryParams["id"];
 
     // Find the media to update in the service
-    this._mediaService.findOne(this._mediaID).subscribe({
-      next: (media: MediaType) => {
-        this.media = media;
-        this._mediaFormService.buildForm(this.media);
-        this.mediaForm = this._mediaFormService.form;
+    this._mediaService.findOne(this._mediaID)
+      .pipe(
+        tap((media: MediaType) => {
+          this.media = media;
+          this._mediaFormService.buildForm(this.media);
+          this.mediaForm = this._mediaFormService.form;
 
-        if (this.hasFile()) {
-          this.fileName = this._getFilenameWithoutUUID(this._mediaFormService.filenameWithExtension)
+          if (this.hasFile()) {
+            this.fileName = this._getFilenameWithoutUUID(this._mediaFormService.filenameWithExtension)
+          }
+        })
+      )
+      .subscribe(
+        null,
+        (error) => {
+          this._snackBar.open("Something went wrong: " + error, 'Close', { duration: 1500 });
         }
+      );
 
-      },
-      error: (error) => {
-        this._snackBar.open("Something went wrong: " + error, 'Close', { duration: 1500 });
-      },
-    });
   }
 
   get c(): { [key: string]: AbstractControl } {

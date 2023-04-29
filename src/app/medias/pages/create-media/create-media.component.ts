@@ -21,6 +21,7 @@ import { FileUploadService } from 'src/app/core/services/file-upload.service';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { MediaType } from 'src/app/course/types/media-type';
 import { ModuleService } from 'src/app/modules/services/module.service';
+import { fadeInOut } from 'src/app/shared/animations/fadeInOut';
 import { Member } from 'src/app/user/models/member';
 import { MediaModel } from '../../models/media-model';
 import { MediaService } from '../../services/media.service';
@@ -29,6 +30,7 @@ import { MediaService } from '../../services/media.service';
   selector: 'app-create-media',
   templateUrl: './create-media.component.html',
   styleUrls: ['./create-media.component.scss'],
+  animations: [fadeInOut]
 })
 export class CreateMediaComponent implements OnInit {
   @Input() visibility: boolean = false;

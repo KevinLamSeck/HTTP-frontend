@@ -1,4 +1,5 @@
 <div
+  [@fadeInOut]
   class="flex flex-col mx-auto justify-center space-y-8 max-w-2xl p-16 rounded-xl bg-neutral-100 dark:bg-neutral-700"
 >
   <div class="text-center">
@@ -23,10 +24,18 @@
             matInput
             formControlName="title"
             placeholder="Media title..."
+            maxlength="50"
           />
           <mat-error *ngIf="c['title'].errors && c['title'].touched">
-            Title is required
+            <span *ngIf="c['title'].errors['required']">Title is required</span>
+            <span *ngIf="c['title'].errors['maxlength']">
+              Title must not exceed 50 characters</span
+            >
+            <span *ngIf="c['title'].value.length === 50">
+              Title must not exceed 50 characters</span
+            >
           </mat-error>
+          <mat-hint>50 max characts</mat-hint>
         </mat-form-field>
         <mat-form-field class="w-full">
           <input matInput formControlName="summary" placeholder="Summary..." />
@@ -40,9 +49,16 @@
             min="0"
             step="1"
             value="0"
+            numbersOnly
           />
           <mat-error *ngIf="c['duration'].errors && c['duration'].touched">
-            Duration is required in positive integer
+            <span
+              *ngIf="
+                c['duration'].errors['pattern'] ||
+                c['duration'].errors['required']
+              "
+              >Duration must be a positive integer</span
+            >
           </mat-error>
         </mat-form-field>
         <mat-form-field
@@ -61,8 +77,10 @@
         <!-- Upload file UI -->
       </form>
       <div class="text-center">
+        <label for="file">{{ fileName }}</label>
         <input
           type="file"
+          name="file"
           class=""
           (change)="selectFile($event)"
           *ngIf="
@@ -82,10 +100,10 @@
           color="primary"
           [disabled]="
             mediaForm.invalid ||
-            (['Document', 'Image', 'Slide', 'PDF'].includes(
-              c['typeMedia'].value
-            ) &&
-              !mediaForm.get('file')?.value)
+            (!hasFile() &&
+              ['Document', 'Image', 'Slide', 'PDF'].includes(
+                c['typeMedia'].value
+              ))
           "
           (click)="onSubmit()"
           class="mx-4 btn primary"

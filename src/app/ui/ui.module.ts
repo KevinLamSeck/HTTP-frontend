@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
@@ -35,6 +36,7 @@ export class UiModule {
     DragDropModule,
     MatSelectModule,
     MatDividerModule,
-    MatChipsModule
+    MatChipsModule,
+    MatCheckboxModule,
   ];
 }

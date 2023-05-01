@@ -21,6 +21,7 @@ import { FileUploadService } from 'src/app/core/services/file-upload.service';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { MediaType } from 'src/app/course/types/media-type';
 import { ModuleService } from 'src/app/modules/services/module.service';
+import { fadeInOut } from 'src/app/shared/animations/fadeInOut';
 import { Member } from 'src/app/user/models/member';
 import { MediaModel } from '../../models/media-model';
 import { MediaService } from '../../services/media.service';
@@ -29,12 +30,14 @@ import { MediaService } from '../../services/media.service';
   selector: 'app-create-media',
   templateUrl: './create-media.component.html',
   styleUrls: ['./create-media.component.scss'],
+  animations: [fadeInOut]
 })
 export class CreateMediaComponent implements OnInit {
   @Input() visibility: boolean = false;
   @Output() newItemEvent = new EventEmitter<boolean>();
 
   public actionTitle: string = 'Create';
+  public fileName!: string
 
   // Need this to wait display the form
   public media: MediaModel = new MediaModel({
@@ -42,6 +45,7 @@ export class CreateMediaComponent implements OnInit {
     _summary: 'My Summary',
     _duration: 120,
     _typeMedia: { id: 1, title: 'Video' },
+
   });
 
   public mediaForm: FormGroup = new FormGroup({});
@@ -74,14 +78,14 @@ export class CreateMediaComponent implements OnInit {
     private _fileUpload: FileUploadService,
     @Optional() @Inject(MAT_DIALOG_DATA) public onModal: boolean,
     @Optional() public dialogRef: MatDialogRef<CreateMediaComponent>
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.mediaForm = this._formBuilder.group({
-      title: ['', [Validators.required]],
+      title: ['', [Validators.required, Validators.maxLength(50)]],
       summary: [''],
-      duration: ['', [Validators.required, Validators.min(0)]],
-      url: [''],
+      duration: ['', [Validators.required, Validators.min(0), Validators.pattern(/^[1-9]\d*$/),]],
+      url: ['', [Validators.pattern(/^(http|https):\/\/[^ "]+$/)]],
       typeMedia: [this.optionsMethod[2], [Validators.required]],
       file: [null],
     });
@@ -111,6 +115,10 @@ export class CreateMediaComponent implements OnInit {
       this.submitMediaWithURL();
     }
     // this.mediaForm.reset();
+  }
+
+  hasFile(): boolean {
+    return true
   }
 
   onNoClick() {
@@ -147,25 +155,27 @@ export class CreateMediaComponent implements OnInit {
     this.onModal
       ? this.dialogRef.close(media)
       : this._mediaService
-          .add(media)
-          .pipe(take(1))
-          .subscribe({
-            next: (response: any) => {
-              // TODO Display Success Message
-              // console.log(response);
-              this._snackBar.open(`"${media.title}" was created.`, 'Close');
-              this._router.navigate(['dashboard/conceptor/media']);
-            },
-            complete: () => {
-              this.mediaForm.reset();
-            },
-          });
+        .add(media)
+        .pipe(take(1))
+        .subscribe({
+          next: (response: any) => {
+            // TODO Display Success Message
+            // console.log(response);
+            this._snackBar.open(`"${media.title}" was created.`, 'Close', { duration: 1500 });
+            this._router.navigate(['dashboard/conceptor/media']);
+          },
+          complete: () => {
+            this.mediaForm.reset();
+          },
+        });
   }
+
   onBack() {
     this.onModal
       ? this.dialogRef.close(this.mediaForm.value)
-      : this._router.navigate(['../']);
+      : this._router.navigate(['dashboard/conceptor/media']);
   }
+
   private async submitMediaWithFile(): Promise<void> {
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
@@ -198,23 +208,24 @@ export class CreateMediaComponent implements OnInit {
           this.onModal
             ? this.dialogRef.close(media)
             : this._mediaService
-                .add(media)
-                .pipe(take(1))
-                .subscribe({
-                  next: (response: any) => {
-                    // TODO Display Success Message
-                    // console.log(response);
+              .add(media)
+              .pipe(take(1))
+              .subscribe({
+                next: (response: any) => {
+                  // TODO Display Success Message
+                  // console.log(response);
 
-                    this._snackBar.open(
-                      `"${media.title}" was created.`,
-                      'Close'
-                    );
-                    this._router.navigate(['/']);
-                  },
-                  complete: () => {
-                    this.mediaForm.reset();
-                  },
-                });
+                  this._snackBar.open(
+                    `"${media.title}" was created.`,
+                    'Close',
+                    { duration: 1500 }
+                  );
+                  this._router.navigate(['dashboard/conceptor/media']);
+                },
+                complete: () => {
+                  this.mediaForm.reset();
+                },
+              });
           this.fileInfos = this._fileUpload.getFiles();
         } catch (error) {
           this.message = 'Could not upload the file!';

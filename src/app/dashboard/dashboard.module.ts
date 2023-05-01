@@ -12,6 +12,7 @@ import { DashboardComponent } from './dashboard.component';
 import { ConceptorComponent } from './pages/conceptor/conceptor.component';
 import { ManagerComponent } from './pages/manager/manager.component';
 import { StudentComponent } from './pages/student/student.component';
+import { MobileActionsConceptorComponent } from './components/mobile-actions-conceptor/mobile-actions-conceptor.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { StudentComponent } from './pages/student/student.component';
     BreadcrumbComponent,
     MediaSVGComponent,
     CourseSVGComponent,
-    ModuleSVGComponent
+    ModuleSVGComponent,
+    MobileActionsConceptorComponent
   ],
   imports: [
     CommonModule,

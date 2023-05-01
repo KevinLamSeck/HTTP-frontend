@@ -43,6 +43,10 @@ export class AvatarComponent implements OnInit {
     this.memberData = new Member(this._localStorageService.getItem(`${environment.storage.member.key}`))
   }
 
+  currentMemberRoleName(): string {
+    return this.memberData.getRoleName().toLowerCase();
+  }
+
   signOut(): void {
     this._userService.logout()
   }

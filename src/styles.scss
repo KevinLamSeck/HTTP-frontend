@@ -38,6 +38,10 @@ body {
   font-variant: normal;
 }
 
+body * {
+  @apply transition-colors duration-300 ease-in-out;
+}
+
 /**
 * Helpers
 **/
@@ -309,8 +313,11 @@ mat-panel-description.mat-expansion-panel-header-description .numberOfModules {
   --tw-ring-color: rgb(110, 110, 231);
 }
 
-.mat-expansion-panel-header[aria-disabled="true"]
-  .mat-expansion-panel-header-title {
+mat-checkbox span.mat-checkbox-frame {
+  @apply dark:border-primary-100;
+}
+
+.mat-expansion-panel-header[aria-disabled="true"] .mat-expansion-panel-header-title {
   @apply dark:text-white;
   color: rgba(0, 0, 0, 1);
 }

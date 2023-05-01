@@ -1,0 +1,40 @@
+<button
+  mat-fab
+  class="visible sm:hidden fixed bottom-8 right-8 hover:bg-primary-800 transition-all ease-out"
+  [matMenuTriggerFor]="actions"
+>
+  <mat-icon>add</mat-icon>
+</button>
+
+<mat-menu
+  #actions="matMenu"
+  class="bg-transparent mb-4 no-styles"
+  yPosition="above"
+>
+  <div class="flex flex-col gap-4">
+    <button
+      mat-flat-button
+      color="primary"
+      class="btn transition delay-200"
+      (click)="goToCourseAdd()"
+    >
+      + Course
+    </button>
+    <button
+      mat-flat-button
+      color="primary"
+      class="btn transition delay-100"
+      (click)="goToModuleAdd()"
+    >
+      + Module
+    </button>
+    <button
+      mat-flat-button
+      color="primary"
+      class="btn transition delay-0"
+      (click)="goToMediaAdd()"
+    >
+      + Media
+    </button>
+  </div>
+</mat-menu>

@@ -1,22 +1,50 @@
 <header class="bg-stone-50 dark:bg-neutral-900 shadow-sm">
   <div
-    class="main-layout px-4 py-8 sm:py-12 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center align-middle justify-between">
+    class="main-layout px-4 py-8 sm:py-12 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center align-middle justify-between"
+  >
     <div class="">
       <nav dashboard-breadcrumb></nav>
-      <h1 class="text-3xl font-bold leading-tight tracking-tight  text-stone-900 dark:text-white">
+      <h1
+        class="text-3xl font-bold leading-tight tracking-tight text-stone-900 dark:text-white"
+      >
         Dashboard {{ showRole(currentUser) }}
       </h1>
-      <p class="mt-1.5 text-sm text-stone-500">{{greetings(currentUser)}}</p>
+      <p class="mt-1.5 text-sm text-stone-500">{{ greetings(currentUser) }}</p>
     </div>
-    <div class="action-user flex flex-row gap-2 justify-center mt-4 sm:mt-0" *ngIf="currentUser.role == 'CONCEPTOR'">
-      <button mat-flat-button color="primary" class="btn" (click)="goToCourseAdd()">+ Course</button>
-      <button mat-flat-button color="primary" class="btn" (click)="goToModuleAdd()">+ Module</button>
-      <button mat-flat-button color="primary" class="btn" (click)="goToMediaAdd()">+ Media</button>
+    <div
+      class="action-user sm:flex flex-row gap-2 justify-center mt-4 sm:mt-0 hidden sm:visible"
+      *ngIf="currentUser.role == 'CONCEPTOR'"
+    >
+      <button
+        mat-flat-button
+        color="primary"
+        class="btn"
+        (click)="goToCourseAdd()"
+      >
+        + Course
+      </button>
+      <button
+        mat-flat-button
+        color="primary"
+        class="btn"
+        (click)="goToModuleAdd()"
+      >
+        + Module
+      </button>
+      <button
+        mat-flat-button
+        color="primary"
+        class="btn"
+        (click)="goToMediaAdd()"
+      >
+        + Media
+      </button>
     </div>
   </div>
 </header>
 
-<section class="main-layout py-8 h-full
-">
+<section class="main-layout py-8 h-full">
   <router-outlet></router-outlet>
 </section>
+
+<floating-action-conceptor></floating-action-conceptor>

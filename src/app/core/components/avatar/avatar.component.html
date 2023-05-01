@@ -18,16 +18,13 @@
     class="no-styles max-w-screen-sm"
   >
     <div
-      class="divide-y divide-neutral-600/30 p-6 rounded-xl bg-white dark:bg-neutral-800"
+      class="divide-y divide-neutral-600/30 p-6 rounded-xl bg-primary-50 dark:bg-primary-950 shadow-sm"
       role="menu"
       aria-orientation="vertical"
       aria-labelledby="menu-button"
       tabindex="-1"
     >
-      <div
-        class="flex flex-row px-2 py-4 items-center align-middle gap-2"
-        role="none"
-      >
+      <div class="flex flex-row px-2 py-4 items-center align-middle gap-2">
         <img
           src="assets/images/avatar-{{ memberData.getRoleName() }}.jpg"
           class="rounded-full h-16 w-16"
@@ -40,17 +37,79 @@
           }}</span>
           <span
             class="truncate font-light text-neutral-400 flex flex-row align-middle items-center"
-            role="none"
           >
             {{ memberData.email }}
           </span>
         </div>
       </div>
-      <div class="p-2" role="none">
-        <button
-          (click)="toggleTheme()"
-          class="btn block w-full text-left text-sm font-medium hover:bg-primary-100"
-        >
+      <div class="p-2 space-y-1">
+        <div *ngIf="currentMemberRoleName() === 'conceptor'" class="space-y-1">
+          <button
+            [routerLink]="['/dashboard/conceptor']"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLinkActive="bg-primary-100 dark:bg-primary-800"
+            class="btn btn-menu"
+          >
+            Dashboard
+          </button>
+          <button
+            [routerLink]="['/dashboard/conceptor/course']"
+            routerLinkActive="bg-primary-100 dark:bg-primary-800"
+            class="btn btn-menu"
+          >
+            Courses Management
+          </button>
+          <button
+            [routerLink]="['/dashboard/conceptor/module']"
+            routerLinkActive="bg-primary-100 dark:bg-primary-800"
+            class="btn btn-menu"
+          >
+            Modules
+          </button>
+          <button
+            [routerLink]="['/dashboard/conceptor/media']"
+            routerLinkActive="bg-primary-100 dark:bg-primary-800"
+            class="btn btn-menu"
+          >
+            Medias Hub
+          </button>
+        </div>
+        <div *ngIf="currentMemberRoleName() === 'student'" class="space-y-1">
+          <button
+            [routerLink]="['/dashboard/student']"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLinkActive="bg-primary-100 dark:bg-primary-800"
+            class="btn btn-menu"
+          >
+            Dashboard
+          </button>
+          <button
+            [routerLink]="['/dashboard/student/list']"
+            routerLinkActive="bg-primary-100 dark:bg-primary-800"
+            class="btn btn-menu"
+          >
+            My Courses
+          </button>
+        </div>
+        <div *ngIf="currentMemberRoleName() === 'manager'" class="space-y-1">
+          <button
+            [routerLink]="['/dashboard/student']"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLinkActive="bg-primary-100 dark:bg-primary-800"
+            class="btn btn-menu"
+          >
+            Dashboard
+          </button>
+          <button
+            [routerLink]="['/dashboard/manager/student']"
+            routerLinkActive="bg-primary-100 dark:bg-primary-800"
+            class="btn btn-menu"
+          >
+            My Courses
+          </button>
+        </div>
+
+        <button (click)="toggleTheme()" class="btn btn-menu">
           <span
             class="flex flex-row gap-2 align-middle"
             *ngIf="(theme$ | async) === 'light'"

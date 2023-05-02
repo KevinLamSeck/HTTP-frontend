@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, OnInit, Optional, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Optional, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { take } from 'rxjs';
 import { MediaType } from 'src/app/course/types/media-type';
@@ -14,7 +14,11 @@ import { fadeInOut } from 'src/app/shared/animations/fadeInOut';
 export class AddMediaComponent implements OnInit {
 
   public medias: MediaType[] = []
+  public mediasFiltered: MediaType[] = []
   public searchText: string = ''
+
+  @Input()
+  public mediasInModule: Array<MediaType> = new Array<MediaType>()
 
   @Output()
   public idMedia: EventEmitter<number> = new EventEmitter<number>()
@@ -29,7 +33,11 @@ export class AddMediaComponent implements OnInit {
       .pipe(
         take(1)
       ).subscribe((medias: MediaType[]) => {
-        this.medias = medias
+        this.mediasFiltered = medias
+        this.mediasInModule.forEach(media => {
+          this.mediasFiltered = this.mediasFiltered.filter((m) => (media.id !== m.id))
+        })
+        this.medias = this.mediasFiltered
         this.medias.sort((s1: MediaType, s2: MediaType) => s1.id! - s2.id!)
       })
 
@@ -56,7 +64,6 @@ export class AddMediaComponent implements OnInit {
 
   public onSearchTextEntered(searchValue: string) {
     this.searchText = searchValue
-    // // console.log(this.searchText)
   }
 
 }

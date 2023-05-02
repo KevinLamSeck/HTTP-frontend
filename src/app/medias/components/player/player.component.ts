@@ -13,6 +13,7 @@ export class PlayerComponent implements OnInit {
   public medias: any;
   public safeSrc: SafeResourceUrl | undefined;
   public safeSrcVideo: SafeResourceUrl | undefined;
+  public safePDF!: SafeResourceUrl
 
   constructor(
     private _route: ActivatedRoute,
@@ -25,11 +26,17 @@ export class PlayerComponent implements OnInit {
     this._mediaService.findOne(id).subscribe({
       next: (media: MediaType) => {
         this.medias = media;
-        console.log(this.medias.url);
+
+        this.safePDF = this.sanitizer.bypassSecurityTrustResourceUrl(this.medias?.url)
+
+        console.log(this.safePDF);
+
         this.safeSrc = this.sanitizer.bypassSecurityTrustResourceUrl(
           'https://w.soundcloud.com/player/?url=' + this.medias?.url
         );
+
         let videoId = this.medias?.url.split('v=')[1]?.split('&')[0];
+
 
         this.safeSrcVideo = this.sanitizer.bypassSecurityTrustResourceUrl(
           'https://www.youtube.com/embed/' + videoId

@@ -2,6 +2,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {
+  BrowserAnimationsModule,
+  NoopAnimationsModule,
+} from '@angular/platform-browser/animations';
 import { ListMediaComponent } from './list-media.component';
 
 describe('ListMediaComponent', () => {
@@ -11,9 +15,13 @@ describe('ListMediaComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ListMediaComponent],
-      imports: [HttpClientTestingModule, MatSnackBarModule]
-    })
-      .compileComponents();
+      imports: [
+        HttpClientTestingModule,
+        MatSnackBarModule,
+        BrowserAnimationsModule,
+        NoopAnimationsModule,
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {

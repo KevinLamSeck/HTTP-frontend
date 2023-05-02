@@ -21,7 +21,7 @@
 </form>
 
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">
+  <button mat-button (click)="onNoClick()" id="no-button">
     <span color="primary" class="btn primary dark:text-primary-50">Cancel</span>
   </button>
   <button mat-button [disabled]="form.invalid" (click)="onSubmit()">

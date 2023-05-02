@@ -101,7 +101,7 @@ export class UserService {
         : new LocalStorageStrategy();
     this._router.navigate(['/', 'user']);
 
-    const messageSucessLogin: string = `Disconnected`;
+    const messageSucessLogin: string = `You have been successfully logged out. See you again soon!`;
     this._toastService.show(messageSucessLogin);
   }
 }

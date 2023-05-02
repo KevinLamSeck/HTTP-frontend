@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import ListMyCourseComponent from '../course/list/list.component';
 import { ListComponent } from '../student/list/list.component';
 import { DashboardComponent } from './dashboard.component';
 import { RoleGuard } from './guards/role.guard';
 import { ConceptorComponent } from './pages/conceptor/conceptor.component';
 import { ManagerComponent } from './pages/manager/manager.component';
 import { StudentComponent } from './pages/student/student.component';
-import ListMyCourseComponent from '../course/list/list.component';
 
 @NgModule({
   imports: [[RouterModule.forChild(DashboardRoutingModule.routes)]],
@@ -27,7 +27,7 @@ export class DashboardRoutingModule {
       data: {
         allowedRoles: ['CONCEPTOR', 'MANAGER', 'STUDENT'],
         title: 'Dashboard',
-        breadcrumb: 'Dashboard',
+        // breadcrumb: 'Dashboard',
       },
       children: [
         {

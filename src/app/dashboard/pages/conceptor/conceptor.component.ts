@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CourseSVGComponent } from '../../components/svg/course-svg/course-svg.component';
-import { MediaSVGComponent } from '../../components/svg/media-svg/media-svg.component';
-import { ModuleSVGComponent } from '../../components/svg/module-svg/module-svg.component';
+import { CourseSVGComponent } from '../../../shared/svg/course-svg/course-svg.component';
+import { MediaSVGComponent } from '../../../shared/svg/media-svg/media-svg.component';
+import { ModuleSVGComponent } from '../../../shared/svg/module-svg/module-svg.component';
 import { Tile } from '../../models/tile';
 
 @Component({

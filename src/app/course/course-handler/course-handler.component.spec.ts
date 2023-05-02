@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CourseHandlerComponent } from './course-handler.component';
 
@@ -19,7 +20,9 @@ describe('CourseHandlerComponent', () => {
         ReactiveFormsModule,
         MatSnackBarModule,
         RouterTestingModule,
-        MatDialogModule
+        MatDialogModule,
+        BrowserAnimationsModule,
+        NoopAnimationsModule
       ]
     })
       .compileComponents();

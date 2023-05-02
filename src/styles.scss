@@ -287,7 +287,7 @@ button.mat-flat-button.mat-primary.mat-button-disabled {
 }
 
 mat-dialog-container {
-  @apply dark:bg-neutral-800;
+  @apply dark:bg-neutral-900;
 }
 
 mat-expansion-panel.mat-expansion-panel:not([class*="mat-elevation-z"]),
@@ -303,6 +303,26 @@ mat-panel-description.mat-expansion-panel-header-description .numberOfModules {
 
 .modalDialog {
   @apply dark:bg-neutral-800 w-3/4;
+}
+
+mat-dialog-container {
+  &.mat-dialog-container {
+    @apply rounded-lg;
+  }
+
+  & app-create-media div:is(.dark .dark\:bg-neutral-700) {
+    background-color: transparent !important;
+  }
+  & app-create-media div.bg-neutral-100 {
+    background-color: transparent !important;
+  }
+
+  & app-add-media div.bg-neutral-100 {
+    background-color: transparent !important;
+  }
+  & app-add-media div:is(.dark .dark\:bg-neutral-700) {
+    background-color: transparent !important;
+  }
 }
 
 //checkbox

@@ -186,7 +186,14 @@
       class="dark:bg-neutral-600"
       *ngFor="let course of courses"
     >
-      <mat-expansion-panel-header>
+      <mat-expansion-panel-header
+        [title]="
+          'Creator : ' +
+          course?.creator.firstName +
+          ' ' +
+          course?.creator.lastName
+        "
+      >
         <mat-panel-title class="dark:text-white">
           {{ course.title }}
         </mat-panel-title>

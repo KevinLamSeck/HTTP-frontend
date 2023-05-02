@@ -13,32 +13,41 @@
     </div>
     <div
       class="action-user sm:flex flex-row gap-2 justify-center mt-4 sm:mt-0 hidden sm:visible"
-      *ngIf="currentUser.role == 'CONCEPTOR'"
     >
       <button
         mat-flat-button
         color="primary"
-        class="btn"
-        (click)="goToCourseAdd()"
+        class="btn hover:bg-primary-900"
+        routerLink=".."
       >
-        + Course
+        <i class="material-icons text-sm">arrow_back</i> Back
       </button>
-      <button
-        mat-flat-button
-        color="primary"
-        class="btn"
-        (click)="goToModuleAdd()"
-      >
-        + Module
-      </button>
-      <button
-        mat-flat-button
-        color="primary"
-        class="btn"
-        (click)="goToMediaAdd()"
-      >
-        + Media
-      </button>
+      <ng-container *ngIf="currentUser.role == 'CONCEPTOR'">
+        <button
+          mat-flat-button
+          color="primary"
+          class="btn hover:bg-primary-900"
+          (click)="goToCourseAdd()"
+        >
+          + Course
+        </button>
+        <button
+          mat-flat-button
+          color="primary"
+          class="btn hover:bg-primary-900"
+          (click)="goToModuleAdd()"
+        >
+          + Module
+        </button>
+        <button
+          mat-flat-button
+          color="primary"
+          class="btn hover:bg-primary-900"
+          (click)="goToMediaAdd()"
+        >
+          + Media
+        </button>
+      </ng-container>
     </div>
   </div>
 </header>

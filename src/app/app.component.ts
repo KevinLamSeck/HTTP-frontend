@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
@@ -45,4 +45,13 @@ export class AppComponent {
       return activatedRoute;
     }
   }
+
+  // Shortcut control to open the avatar with control l
+  @HostListener('window:keydown.control.l', ['$event'])
+  controlL(event: KeyboardEvent) {
+    event.preventDefault();
+    this.router.navigate(['/control']);
+  }
+
+
 }

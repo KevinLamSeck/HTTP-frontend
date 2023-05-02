@@ -50,8 +50,10 @@ export class BreadcrumbService {
       if (route.data["breadcrumb"]) {
         const breadcrumb = {
           label: this.getLabel(route.data),
-          url: "http://localhost:4200/" + routeUrl.join("/"),
+          url: routeUrl.join("/"),
         };
+        console.log(routeUrl.join("/"));
+
         breadcrumbs.push(breadcrumb);
       }
 

@@ -85,7 +85,10 @@
 
   <ng-container *ngIf="addMediaVisible">
     <div class="p-8 bg-neutral-50 dark:bg-neutral-700 rounded-2xl h-max">
-      <app-add-media (idMedia)="addMedia($event)"></app-add-media>
+      <app-add-media
+        (idMedia)="addMedia($event)"
+        [mediasInModule]="medias"
+      ></app-add-media>
     </div>
   </ng-container>
 

@@ -20,7 +20,10 @@
     <div>
       <div class="flex flex-col justify-start lg:items-center h-ful">
         <div class="w-full space-y-2">
-          <span *ngIf="medias.length > 0">Medias in this module :</span>
+          <span *ngIf="medias.length > 0"
+            >{{ medias.length <= 1 ? " Media" : " Medias" }} in this module
+            :</span
+          >
           <span *ngIf="medias.length == 0"
             >This module doesn't have medias.</span
           >

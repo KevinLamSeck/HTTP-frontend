@@ -27,7 +27,7 @@ export class AvatarComponent implements OnInit {
   constructor(
     private _userService: UserService,
     private _router: Router,
-    private _darkModeService: DarkModeService
+    private _darkModeService: DarkModeService,
   ) { }
 
   ngOnInit(): void {

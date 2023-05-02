@@ -1,11 +1,11 @@
 .chips {
     @apply px-2 py-1 text-sm rounded-md cursor-pointer transition-all w-fit;
-    @apply dark:text-primary-300 border dark:border-primary-400 hover:bg-primary-100;
+    @apply dark:text-primary-300 border dark:border-primary-400 hover:bg-primary-500;
     @apply transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)];
 }
 
 .hoverChips {
-    @apply bg-primary-300;
+    @apply bg-primary-600;
 }
 
 // mb-0 min-h-[45px] border-none pb-0 shadow-none outline-none transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)] hover:cursor-text

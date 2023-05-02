@@ -1,6 +1,6 @@
 <div class="row m-10 justify-between items-center">
   <div class="col xs9 course-title flex items-center">
-    <h2 class="h2">My own list</h2>
+    <h2 class="h2">My Courses</h2>
   </div>
 
   <div class="col xs3 course-number flex items-end justify-end content-end">
@@ -173,7 +173,7 @@
 
 <!-- Other list -->
 <div class="row m-10">
-  <h2 id="otherList" class="col xs11 course-title">Other list</h2>
+  <h2 id="otherList" class="col xs11 course-title">Other Courses</h2>
   <div class="col xs1 course-number">
     {{ courses.length }} {{ courses.length <= 1 ? " course" : " courses" }}
   </div>
@@ -186,7 +186,14 @@
       class="dark:bg-neutral-600"
       *ngFor="let course of courses"
     >
-      <mat-expansion-panel-header>
+      <mat-expansion-panel-header
+        [title]="
+          'Creator : ' +
+          course?.creator?.firstName +
+          ' ' +
+          course?.creator?.lastName
+        "
+      >
         <mat-panel-title class="dark:text-white">
           {{ course.title }}
         </mat-panel-title>

@@ -106,11 +106,19 @@ export class CourseListComponent implements OnInit {
           const message: string = `${course.title} was removed. ${
             course.modules!.length
           } modules were affected`;
-          this._toastService.show(message);
+          this._snackBar.open(message, "Close", {
+            duration: 2000,
+          });
         },
         error: (error: any) => {
           const badMessage: string = `Sorry, ${course.title} was already removed`;
-          this._toastService.show(badMessage);
+          this._snackBar.open(
+            `Sorry, ${course.title} was already removed`,
+            "Close",
+            {
+              duration: 2000,
+            }
+          );
         },
         complete: () => {
           this.courses.splice(this.courses.indexOf(course), 1);
@@ -135,7 +143,9 @@ export class CourseListComponent implements OnInit {
     });
 
     this._courseService.copyCourse(course).subscribe(() => {
-      this._snackBar.open(`"${course.title}" was copied.`, "Close");
+      this._snackBar.open(`The module was deleted.`, "Close", {
+        duration: 2000,
+      });
       this.ngOnInit();
     });
   }
@@ -166,7 +176,9 @@ export class CourseListComponent implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: (response: HttpResponse<any>) => {
-          this._snackBar.open(`The module was deleted.`, "Close");
+          this._snackBar.open(`The module was deleted.`, "Close", {
+            duration: 2000,
+          });
           this.ngOnInit();
         },
       });

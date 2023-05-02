@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MediaService } from '../../services/media.service';
-import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { log } from 'console';
+import { ActivatedRoute } from '@angular/router';
+import { MediaType } from 'src/app/course/types/media-type';
+import { MediaService } from '../../services/media.service';
 
 @Component({
   selector: 'app-player',
@@ -18,14 +18,14 @@ export class PlayerComponent implements OnInit {
     private _route: ActivatedRoute,
     private _mediaService: MediaService,
     private sanitizer: DomSanitizer
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const id: number = +this._route.snapshot.paramMap.get('id')!;
     this._mediaService.findOne(id).subscribe({
-      next: (media: any) => {
+      next: (media: MediaType) => {
         this.medias = media;
-
+        console.log(this.medias.url);
         this.safeSrc = this.sanitizer.bypassSecurityTrustResourceUrl(
           'https://w.soundcloud.com/player/?url=' + this.medias?.url
         );

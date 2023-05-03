@@ -15,7 +15,7 @@
     <button
       mat-flat-button
       color="primary"
-      class="btn transition"
+      class="btn shadow-md transition hover:shadow-lg hover:bg-primary-900"
       (click)="goToCourseAdd()"
     >
       + Course
@@ -23,7 +23,7 @@
     <button
       mat-flat-button
       color="primary"
-      class="btn transition"
+      class="btn shadow-md transition hover:shadow-lg hover:bg-primary-900"
       (click)="goToModuleAdd()"
     >
       + Module
@@ -31,10 +31,18 @@
     <button
       mat-flat-button
       color="primary"
-      class="btn transition"
+      class="btn shadow-md transition hover:shadow-lg hover:bg-primary-900"
       (click)="goToMediaAdd()"
     >
       + Media
+    </button>
+    <button
+      mat-flat-button
+      color="primary"
+      class="btn shadow-md transition hover:shadow-lg hover:bg-primary-900"
+      routerLink=".."
+    >
+      <i class="material-icons text-sm">arrow_back</i> Back
     </button>
   </div>
 </mat-menu>

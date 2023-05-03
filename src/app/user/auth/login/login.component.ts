@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     private _router: Router,
     private _dialog: MatDialog,
     private _toastService: ToastService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const loginControl: AbstractControl = new FormControl("", [
@@ -87,13 +87,13 @@ export class LoginComponent implements OnInit {
         this._router.navigate(["/"]);
       },
       error: (error: any) => {
-        const messageErrorLogin: string = `Désolé vous avez rentrer des identifiants incorrects !`;
+        const messageErrorLogin: string = `Sorry, the login credentials you entered were incorrect.`;
         this._toastService.show(messageErrorLogin);
       },
       complete: () => {
         this.form.controls["login"].setValue("");
         this.form.controls["password"].setValue("");
-        const messageSucessLogin: string = `Welcome !`;
+        const messageSucessLogin: string = `Welcome back! We're glad to see you again.`;
         this._toastService.show(messageSucessLogin);
       },
     });

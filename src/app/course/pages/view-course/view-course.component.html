@@ -1,18 +1,14 @@
 <div
-  class="bg-neutral-100 flex flex-col md:flex-row justify-between rounded shadow-md p-10 dark:bg-neutral-600"
+  class="bg-neutral-100 flex flex-col md:flex-row justify-between rounded-xl p-10 dark:bg-neutral-600"
 >
-  <div class="flex-col gap-2 flex">
+  <div class="flex-col gap-2 flex justify-center">
     <h2>{{ course.title }}</h2>
     <h3>{{ course.objective }}</h3>
     <p>Created at : {{ course.createdAt }}</p>
     <p>Created by : {{ user.firstName }} {{ user.lastName }}</p>
   </div>
-  <div>
-    <img
-      src="https://placekitten.com/300/150"
-      class="rounded h-full w-full overflow-hidden shadow"
-      alt=""
-    />
+  <div class="mt-4 md:mt-0">
+    <course-svg></course-svg>
   </div>
 </div>
 <div class="mt-10 mx-28">

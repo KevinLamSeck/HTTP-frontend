@@ -22,7 +22,7 @@ export class RecoveryComponent implements OnInit {
     private _userService: UserService,
     public dialogRef: MatDialogRef<RecoveryComponent>,
     private _toastService: ToastService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const loginControl: AbstractControl = new FormControl("", [
@@ -39,17 +39,15 @@ export class RecoveryComponent implements OnInit {
   onSubmit(): void {
     this._userService.recovery(this.form.value).subscribe({
       next: (response: HttpResponse<string>) => {
-        // console.log(response);
         this.dialogRef.close(response);
       },
       error: (error: any) => {
-        // console.log(error);
         this.form.controls["login"].setValue("");
         this.form.controls["email"].setValue("");
-        const messageErrorLogin: string = `Sorry, you should enter login and email`;
+        const messageErrorLogin: string = `Your login credentials don't match our records. Please check your email and password and try again.`;
         this._toastService.show(messageErrorLogin);
       },
-      complete: () => {},
+      complete: () => { },
     });
   }
 

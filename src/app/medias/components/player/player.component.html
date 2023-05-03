@@ -15,7 +15,7 @@
 
 <iframe
   *ngIf="medias?.typeMedia?.title == 'PDF'"
-  src="../../../../assets/medias/pdf/Streamer_Projet_Final.pdf"
+  [src]="safePDF"
   width="100%"
   height="800px"
 >
@@ -23,7 +23,7 @@
 
 <iframe
   *ngIf="medias?.typeMedia?.title == 'Document'"
-  src="../../../../assets/medias/pdf/Streamer_Projet_Final.pdf"
+  [src]="safePDF"
   width="100%"
   height="800px"
 >

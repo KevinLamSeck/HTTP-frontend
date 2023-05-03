@@ -1,7 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router, RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
+import {
+  BrowserAnimationsModule,
+  NoopAnimationsModule,
+} from '@angular/platform-browser/animations';
 import { TileComponent } from './tile.component';
 
 describe('TileComponent', () => {
@@ -11,14 +14,13 @@ describe('TileComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        BrowserAnimationsModule,
+        NoopAnimationsModule,
       ],
-      providers: [
-
-      ],
-      declarations: [ TileComponent ]
-    })
-    .compileComponents();
+      providers: [],
+      declarations: [TileComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -27,8 +29,8 @@ describe('TileComponent', () => {
     component.tileInfo = {
       title: 'Hello world',
       summary: 'Test',
-      action: ['dashboard']
-    }
+      action: ['dashboard'],
+    };
     fixture.detectChanges();
   });
 

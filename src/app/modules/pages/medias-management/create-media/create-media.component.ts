@@ -56,7 +56,7 @@ export class CreateMediaComponent implements OnInit {
     private _localStorageService: LocalStorageService,
     private _snackBar: MatSnackBar,
     private _fileUpload: FileUploadService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.mediaForm = this._formBuilder.group({

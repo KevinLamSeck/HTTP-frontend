@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MediaService } from '../../services/media.service';
-import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
+import { MediaType } from 'src/app/course/types/media-type';
+import { MediaService } from '../../services/media.service';
 
 @Component({
   selector: 'app-player',
@@ -12,6 +13,7 @@ export class PlayerComponent implements OnInit {
   public medias: any;
   public safeSrc: SafeResourceUrl | undefined;
   public safeSrcVideo: SafeResourceUrl | undefined;
+  public safePDF!: SafeResourceUrl;
 
   constructor(
     private _route: ActivatedRoute,
@@ -22,12 +24,19 @@ export class PlayerComponent implements OnInit {
   ngOnInit(): void {
     const id: number = +this._route.snapshot.paramMap.get('id')!;
     this._mediaService.findOne(id).subscribe({
-      next: (media: any) => {
+      next: (media: MediaType) => {
         this.medias = media;
+
+        this.safePDF = this.sanitizer.bypassSecurityTrustResourceUrl(
+          this.medias?.url
+        );
+
+        console.log(this.safePDF);
 
         this.safeSrc = this.sanitizer.bypassSecurityTrustResourceUrl(
           'https://w.soundcloud.com/player/?url=' + this.medias?.url
         );
+
         let videoId = this.medias?.url.split('v=')[1]?.split('&')[0];
 
         this.safeSrcVideo = this.sanitizer.bypassSecurityTrustResourceUrl(

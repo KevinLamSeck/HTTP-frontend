@@ -27,6 +27,12 @@
 
     <h4 class="mb-4">List of Modules :</h4>
     <ng-container *ngIf="useModule">
+      <div
+        class="text-neutral-400 rounded-xl px-6 py-4 border border-dashed mb-4"
+        [ngClass]="{ hidden: modules.length >= 1 }"
+      >
+        Your module list is empty.
+      </div>
       <mat-accordion *ngIf="modules.length" class="ModuleList">
         <div
           cdkDropList

@@ -94,8 +94,7 @@ export class UpdateModuleComponent implements OnInit {
       .subscribe((response: HttpResponse<any>) => {
         // console.log(response)
         this._snackBar.open(`"${module.name}" was updated.`, "Close", { duration: 2000 });
-        this._router.navigate(['/'])
-        console.log(this.medias)
+        this._router.navigate(["/dashboard/conceptor/module"]);
       })
   }
 

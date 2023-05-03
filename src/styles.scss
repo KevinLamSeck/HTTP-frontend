@@ -317,7 +317,11 @@ mat-checkbox span.mat-checkbox-frame {
   @apply dark:border-primary-100;
 }
 
-.mat-expansion-panel-header[aria-disabled="true"] .mat-expansion-panel-header-title {
+.mat-expansion-panel-header[aria-disabled="true"]
+  .mat-expansion-panel-header-title {
   @apply dark:text-white;
   color: rgba(0, 0, 0, 1);
+}
+.visibilityIcon[_ngcontent-rex-c170] {
+  @apply dark:text-white;
 }

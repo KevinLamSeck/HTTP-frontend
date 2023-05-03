@@ -16,6 +16,13 @@ export class ViewCourseComponent implements OnInit {
     this.course = JSON.parse(sessionStorage.getItem('ModifiedCourse') + '');
     this.user = JSON.parse(localStorage.getItem('memberData') + '');
   }
+  time() {
+    if (this.totalTime === '00h 00min') {
+      ('');
+    } else {
+      this.totalTime + 'total length';
+    }
+  }
 
   ngOnInit(): void {
     this.course.modules?.forEach((module) => {
@@ -36,6 +43,6 @@ export class ViewCourseComponent implements OnInit {
     const minutes = (totalMinutes % 60).toString().padStart(2, '0');
 
     this.totalTime = `${hours}h ${minutes}min`;
-    console.log(this.totalTime);
+    console.log(this.addTime);
   }
 }

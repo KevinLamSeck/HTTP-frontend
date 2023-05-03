@@ -24,7 +24,10 @@
           ? " module"
           : " modules"
       }}
-      | {{ totalTime === "00h 00min" ? "{{totalTime}} total length" : "" }}
+
+      <span *ngIf="totalTime !== '00h 00min'"
+        >| {{ totalTime }} total length</span
+      >
     </p>
   </ng-template>
 

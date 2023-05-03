@@ -63,17 +63,20 @@
         </button>
       </div>
 
-      <div mat-dialog-actions class="w-full flex flex-row gap-2 justify-center">
-        <button mat-flat-button color="warn" (click)="onNoClick()" class="">
+      <div class="w-full flex flex-row gap-2 justify-center mt-8">
+        <button
+          (click)="onNoClick()"
+          class="btn outlined !text-primary-500 hover:text-primary-100 w-36"
+        >
           Cancel
         </button>
         <button
           cdkFocusInitial
-          mat-flat-button
           color="primary"
+          mat-button
           [disabled]="moduleForm.invalid"
           (click)="onSubmit()"
-          class=""
+          class="btn primary w-36"
         >
           Create Module
         </button>

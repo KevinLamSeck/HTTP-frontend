@@ -56,7 +56,7 @@ export class BreadcrumbService {
           label: this.getLabel(route.data),
           url: routeUrl.join("/"),
         };
-        console.log(routeUrl.join("/").replace(/^\//, ''),);
+        // console.log(routeUrl.join("/").replace(/^\//, ''),);
 
         breadcrumbs.push(breadcrumb);
       }

@@ -1,6 +1,5 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { LocalStorageService } from '../core/services/local-storage.service';
@@ -21,7 +20,6 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private _router: Router,
-    private _matDialog: MatDialog,
     private _location: Location
   ) { }
 
@@ -65,7 +63,10 @@ export class DashboardComponent implements OnInit {
   }
 
   isOnDashboard(): boolean {
-    const currentUserRole = this.currentUser.getRoleName().toLowerCase()
+    if (!this.currentUser) {
+      return false;
+    }
+    const currentUserRole = this.currentUser.getRoleName()?.toLowerCase();
     return this._router.url === `/dashboard/${currentUserRole}`;
   }
 

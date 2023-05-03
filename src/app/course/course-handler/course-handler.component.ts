@@ -28,7 +28,7 @@ export class CourseHandlerComponent implements OnInit {
   public modules: Array<ModuleType> = [];
   public course: CourseType;
   public updateCourse: boolean = false;
-  public updateOrCreate: string = "Create";
+  public updateOrCreate: string = "Create Course";
 
   constructor(
     private _formBuilder: FormCourseBuilderService,
@@ -41,7 +41,7 @@ export class CourseHandlerComponent implements OnInit {
     this.course = JSON.parse(sessionStorage.getItem("ModifiedCourse") + "");
     this._formBuilder.buildForm(this.course);
     if (this.course) {
-      this.updateOrCreate = "Update";
+      this.updateOrCreate = "Update Course";
       this.updateCourse = true;
       this.course.modules?.forEach((m) => {
         this.modules.push(m);

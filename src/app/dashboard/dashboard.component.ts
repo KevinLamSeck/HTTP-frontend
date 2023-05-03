@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -20,7 +21,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private _router: Router,
-    private _matDialog: MatDialog
+    private _matDialog: MatDialog,
+    private _location: Location
   ) { }
 
   ngOnInit(): void {
@@ -56,6 +58,10 @@ export class DashboardComponent implements OnInit {
     if (hour < 12) return greetingsMSG[0];
     else if (hour < 18) return greetingsMSG[1];
     else return greetingsMSG[2];
+  }
+
+  goBack() {
+    this._location.back();
   }
 
 }

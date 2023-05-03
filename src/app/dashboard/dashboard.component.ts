@@ -64,4 +64,9 @@ export class DashboardComponent implements OnInit {
     this._location.back();
   }
 
+  isOnDashboard(): boolean {
+    const currentUserRole = this.currentUser.getRoleName().toLowerCase()
+    return this._router.url === `/dashboard/${currentUserRole}`;
+  }
+
 }

@@ -16,8 +16,9 @@
     >
       <button
         mat-flat-button
+        *ngIf="!isOnDashboard()"
         color="primary"
-        class="btn hover:bg-primary-900"
+        class="btn hover:bg-primary-900 transition-all"
         (click)="goBack()"
       >
         <i class="material-icons text-sm">arrow_back</i> Back

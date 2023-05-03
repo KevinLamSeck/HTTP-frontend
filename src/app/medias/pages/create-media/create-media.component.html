@@ -80,15 +80,17 @@
         </mat-form-field>
         <!-- Upload file UI -->
       </form>
-      <div class="text-center">
-        <label for="file">{{ fileName }}</label>
+      <div class="text-center space-y-4">
+        <div for="file">{{ fileName }}</div>
         <input
           type="file"
           name="file"
-          class=""
+          class="block w-full text-sm text-gray-900 cursor-pointer dark:text-gray-400 focus:outline-none dark:placeholder-primary-400"
           (change)="selectFile($event)"
           *ngIf="
-            ['Document', 'Image', 'Slide', 'PDF'].includes(c['typeMedia'].value)
+            ['Document', 'Image', 'Slide', 'PDF'].includes(
+              c['typeMedia'].value
+            ) && !fileName
           "
         />
       </div>

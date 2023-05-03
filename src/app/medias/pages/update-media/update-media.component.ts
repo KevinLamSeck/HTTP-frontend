@@ -200,7 +200,7 @@ export class UpdateMediaComponent implements OnInit {
       const operation = this._mediaService.update(media).pipe(take(1)).subscribe({
         next: () => {
           this._router.navigate(["dashboard/conceptor/media"]);
-          this._snackBar.open(`"${media.title}" a été mis à jour.`, "Fermer");
+          this._snackBar.open(`"${media.title}" was updated.`, "Close", { duration: 1500 });
         },
         complete: () => {
           this.mediaForm.reset();

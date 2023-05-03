@@ -17,13 +17,23 @@
       Order by :
     </button>
   </div>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="sortByName(!nameOrder)">
-      <mat-icon>{{ nameOrder ? "arrow_upward" : "arrow_downward" }}</mat-icon>
+  <mat-menu #menu="matMenu" class="dark:bg-neutral-900">
+    <button
+      mat-menu-item
+      (click)="sortByName(!nameOrder)"
+      class="dark:text-white"
+    >
+      <mat-icon class="white-icon">{{
+        nameOrder ? "arrow_upward" : "arrow_downward"
+      }}</mat-icon>
       <span>Name</span>
     </button>
-    <button mat-menu-item (click)="sortByModules(!modulesOrder)">
-      <mat-icon>{{
+    <button
+      mat-menu-item
+      (click)="sortByModules(!modulesOrder)"
+      class="dark:text-white"
+    >
+      <mat-icon class="white-icon">{{
         modulesOrder ? "arrow_upward" : "arrow_downward"
       }}</mat-icon>
       <span>Number of modules</span>

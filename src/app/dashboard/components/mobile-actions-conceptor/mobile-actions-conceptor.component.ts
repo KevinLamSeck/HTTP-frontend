@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class MobileActionsConceptorComponent implements OnInit {
 
-  constructor(private _router: Router) { }
+  constructor(private _router: Router, private _location: Location) { }
 
   ngOnInit(): void {
   }
@@ -24,6 +25,10 @@ export class MobileActionsConceptorComponent implements OnInit {
   goToCourseAdd() {
     sessionStorage.removeItem('ModifiedCourse');
     this._router.navigate(['dashboard/conceptor/course/add']);
+  }
+
+  goBack() {
+    this._location.back()
   }
 
 }

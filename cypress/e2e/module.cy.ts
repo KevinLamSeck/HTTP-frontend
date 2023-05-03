@@ -6,7 +6,6 @@ describe('should create a module', () => {
     cy.get('#mat-input-1').type('123456');
     cy.get('.mat-flat-button').click();
 
-    /* ==== Generated with Cypress Studio ==== */
     cy.get(':nth-child(2) > .mat-button-wrapper').click();
     cy.get('#mat-input-2').clear('Git Branching and Merging ');
     cy.get('#mat-input-2').type('Git Branching and Merging');
@@ -15,6 +14,5 @@ describe('should create a module', () => {
     cy.get('.lg\\:items-center > .flex-col > :nth-child(3) > :nth-child(1)').click();
     cy.get('.list-none > :nth-child(1)').click();
     cy.get('.lg\\:items-center > .flex-col > .justify-center > .mat-focus-indicator').click();
-    /* ==== End Cypress Studio ==== */
   })
 })

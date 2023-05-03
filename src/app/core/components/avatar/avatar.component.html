@@ -74,8 +74,6 @@
             Medias Hub
           </button>
         </div>
-      </div>
-      <div>
         <div *ngIf="currentMemberRoleName() === 'student'" class="space-y-1">
           <button
             [routerLink]="['/dashboard/student']"
@@ -95,7 +93,7 @@
         </div>
         <div *ngIf="currentMemberRoleName() === 'manager'" class="space-y-1">
           <button
-            [routerLink]="['/dashboard/student']"
+            [routerLink]="['/dashboard/manager']"
             [routerLinkActiveOptions]="{ exact: true }"
             routerLinkActive="bg-primary-100 dark:bg-primary-800"
             class="btn btn-menu"
@@ -107,10 +105,11 @@
             routerLinkActive="bg-primary-100 dark:bg-primary-800"
             class="btn btn-menu"
           >
-            My Courses
+            Manage Students
           </button>
         </div>
-
+      </div>
+      <div>
         <button (click)="toggleTheme()" class="btn btn-menu mt-2">
           <span
             class="flex flex-row gap-2 align-middle"

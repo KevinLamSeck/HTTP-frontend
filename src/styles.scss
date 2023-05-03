@@ -188,16 +188,21 @@ body {
 
 // Remove the background color on webkit browser (Chrome, Safari..)
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+  -webkit-text-fill-color: inherit;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
-// input:autofill {
-//   @apply dark:bg-transparent;
-// }
+.dark input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #262626 inset; /* Change this color to your dark mode background color */
+  -webkit-text-fill-color: inherit;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input:autofill {
+  @apply dark:bg-transparent;
+}
 
 // Typo styles
 
@@ -337,8 +342,7 @@ mat-checkbox span.mat-checkbox-frame {
   @apply dark:border-primary-100;
 }
 
-.mat-expansion-panel-header[aria-disabled="true"]
-  .mat-expansion-panel-header-title {
+.mat-expansion-panel-header[aria-disabled="true"] .mat-expansion-panel-header-title {
   @apply dark:text-white;
   color: rgba(0, 0, 0, 1);
 }

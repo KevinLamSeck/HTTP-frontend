@@ -59,24 +59,24 @@
           Import media
         </button>
         <button class="w-full btn primary" (click)="showCreateMedia()">
-          New media
+          Create media
         </button>
       </div>
 
       <div class="w-full flex flex-row gap-2 justify-center mt-8">
         <button
           (click)="onNoClick()"
-          class="btn outlined !text-primary-500 hover:text-primary-100 w-36"
+          class="btn outlined !text-primary-500 hover:text-primary-100 w-36 dark:text-primary-300"
         >
           Cancel
         </button>
         <button
           cdkFocusInitial
           color="primary"
-          mat-button
+          mat-flat-button
           [disabled]="moduleForm.invalid"
           (click)="onSubmit()"
-          class="btn primary w-36"
+          class="btn w-36"
         >
           Create Module
         </button>

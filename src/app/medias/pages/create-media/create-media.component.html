@@ -80,21 +80,32 @@
         </mat-form-field>
         <!-- Upload file UI -->
       </form>
-      <div class="text-center">
-        <label for="file">{{ fileName }}</label>
+      <div class="text-center space-y-4">
+        <div
+          for="file"
+          *ngIf="fileName"
+          class="flex flex-row items-center align-middle justify-between"
+        >
+          <div class="flex flex-row items-center align-middle">
+            <mat-icon> attach_file</mat-icon>{{ fileName }}
+          </div>
+          <mat-icon (click)="deleteFileFromMedia()">delete_forever</mat-icon>
+        </div>
         <input
           type="file"
           name="file"
-          class=""
+          class="block w-full text-sm text-gray-900 cursor-pointer dark:text-gray-400 focus:outline-none dark:placeholder-primary-400"
           (change)="selectFile($event)"
           *ngIf="
-            ['Document', 'Image', 'Slide', 'PDF'].includes(c['typeMedia'].value)
+            ['Document', 'Image', 'Slide', 'PDF'].includes(
+              c['typeMedia'].value
+            ) && !fileName
           "
         />
       </div>
       <div class="flex justify-center flex-row gap-2">
         <button
-          class="btn outlined rounded-xl hover:border-transparent w-36"
+          class="btn outlined rounded-xl hover:border-transparent w-36 dark:text-primary-300"
           (click)="onBack()"
         >
           Back

@@ -92,7 +92,7 @@ export class ListMediaComponent implements OnInit {
     );
     const mediaTypes = new Set<string>(this.medias.map(media => media.typeMedia.title));
     this.typeMediasChips = Array.from(mediaTypes);
-    this._snackBar.open(`"${mediaDeleted!.title}" was deleted.`, "Close");
+    this._snackBar.open(`"${mediaDeleted!.title}" was deleted.`, "Close", { duration: 2000 });
   }
 
 

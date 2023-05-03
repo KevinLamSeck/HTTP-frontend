@@ -1,6 +1,6 @@
 <div class="flex flex-col space-y-8">
   <div class="text-center">
-    <h2 class="text-2xl sm:text-4xl leading-tight">New media</h2>
+    <h2 class="text-2xl sm:text-4xl leading-tight">Create media</h2>
   </div>
 
   <div class="flex flex-col justify-between space-y-8">
@@ -60,17 +60,19 @@
         type="file"
         class=""
         (change)="selectFile($event)"
+        class="block w-full text-sm text-gray-900 cursor-pointer dark:text-gray-400 focus:outline-none dark:placeholder-primary-400"
         *ngIf="
           ['Document', 'Image', 'Slide', 'PDF'].includes(c['typeMedia'].value)
         "
       />
     </div>
 
-    <div mat-dialog-actions class="flex justify-center">
+    <div
+      mat-dialog-actions
+      class="w-full flex flex-row gap-2 justify-center mt-8"
+    >
       <button
-        mat-flat-button
-        color="warn"
-        class="mx-2 btn"
+        class="btn outlined !text-primary-500 dark:text-primary-300 hover:text-primary-100 w-36"
         (click)="onNoClick()"
       >
         Cancel
@@ -80,7 +82,7 @@
         color="primary"
         [disabled]="mediaForm.invalid"
         (click)="onSubmit()"
-        class="mx-4 btn primary"
+        class="btn w-36"
       >
         Create
       </button>

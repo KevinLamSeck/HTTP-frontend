@@ -23,8 +23,6 @@ describe('Media Spec', () => {
     cy.wait('@mediaPost').then(({ request, response }) => {
       const requestData = request.body;
       const responseData = response!.body;
-      console.log('Request data:', requestData);
-      console.log('Response data:', responseData);
 
       idOfMedia = responseData.id;
 

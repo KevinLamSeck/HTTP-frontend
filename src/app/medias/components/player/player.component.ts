@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MediaService } from '../../services/media.service';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { log } from 'console';
 
 @Component({
   selector: 'app-player',

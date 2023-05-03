@@ -65,7 +65,7 @@ describe('RecoveryComponent', () => {
     expect(component.onSubmit).toBeTruthy();
   });
 
-  it('should', async () => {
+  it('should have onNoClick called', async () => {
     spyOn(component, 'onNoClick');
 
     let button = fixture.debugElement.nativeElement.querySelector('#no-button');
@@ -76,12 +76,13 @@ describe('RecoveryComponent', () => {
     });
   });
 
-  it('should', fakeAsync(() => {
-    spyOn(component, 'onNoClick');
+  it('should have onSubmit called', fakeAsync(() => {
+    spyOn(component, 'onSubmit');
 
-    let button = fixture.debugElement.nativeElement.querySelector('#no-button');
+    let button =
+      fixture.debugElement.nativeElement.querySelector('#submit-button');
     button.click();
     tick();
-    expect(component.onNoClick).toHaveBeenCalled();
+    expect(component.onSubmit).toHaveBeenCalled();
   }));
 });

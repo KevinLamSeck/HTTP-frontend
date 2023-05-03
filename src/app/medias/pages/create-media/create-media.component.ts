@@ -159,8 +159,7 @@ export class CreateMediaComponent implements OnInit {
         .pipe(take(1))
         .subscribe({
           next: (response: any) => {
-            // TODO Display Success Message
-            // console.log(response);
+
             this._snackBar.open(`"${media.title}" was created.`, 'Close', { duration: 1500 });
             this._router.navigate(['dashboard/conceptor/media']);
           },
@@ -237,5 +236,8 @@ export class CreateMediaComponent implements OnInit {
 
       this.selectedFiles = undefined;
     }
+  }
+
+  public deleteFileFromMedia(): void {
   }
 }

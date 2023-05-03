@@ -226,7 +226,7 @@ export class UpdateMediaComponent implements OnInit {
       const operation = this.onModal ? this.dialogRef.close(media) : this._mediaService.update(media).pipe(take(1)).subscribe({
         next: () => {
           this._router.navigate(["dashboard/conceptor/media"]);
-          this._snackBar.open(`"${media.title}" a été mis à jour.`, "Fermer");
+          this._snackBar.open(`"${media.title}" was updated!`, "Close", { duration: 1500 });
         },
         complete: () => {
           this.mediaForm.reset();
@@ -236,8 +236,8 @@ export class UpdateMediaComponent implements OnInit {
       this.fileInfos = this._fileUpload.getFiles();
 
     } catch (error) {
-      this.message = "Impossible de téléverser le fichier !";
-      this._snackBar.open(`${this.message}`, "Fermer");
+      this.message = "Unable to upload file!";
+      this._snackBar.open(`${this.message}`, "Close", { duration: 2000 });
       this.currentFile = undefined;
     }
 
@@ -250,4 +250,7 @@ export class UpdateMediaComponent implements OnInit {
     return name;
   }
 
+  public deleteFileFromMedia(): void {
+    this.fileName = ''
+  }
 }

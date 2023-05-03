@@ -81,7 +81,16 @@
         <!-- Upload file UI -->
       </form>
       <div class="text-center space-y-4">
-        <div for="file">{{ fileName }}</div>
+        <div
+          for="file"
+          *ngIf="fileName"
+          class="flex flex-row items-center align-middle justify-between"
+        >
+          <div class="flex flex-row items-center align-middle">
+            <mat-icon> attach_file</mat-icon>{{ fileName }}
+          </div>
+          <mat-icon (click)="deleteFileFromMedia()">delete_forever</mat-icon>
+        </div>
         <input
           type="file"
           name="file"

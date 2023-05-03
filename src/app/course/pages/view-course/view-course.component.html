@@ -24,7 +24,7 @@
           ? " module"
           : " modules"
       }}
-      | {{ totalTime }} total length
+      | {{ totalTime === "00h 00min" ? "{{totalTime}} total length" : "" }}
     </p>
   </ng-template>
 

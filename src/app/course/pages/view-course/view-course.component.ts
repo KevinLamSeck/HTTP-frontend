@@ -36,5 +36,6 @@ export class ViewCourseComponent implements OnInit {
     const minutes = (totalMinutes % 60).toString().padStart(2, '0');
 
     this.totalTime = `${hours}h ${minutes}min`;
+    console.log(this.totalTime);
   }
 }

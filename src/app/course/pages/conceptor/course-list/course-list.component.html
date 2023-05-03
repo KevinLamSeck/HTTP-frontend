@@ -134,6 +134,12 @@
                 <button mat-menu-item (click)="viewMedia(media.id!, media)">
                   <span class="dark:text-white">View media</span>
                 </button>
+                <button mat-menu-item (click)="goToEditMedia(media)">
+                  <span class="dark:text-white">Update media</span>
+                </button>
+                <button mat-menu-item (click)="deleteMedia(media.id)">
+                  <span class="dark:text-red-500 hot-action">Remove media</span>
+                </button>
               </mat-menu>
             </mat-panel-description>
           </ng-container>

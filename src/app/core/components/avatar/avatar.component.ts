@@ -44,7 +44,7 @@ export class AvatarComponent implements OnInit {
   }
 
   currentMemberRoleName(): string {
-    return this.memberData.getRoleName().toLowerCase();
+    return this.memberData ? this.memberData.getRoleName()?.toLowerCase() || '' : '';
   }
 
   signOut(): void {

@@ -1,23 +1,25 @@
-import { HttpResponse } from "@angular/common/http";
-import { Component, OnInit } from "@angular/core";
-import { MatDialog } from "@angular/material/dialog";
-import { MatExpansionPanel } from "@angular/material/expansion";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { Router } from "@angular/router";
-import { take } from "rxjs";
-import { LocalStorageService } from "src/app/core/services/local-storage.service";
-import { ToastService } from "src/app/core/toast.service";
-import { CourseService } from "src/app/course/services/course.service";
-import { CourseListType } from "src/app/course/types/course-list-type";
-import { CourseType } from "src/app/course/types/course-type";
-import { ModuleType } from "src/app/course/types/module-type";
-import { ModuleService } from "src/app/modules/services/module.service";
-import { StudentService } from "src/app/student/services/student.service";
+import { HttpResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatExpansionPanel } from '@angular/material/expansion';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { NavigationExtras, Router } from '@angular/router';
+import { take } from 'rxjs';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { ToastService } from 'src/app/core/toast.service';
+import { CourseService } from 'src/app/course/services/course.service';
+import { CourseListType } from 'src/app/course/types/course-list-type';
+import { CourseType } from 'src/app/course/types/course-type';
+import { MediaType } from 'src/app/course/types/media-type';
+import { ModuleType } from 'src/app/course/types/module-type';
+import { MediaService } from 'src/app/medias/services/media.service';
+import { ModuleService } from 'src/app/modules/services/module.service';
+import { StudentService } from 'src/app/student/services/student.service';
 
 @Component({
-  selector: "app-course-list",
-  templateUrl: "./course-list.component.html",
-  styleUrls: ["./course-list.component.scss"],
+  selector: 'app-course-list',
+  templateUrl: './course-list.component.html',
+  styleUrls: ['./course-list.component.scss'],
 })
 export class CourseListComponent implements OnInit {
   [x: string]: any;
@@ -37,7 +39,8 @@ export class CourseListComponent implements OnInit {
     private _moduleService: ModuleService,
     private _dialog: MatDialog,
     private _router: Router,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private _mediaService: MediaService
   ) {}
 
   ngOnInit(): void {
@@ -85,16 +88,16 @@ export class CourseListComponent implements OnInit {
   }
   // recuperer tous les cours associer aux conceptor et les mettre dans coursesConceptor
 
-  private _pathForConceptor: String[] = ["/", "dashboard", "conceptor"];
+  private _pathForConceptor: String[] = ['/', 'dashboard', 'conceptor'];
 
   goToUpdateCourse(course: any): void {
-    sessionStorage.setItem("ModifiedCourse", JSON.stringify(course));
-    this._router.navigate([...this._pathForConceptor, "course", "edit"]);
+    sessionStorage.setItem('ModifiedCourse', JSON.stringify(course));
+    this._router.navigate([...this._pathForConceptor, 'course', 'edit']);
   }
 
   goToViewCourse(course: any): void {
-    sessionStorage.setItem("ModifiedCourse", JSON.stringify(course));
-    this._router.navigate([...this._pathForConceptor, "course", "view"]);
+    sessionStorage.setItem('ModifiedCourse', JSON.stringify(course));
+    this._router.navigate([...this._pathForConceptor, 'course', 'view']);
   }
 
   doRemoveCourseConceptor(course: CourseListType): void {
@@ -106,7 +109,7 @@ export class CourseListComponent implements OnInit {
           const message: string = `${course.title} was removed. ${
             course.modules!.length
           } modules were affected`;
-          this._snackBar.open(message, "Close", {
+          this._snackBar.open(message, 'Close', {
             duration: 2000,
           });
         },
@@ -114,7 +117,7 @@ export class CourseListComponent implements OnInit {
           const badMessage: string = `Sorry, ${course.title} was already removed`;
           this._snackBar.open(
             `Sorry, ${course.title} was already removed`,
-            "Close",
+            'Close',
             {
               duration: 2000,
             }
@@ -143,7 +146,7 @@ export class CourseListComponent implements OnInit {
     });
 
     this._courseService.copyCourse(course).subscribe(() => {
-      this._snackBar.open(`The module was deleted.`, "Close", {
+      this._snackBar.open(`The course was copied.`, 'Close', {
         duration: 2000,
       });
       this.ngOnInit();
@@ -162,7 +165,7 @@ export class CourseListComponent implements OnInit {
   }
   openSimpleDialog(templateRef: any) {
     this.validationDialog = this._dialog.open(templateRef, {
-      width: "300px",
+      width: '300px',
     });
   }
   closeSimpleDialog() {
@@ -176,7 +179,7 @@ export class CourseListComponent implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: (response: HttpResponse<any>) => {
-          this._snackBar.open(`The module was deleted.`, "Close", {
+          this._snackBar.open(`The module was deleted.`, 'Close', {
             duration: 2000,
           });
           this.ngOnInit();
@@ -191,7 +194,32 @@ export class CourseListComponent implements OnInit {
     this._router.navigate([`dashboard/conceptor/module/${id}/view`]);
   }
   viewMedia(id: number, media: any) {
-    sessionStorage.setItem("ViewMedia", JSON.stringify(media));
+    sessionStorage.setItem('ViewMedia', JSON.stringify(media));
     this._router.navigate([`dashboard/conceptor/media/${id}/view`]);
+  }
+  deleteMedia(mediaID: number | undefined): void {
+    this._mediaService
+      .remove(mediaID!)
+      .pipe(take(1))
+      .subscribe({
+        next: (response: HttpResponse<any>) => {
+          this._snackBar.open(`The media was deleted.`, 'Close', {
+            duration: 2000,
+          });
+          this.ngOnInit();
+        },
+      });
+  }
+
+  goToEditMedia(mediaInfos: MediaType | undefined) {
+    // Pass the media info
+    const data: NavigationExtras = {
+      queryParams: {
+        id: mediaInfos?.id,
+      },
+    };
+    // console.log('go');
+    // Go to edit page
+    this._router.navigate(['/dashboard/conceptor/media/update'], data);
   }
 }

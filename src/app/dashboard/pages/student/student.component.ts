@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Tile } from '../../models/tile';
 import { Router } from '@angular/router';
-import { CourseSVGComponent } from '../../components/svg/course-svg/course-svg.component';
+import { CourseSVGComponent } from '../../../shared/svg/course-svg/course-svg.component';
 import ListComponent from 'src/app/course/list/list.component';
 
 @Component({

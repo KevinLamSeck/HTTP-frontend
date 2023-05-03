@@ -1,30 +1,45 @@
-<form class="row" [formGroup]="form" (ngSubmit)="onSubmit()">
-  <mat-form-field class="col xs12">
-    <input matInput placeholder="Your login..." formControlName="login" />
-    <mat-error
-      *ngIf="form.controls['login'].touched && form.controls['login'].errors"
-    >
-      Login is required...
-    </mat-error>
-  </mat-form-field>
+<section class="text-center flex flex-col gap-4 m-4">
+  <h4>Forgotten password ?</h4>
 
-  <mat-form-field class="col xs12">
-    <!-- <div class="email"> -->
-    <input matInput placeholder="Your email..." formControlName="email" />
-    <mat-error
-      *ngIf="form.controls['email'].touched && form.controls['email'].errors"
-    >
-      Email is required...
-    </mat-error>
-    <!-- </div> -->
-  </mat-form-field>
-</form>
+  <form class="row" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field class="col xs12">
+      <input matInput placeholder="Your login..." formControlName="login" />
+      <mat-error
+        *ngIf="form.controls['login'].touched && form.controls['login'].errors"
+      >
+        Login is required...
+      </mat-error>
+    </mat-form-field>
 
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">
-    <span color="primary" class="btn primary dark:text-primary-50">Cancel</span>
-  </button>
-  <button mat-button [disabled]="form.invalid" (click)="onSubmit()">
-    <span class="btn primary dark:text-primary-50">Reset</span>
-  </button>
-</div>
+    <mat-form-field class="col xs12">
+      <!-- <div class="email"> -->
+      <input matInput placeholder="Your email..." formControlName="email" />
+      <mat-error
+        *ngIf="form.controls['email'].touched && form.controls['email'].errors"
+      >
+        Email is required...
+      </mat-error>
+      <!-- </div> -->
+    </mat-form-field>
+  </form>
+
+  <div class="flex flex-row gap-2">
+    <button
+      mat-button
+      (click)="onNoClick()"
+      id="no-button"
+      class="btn primary dark:text-primary-50 w-full"
+    >
+      <span>Cancel</span>
+    </button>
+    <button
+      mat-button
+      [disabled]="form.invalid"
+      (click)="onSubmit()"
+      id="submit-button"
+      class="btn primary dark:text-primary-50 w-full"
+    >
+      <span>Reset</span>
+    </button>
+  </div>
+</section>

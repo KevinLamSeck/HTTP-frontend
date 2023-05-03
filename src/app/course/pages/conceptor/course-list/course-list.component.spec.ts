@@ -53,12 +53,12 @@ describe('CourseListComponent', () => {
   it('should render title "My own list"', () => {
     const titleElement: HTMLElement = fixture.nativeElement;
     const h2 = titleElement.querySelector('.h2')!;
-    expect(h2.textContent).toEqual('My own list');
+    expect(h2.textContent).toEqual('My Courses');
   });
 
   it('should render title "Other list"', () => {
     const titleElement: HTMLElement = fixture.nativeElement;
     const h2 = titleElement.querySelector('#otherList')!;
-    expect(h2.textContent).toEqual('Other list');
+    expect(h2.textContent).toEqual('Other Courses');
   });
 });

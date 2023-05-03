@@ -46,12 +46,18 @@ export class BreadcrumbService {
       // Construct the route URL
       const routeUrl = parentUrl.concat(route.url.map((url) => url.path));
 
+      if (routeUrl.length > 1 && routeUrl[0] === "dashboard") {
+        routeUrl.shift();
+      }
+
       // Add an element for the current route part
       if (route.data["breadcrumb"]) {
         const breadcrumb = {
           label: this.getLabel(route.data),
-          url: "http://localhost:4200/" + routeUrl.join("/"),
+          url: routeUrl.join("/"),
         };
+        console.log(routeUrl.join("/").replace(/^\//, ''),);
+
         breadcrumbs.push(breadcrumb);
       }
 

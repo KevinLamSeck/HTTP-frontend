@@ -9,6 +9,7 @@ import { ModuleType } from 'src/app/course/types/module-type';
 import { MediaService } from 'src/app/medias/services/media.service';
 import { fadeInOut } from 'src/app/shared/animations/fadeInOut';
 import { ModuleService } from '../../services/module.service';
+import { AddMediaComponent } from '../medias-management/add-media/add-media.component';
 
 @Component({
   selector: 'app-update-module',
@@ -20,7 +21,7 @@ export class UpdateModuleComponent implements OnInit {
 
   public moduleForm: FormGroup = new FormGroup({})
   public module: ModuleType | null = null
-  public medias: Array<MediaType> = new Array<MediaType>()
+  public medias: MediaType[] = []
   public conceptor: any;
   public addMediaVisible: boolean = false
   public createMediaVisible: boolean = false
@@ -52,6 +53,8 @@ export class UpdateModuleComponent implements OnInit {
           // console.log('Something went wrong')
         }
       })
+
+
 
   }
 
@@ -91,7 +94,7 @@ export class UpdateModuleComponent implements OnInit {
       .subscribe((response: HttpResponse<any>) => {
         // console.log(response)
         this._snackBar.open(`"${module.name}" was updated.`, "Close", { duration: 2000 });
-        this._router.navigate(['/'])
+        this._router.navigate(["/dashboard/conceptor/module"]);
       })
   }
 
@@ -102,6 +105,7 @@ export class UpdateModuleComponent implements OnInit {
     if (this.createMediaVisible) {
       this.createMediaVisible = false
       this.addMediaVisible = !this.addMediaVisible
+
     } else {
       this.addMediaVisible = !this.addMediaVisible
     }

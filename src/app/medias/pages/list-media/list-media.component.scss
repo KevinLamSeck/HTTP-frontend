@@ -5,7 +5,7 @@
 }
 
 .hoverChips {
-    @apply bg-primary-600;
+    @apply bg-primary-500 dark:text-primary-300 text-primary-100;
 }
 
 // mb-0 min-h-[45px] border-none pb-0 shadow-none outline-none transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)] hover:cursor-text

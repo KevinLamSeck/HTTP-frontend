@@ -3,14 +3,16 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { take } from 'rxjs';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { ToastService } from 'src/app/core/toast.service';
 import { CourseService } from 'src/app/course/services/course.service';
 import { CourseListType } from 'src/app/course/types/course-list-type';
 import { CourseType } from 'src/app/course/types/course-type';
+import { MediaType } from 'src/app/course/types/media-type';
 import { ModuleType } from 'src/app/course/types/module-type';
+import { MediaService } from 'src/app/medias/services/media.service';
 import { ModuleService } from 'src/app/modules/services/module.service';
 import { StudentService } from 'src/app/student/services/student.service';
 
@@ -37,7 +39,8 @@ export class CourseListComponent implements OnInit {
     private _moduleService: ModuleService,
     private _dialog: MatDialog,
     private _router: Router,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private _mediaService: MediaService
   ) {}
 
   ngOnInit(): void {
@@ -193,5 +196,30 @@ export class CourseListComponent implements OnInit {
   viewMedia(id: number, media: any) {
     sessionStorage.setItem('ViewMedia', JSON.stringify(media));
     this._router.navigate([`dashboard/conceptor/media/${id}/view`]);
+  }
+  deleteMedia(mediaID: number | undefined): void {
+    this._mediaService
+      .remove(mediaID!)
+      .pipe(take(1))
+      .subscribe({
+        next: (response: HttpResponse<any>) => {
+          this._snackBar.open(`The media was deleted.`, 'Close', {
+            duration: 2000,
+          });
+          this.ngOnInit();
+        },
+      });
+  }
+
+  goToEditMedia(mediaInfos: MediaType | undefined) {
+    // Pass the media info
+    const data: NavigationExtras = {
+      queryParams: {
+        id: mediaInfos?.id,
+      },
+    };
+    // console.log('go');
+    // Go to edit page
+    this._router.navigate(['/dashboard/conceptor/media/update'], data);
   }
 }

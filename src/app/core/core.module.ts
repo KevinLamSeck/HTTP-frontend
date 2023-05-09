@@ -4,13 +4,15 @@ import { SharedModule } from '../shared/shared.module';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AppInitializerService, appInitializer } from './services/app-initializer.service';
+import { AvatarComponent } from './components/avatar/avatar.component';
 
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    AvatarComponent
   ],
   imports: [
     SharedModule

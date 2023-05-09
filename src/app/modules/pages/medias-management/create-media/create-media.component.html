@@ -1,0 +1,91 @@
+<div class="flex flex-col space-y-8">
+  <div class="text-center">
+    <h2 class="text-2xl sm:text-4xl leading-tight">Create media</h2>
+  </div>
+
+  <div class="flex flex-col justify-between space-y-8">
+    <form [formGroup]="mediaForm" class="space-y-2">
+      <mat-form-field class="w-full">
+        <mat-label>Media type</mat-label>
+        <mat-select #types formControlName="typeMedia" required>
+          <mat-option *ngFor="let key of optionsMethod" [value]="key">{{
+            key
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="w-full">
+        <input matInput formControlName="title" placeholder="Media title..." />
+        <mat-error *ngIf="c['title'].errors && c['title'].touched">
+          Title is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-full">
+        <input matInput formControlName="summary" placeholder="Summary..." />
+      </mat-form-field>
+
+      <mat-form-field class="w-full">
+        <input
+          matInput
+          formControlName="duration"
+          placeholder="Media duration in seconds..."
+          type="number"
+          min="0"
+          step="1"
+          value="0"
+        />
+        <mat-error *ngIf="c['duration'].errors && c['duration'].touched">
+          Duration is required in positive integer
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field
+        class="w-full"
+        *ngIf="
+          !['Document', 'Image', 'Slide', 'PDF'].includes(c['typeMedia'].value)
+        "
+      >
+        <input matInput formControlName="url" placeholder="Media url..." />
+        <mat-error *ngIf="c['url'].errors && c['url'].touched">
+          Url is required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Upload file UI -->
+    </form>
+
+    <div class="text-center">
+      <input
+        type="file"
+        class=""
+        (change)="selectFile($event)"
+        class="block w-full text-sm text-gray-900 cursor-pointer dark:text-gray-400 focus:outline-none dark:placeholder-primary-400"
+        *ngIf="
+          ['Document', 'Image', 'Slide', 'PDF'].includes(c['typeMedia'].value)
+        "
+      />
+    </div>
+
+    <div
+      mat-dialog-actions
+      class="w-full flex flex-row gap-2 justify-center mt-8"
+    >
+      <button
+        class="btn outlined !text-primary-500 dark:text-primary-300 hover:text-primary-100 w-36"
+        (click)="onNoClick()"
+      >
+        Cancel
+      </button>
+      <button
+        mat-flat-button
+        color="primary"
+        [disabled]="mediaForm.invalid"
+        (click)="onSubmit()"
+        class="btn w-36"
+      >
+        Create
+      </button>
+    </div>
+  </div>
+</div>

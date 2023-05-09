@@ -1,15 +1,10 @@
-<div class="container">
-  <app-header></app-header>
-  <div class="row">
-    <div class="col xs12">
-      <router-outlet></router-outlet>
-    </div>
+<div class="min-h-full flex flex-col">
 
+  <app-header></app-header>
+
+  <div class="flex-1">
+    <router-outlet></router-outlet>
   </div>
 
-  <footer class="row footer">
-    <div class="col xs12">
-      v. 0.0.0 (Dream Team Acelys &copy; 2023)
-    </div>
-  </footer>
+  <app-footer></app-footer>
 </div>

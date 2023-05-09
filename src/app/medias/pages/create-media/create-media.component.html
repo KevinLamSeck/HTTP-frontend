@@ -1,0 +1,132 @@
+<div
+  [@fadeInOut]
+  class="flex flex-col mx-auto justify-center space-y-8 max-w-2xl p-16 rounded-xl bg-neutral-100 dark:bg-neutral-700"
+>
+  <div class="text-center">
+    <h2 class="text-2xl sm:text-4xl leading-tight">
+      {{ actionTitle }} a media
+    </h2>
+  </div>
+
+  <ng-container *ngIf="media">
+    <div class="flex flex-col justify-between space-y-8">
+      <form [formGroup]="mediaForm" class="space-y-2">
+        <mat-form-field class="w-full">
+          <mat-label>Media type</mat-label>
+          <mat-select #types formControlName="typeMedia" required>
+            <mat-option *ngFor="let option of optionsMethod" [value]="option">
+              {{ option }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <input
+            matInput
+            formControlName="title"
+            placeholder="Media title..."
+            maxlength="50"
+          />
+          <mat-error *ngIf="c['title'].errors && c['title'].touched">
+            <span *ngIf="c['title'].errors['required']">Title is required</span>
+            <span *ngIf="c['title'].errors['maxlength']">
+              Title must not exceed 50 characters</span
+            >
+            <span *ngIf="c['title'].value.length === 50">
+              Title must not exceed 50 characters</span
+            >
+          </mat-error>
+          <mat-hint
+            ><span class="dark:text-primary-100"
+              >50 max characters</span
+            ></mat-hint
+          >
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <input matInput formControlName="summary" placeholder="Summary..." />
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <input
+            matInput
+            formControlName="duration"
+            placeholder="Media duration in seconds..."
+            type="number"
+            min="0"
+            step="1"
+            value="0"
+            numbersOnly
+          />
+          <mat-error *ngIf="c['duration'].errors && c['duration'].touched">
+            <span
+              *ngIf="
+                c['duration'].errors['pattern'] ||
+                c['duration'].errors['required']
+              "
+              >Duration must be a positive integer</span
+            >
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="w-full"
+          *ngIf="
+            !['Document', 'Image', 'Slide', 'PDF'].includes(
+              c['typeMedia'].value
+            )
+          "
+        >
+          <input matInput formControlName="url" placeholder="Media url..." />
+          <mat-error *ngIf="c['url'].errors && c['url'].touched">
+            Url is required
+          </mat-error>
+        </mat-form-field>
+        <!-- Upload file UI -->
+      </form>
+      <div class="text-center space-y-4">
+        <div
+          for="file"
+          *ngIf="fileName"
+          class="flex flex-row items-center align-middle justify-between"
+        >
+          <div class="flex flex-row items-center align-middle">
+            <mat-icon> attach_file</mat-icon>{{ fileName }}
+          </div>
+          <mat-icon (click)="deleteFileFromMedia()">delete_forever</mat-icon>
+        </div>
+        <input
+          type="file"
+          name="file"
+          id="fileToUpload"
+          class="block w-full text-sm text-gray-900 cursor-pointer dark:text-gray-400 focus:outline-none dark:placeholder-primary-400"
+          (change)="selectFile($event)"
+          *ngIf="
+            ['Document', 'Image', 'Slide', 'PDF'].includes(
+              c['typeMedia'].value
+            ) && !fileName
+          "
+        />
+      </div>
+      <div class="flex justify-center flex-row gap-2">
+        <button
+          class="btn outlined rounded-xl hover:border-transparent w-36 dark:text-primary-300"
+          (click)="onBack()"
+        >
+          Back
+        </button>
+        <button
+          mat-flat-button
+          color="primary"
+          [disabled]="
+            mediaForm.invalid ||
+            (!hasFile() &&
+              ['Document', 'Image', 'Slide', 'PDF'].includes(
+                c['typeMedia'].value
+              ))
+          "
+          (click)="onSubmit()"
+          class="mx-4 btn primary w-36"
+        >
+          {{ actionTitle }}
+        </button>
+      </div>
+    </div>
+  </ng-container>
+</div>

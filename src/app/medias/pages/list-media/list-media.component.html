@@ -1,0 +1,39 @@
+<div class="space-y-8" [@fadeInOut]>
+  <section class="text-center sm:text-left">
+    <div class="flex flex-col">
+      <h1>Media Management Hub</h1>
+      <p class="text-neutral-700 dark:text-neutral-300 mt-2">
+        Streamline and organize all your media files with ease.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div
+      class="text-neutral-700 dark:text-neutral-300 flex flex-wrap space-x-2 space-y-2 items-center align-middle justify-start"
+    >
+      <div class="mt-1.5 flex-grow-0">Filter by :</div>
+      <div class="chips select-none flex-grow-0" (click)="allMedias()">All</div>
+      <ng-container *ngFor="let typeMedia of typeMediasChips">
+        <div
+          class="chips select-none flex-grow-0"
+          [ngClass]="{
+            hoverChips: selectedType === typeMedia,
+            hidden: isTypeMediaHasMedias(typeMedia) === false
+          }"
+          (click)="filterByType(typeMedia)"
+        >
+          {{ typeMedia }}
+        </div>
+      </ng-container>
+    </div>
+  </section>
+  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <ng-container *ngFor="let media of mediasFiltered">
+      <media-tile
+        [mediaInfo]="media"
+        (mediaInfoChange)="handleMediaInfoChange($event)"
+      ></media-tile>
+    </ng-container>
+  </section>
+</div>

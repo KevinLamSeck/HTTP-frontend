@@ -1,0 +1,102 @@
+<div
+  [@fadeInOut]
+  class="grid grid-cols-1 lg:grid-cols-2 gap-8 justify-items-center lg:justify-items-stretch"
+>
+  <div
+    class="flex flex-col lg:items-center md:align-middle p-16 bg-neutral-50 rounded-2xl w-full dark:bg-neutral-700"
+  >
+    <div class="text-center">
+      <h1 class="">Create a module</h1>
+    </div>
+    <div class="flex flex-col items-center justify-center w-full space-y-4">
+      <form [formGroup]="moduleForm" mat-dialog-content class="w-full">
+        <mat-form-field class="w-full">
+          <input matInput formControlName="name" placeholder="Module name..." />
+          <mat-error *ngIf="c['name'].errors && c['name'].touched">
+            Name is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <input
+            matInput
+            formControlName="objective"
+            placeholder="Objective..."
+          />
+        </mat-form-field>
+      </form>
+
+      <div
+        cdkDropList
+        (cdkDropListDropped)="drop($event)"
+        class="w-full space-y-2"
+      >
+        <ng-container *ngIf="medias">
+          <h4 class="mb-4">List of medias</h4>
+          <div
+            class="text-neutral-400 rounded-xl px-6 py-4 border border-dashed"
+            [ngClass]="{ hidden: medias.length >= 1 }"
+          >
+            No media has been provided for this module yet.
+          </div>
+          <ul *ngFor="let media of medias" class="list-none w-full">
+            <li
+              cdkDrag
+              class="bg-neutral-100 rounded-xl px-6 py-4 flex flex-row justify-between dark:bg-neutral-800"
+            >
+              <mat-icon class="dragIco dark:text-white" color="primary"
+                >drag_indicator</mat-icon
+              >{{ media.title }}
+              <mat-icon (click)="removeMedia(media)" color="primary"
+                >delete</mat-icon
+              >
+            </li>
+          </ul>
+        </ng-container>
+      </div>
+
+      <div class="w-full flex flex-row gap-2">
+        <button class="w-full btn primary" (click)="showAddMedia()">
+          Import media
+        </button>
+        <button class="w-full btn primary" (click)="showCreateMedia()">
+          Create media
+        </button>
+      </div>
+
+      <div class="w-full flex flex-row gap-2 justify-center mt-8">
+        <button
+          (click)="onNoClick()"
+          class="btn outlined !text-primary-500 hover:text-primary-100 w-36 dark:text-primary-300"
+        >
+          Cancel
+        </button>
+        <button
+          cdkFocusInitial
+          color="primary"
+          mat-flat-button
+          [disabled]="moduleForm.invalid"
+          (click)="onSubmit()"
+          class="btn w-36"
+        >
+          Create Module
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngIf="addMediaVisible">
+    <div class="p-8 bg-neutral-50 rounded-2xl h-max dark:bg-neutral-700">
+      <app-add-media (idMedia)="addMedia($event)"></app-add-media>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="createMediaVisible">
+    <div class="p-8 bg-neutral-50 rounded-2xl h-max dark:bg-neutral-700">
+      <app-create-media
+        [visibility]="createMediaVisible"
+        (newItemEvent)="closeCreate($event)"
+        (idNewMedia)="addNewMedia($event)"
+      ></app-create-media>
+    </div>
+  </ng-container>
+</div>

@@ -1,20 +1,30 @@
 <form [formGroup]="form" mat-dialog-content>
-    <div class="row">
-        <mat-form-field class="col xs12">
-            <input matInput formControlName="name" placeholder="Module name...">
-            <mat-error *ngIf="c['name'].errors && c['name'].touched">
-                Name is required
-            </mat-error>
-        </mat-form-field>
-    </div>
-    <div class="row">
-        <mat-form-field class="col xs12">
-            <input matInput formControlName="objective" placeholder="Objective...">
-        </mat-form-field>
-    </div>
+  <div class="row">
+    <mat-form-field class="col xs12">
+      <input matInput formControlName="name" placeholder="Module name..." />
+      <mat-error *ngIf="c['name'].errors && c['name'].touched">
+        Name is required
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="col xs12">
+      <input matInput formControlName="objective" placeholder="Objective..." />
+    </mat-form-field>
+  </div>
 </form>
 
 <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Cancel</button>
-    <button cdkFocusInitial mat-button [disabled]="form.invalid" (click)="onSubmit()">Add</button>
+  <button class="btn primary" mat-raised-button (click)="onNoClick()">
+    Cancel
+  </button>
+  <button
+    class="btn primary"
+    cdkFocusInitial
+    mat-raised-button
+    [disabled]="form.invalid"
+    (click)="onSubmit()"
+  >
+    {{ addOrUpdate ? "Add" : "Update" }}
+  </button>
 </div>

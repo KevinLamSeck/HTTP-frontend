@@ -1,0 +1,48 @@
+<button
+  mat-fab
+  class="visible sm:hidden fixed bottom-8 right-8 hover:bg-primary-800 transition-all ease-out"
+  [matMenuTriggerFor]="actions"
+>
+  <mat-icon>add</mat-icon>
+</button>
+
+<mat-menu
+  #actions="matMenu"
+  class="bg-transparent mb-4 no-styles"
+  yPosition="above"
+>
+  <div class="flex flex-col gap-4">
+    <button
+      mat-flat-button
+      color="primary"
+      class="btn shadow-md transition hover:shadow-lg hover:bg-primary-900"
+      (click)="goToCourseAdd()"
+    >
+      + Course
+    </button>
+    <button
+      mat-flat-button
+      color="primary"
+      class="btn shadow-md transition hover:shadow-lg hover:bg-primary-900"
+      (click)="goToModuleAdd()"
+    >
+      + Module
+    </button>
+    <button
+      mat-flat-button
+      color="primary"
+      class="btn shadow-md transition hover:shadow-lg hover:bg-primary-900"
+      (click)="goToMediaAdd()"
+    >
+      + Media
+    </button>
+    <button
+      mat-flat-button
+      color="primary"
+      class="btn shadow-md transition hover:shadow-lg hover:bg-primary-900"
+      (click)="goBack()"
+    >
+      <i class="material-icons text-sm">arrow_back</i> Back
+    </button>
+  </div>
+</mat-menu>

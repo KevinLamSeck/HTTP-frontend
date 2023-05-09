@@ -1,9 +1,8 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { take } from 'rxjs';
 import { StudentFormComponent } from '../dialogs/student-form/student-form.component';
-import { IStudent } from '../interfaces/i-student';
 import { StudentModel } from '../models/student-model';
 import { StudentService } from '../services/student.service';
 import { SimpleStudent } from '../types/simple-student-type';
@@ -104,7 +103,7 @@ export class ListComponent implements OnInit {
 
   public onCheckUncheckAll(): void {
     this.students = this.students.map((s) => {
-      return {...s, isSelected: this.checkUncheckAll}
+      return { ...s, isSelected: this.checkUncheckAll }
     })
 
     this.checkedStudents = this.students.filter((s: SimpleStudent) => s.isSelected);
@@ -112,10 +111,9 @@ export class ListComponent implements OnInit {
 
   private _openDialog(student: StudentModel): void {
     const dialogRef = this._matDialog.open(StudentFormComponent, {
-      width: '500px',
-      height: '500px',
+      panelClass: "modalDialog",
       hasBackdrop: false,
-      data: {student} // student is passed to dialog => {student: student}
+      data: { student } // student is passed to dialog => {student: student}
     })
 
     dialogRef.afterClosed().subscribe((result: any) => { // student was received from dialog
@@ -142,7 +140,7 @@ export class ListComponent implements OnInit {
         // else add it (and re sort table)
         this.students.sort((s1: SimpleStudent, s2: SimpleStudent) => s1.id - s2.id)
       } else {
-        console.log(`No result, lunch time`)
+        // console.log(`No result, lunch time`)
       }
     })
   }

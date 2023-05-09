@@ -1,4 +1,9 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import { LocalStorageService } from '../core/services/local-storage.service';
+import { Member } from '../user/models/member';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,34 +11,63 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  /**
-   * Tiles to display in the HTML template
-   */
-  public tiles: Array<any> = []
 
-  /**
-   * Specify if a "user" is admin or not (default true)
-   */
   public isAdmin: boolean = true
+  public currentUser!: Member;
+
+  private _envKey: string = `${environment.storage.member.key}`;
+  private _localStorageService = LocalStorageService.getInstance();
 
   constructor(
+    private _router: Router,
+    private _location: Location
   ) { }
 
   ngOnInit(): void {
-    this.tiles.push({
-      title: 'Parameters',
-      summary: 'Parameters management',
-      action: ['dashboard']
-    },
-    {
-      title: 'Students',
-      summary: 'Add, remove, view students',
-      action: ['/', 'student', 'list']
-    },
-    {
-      title: 'Courses',
-      summary: 'Manage courses and medias',
-      action: ['course']
-    })
+    this.getUserDatas()
   }
+
+  getUserDatas() {
+    this.currentUser = this._localStorageService.getMemberFromStorage()
+  }
+
+  showRole(currentUser: Member): string {
+    return currentUser.getRoleName();
+  }
+
+  goToMediaAdd() {
+    this._router.navigate(['dashboard/conceptor/media/add']);
+  }
+
+  goToModuleAdd() {
+    this._router.navigate(['dashboard/conceptor/module/add']);
+  }
+
+  goToCourseAdd() {
+    sessionStorage.removeItem('ModifiedCourse');
+    this._router.navigate(['dashboard/conceptor/course/add']);
+  }
+
+  greetings(currentUser: Member): string {
+    const username = currentUser.firstName;
+    const greetingsMSG = [`Good morning ${username} 🎉 !`, `Good afternoon ${username} 🎉 !`, `Good evening ${username} 🎉 !`];
+    const hour = new Date().getHours();
+
+    if (hour < 12) return greetingsMSG[0];
+    else if (hour < 18) return greetingsMSG[1];
+    else return greetingsMSG[2];
+  }
+
+  goBack() {
+    this._location.back();
+  }
+
+  isOnDashboard(): boolean {
+    if (!this.currentUser) {
+      return false;
+    }
+    const currentUserRole = this.currentUser.getRoleName()?.toLowerCase();
+    return this._router.url === `/dashboard/${currentUserRole}`;
+  }
+
 }

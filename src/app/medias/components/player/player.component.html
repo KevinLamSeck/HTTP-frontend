@@ -1,0 +1,44 @@
+<ng-container class="md:w-300" *ngIf="medias?.typeMedia?.title == 'Video'">
+  <iframe width="100%" height="400" [src]="safeSrcVideo"></iframe>
+</ng-container>
+
+<iframe
+  *ngIf="medias?.typeMedia?.title == 'Audio'"
+  width="100%"
+  padding="11px"
+  height="450px"
+  scrolling="no"
+  frameborder="no"
+  allow="autoplay"
+  [src]="safeSrc"
+></iframe>
+
+<iframe
+  *ngIf="medias?.typeMedia?.title == 'PDF'"
+  [src]="safePDF"
+  width="100%"
+  height="800px"
+>
+</iframe>
+
+<iframe
+  *ngIf="medias?.typeMedia?.title == 'Document'"
+  [src]="safePDF"
+  width="100%"
+  height="800px"
+>
+</iframe>
+
+<img
+  *ngIf="medias?.typeMedia?.title == 'Image'"
+  src="../../../../assets/medias/images/angular cheat sheet.jpg"
+  width="100%"
+  height="100%"
+/>
+<ng-container *ngIf="medias?.typeMedia?.title == 'Animation'">
+  <img
+    src="https://aircodr.com/9d643f53934a11f35e1824df87fdbe33/illustration.gif"
+  />
+</ng-container>
+
+<!-- "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/360226709&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true" -->

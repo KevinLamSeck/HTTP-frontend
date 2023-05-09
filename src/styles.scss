@@ -1,27 +1,47 @@
-@import "~@angular/material/theming";
-@import "assets/scss/generator-material-palette.scss";
+@import "./assets/scss/angular-theme-config.scss";
+
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@include mat-core();
+@import "./assets/scss/components/index.scss";
 
-$Hprimary: createPalette(#8b5cf6);
-$Haccent: createPalette(#8b5cf6);
+:root {
+  $global-font: "Inter", sans-serif;
+  font-family: $global-font;
+}
 
-$lightMod-primary: mat-palette($Hprimary);
-$lightMod-accent: mat-palette($Haccent, 500, A100, A400);
-$lightMod-warn: mat-palette($mat-red);
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #121212 rgba(12, 12, 12, 0.2);
+}
 
-$mainLightTheme: mat-light-theme($lightMod-primary, $lightMod-accent, $lightMod-warn);
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 15px;
+}
 
-@include angular-material-theme($mainLightTheme);
+*::-webkit-scrollbar-track {
+  background: rgba(12, 12, 12, 0.2);
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #121212;
+  border-radius: 14px;
+  border: 3px solid #121212;
+}
 
 body {
   font-size: 1em;
   font-variant: normal;
 }
+
+// body * {
+//   @apply transition-colors duration-300 ease-in-out;
+// }
+
 /**
 * Helpers
 **/
@@ -120,7 +140,6 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 /**
@@ -138,7 +157,10 @@ body {
   }
 
   &.success {
-    background: rgba(20, 20, 200, 0.7);
+    background: #8b5cf6;
+    display: flex;
+    justify-content: center;
+
     .mat-simple-snack-bar-content {
       color: rgb(240, 240, 240);
     }
@@ -146,4 +168,184 @@ body {
       color: rgb(240, 240, 240);
     }
   }
+}
+
+// * GLOBAL STYLES *******************************
+
+.no-styles {
+  @apply bg-transparent border-0 shadow-none text-current w-auto max-w-none p-0 m-0 leading-normal text-left outline-none;
+}
+
+// LAYOUT
+
+.main-layout {
+  @apply mx-auto max-w-7xl p-6 lg:px-8;
+}
+
+.layout-center {
+  @apply flex flex-col items-center align-middle justify-center;
+}
+
+// Remove the background color on webkit browser (Chrome, Safari..)
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+  -webkit-text-fill-color: inherit;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.dark input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #262626 inset; /* Change this color to your dark mode background color */
+  -webkit-text-fill-color: inherit;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input:autofill {
+  @apply dark:bg-transparent;
+}
+
+// Typo styles
+
+h1 {
+  @apply text-2xl md:text-4xl font-bold;
+  @apply dark:text-neutral-200;
+}
+
+h2 {
+  @apply text-3xl font-bold;
+  @apply dark:text-neutral-200;
+}
+
+h3 {
+  @apply text-2xl font-bold;
+  @apply dark:text-neutral-200;
+}
+
+h4 {
+  @apply text-xl font-bold;
+  @apply dark:text-neutral-200;
+}
+
+h5 {
+  @apply text-lg font-bold;
+  @apply dark:text-neutral-200;
+}
+
+h6 {
+  @apply text-base font-bold;
+  @apply dark:text-neutral-200;
+}
+
+// matform global styles
+
+// mat-form-field .mat-form-field-underline {
+//   @apply dark:text-teal-500;
+//   // color: white !important;
+// }
+
+// .mat-input-element::placeholder {
+//   color: white !important;
+// }
+
+input.mat-input-element {
+  @apply dark:text-white;
+}
+
+input.mat-input-element::placeholder {
+  color: white !important;
+}
+
+mat-form-field label.mat-form-field-label {
+  @apply dark:text-white;
+}
+
+mat-form-field div.mat-form-field-wrapper div.mat-form-field-underline {
+  @apply dark:bg-slate-50/30;
+}
+
+mat-form-field.mat-form-field-label {
+  @apply dark:text-teal-500;
+}
+
+mat-form-field mat-select span.mat-select-value-text {
+  @apply dark:text-white;
+}
+
+.mat-select-panel {
+  @apply dark:bg-neutral-700;
+
+  span.mat-option-text {
+    @apply dark:text-white;
+  }
+}
+
+button.mat-flat-button.mat-primary.mat-button-disabled {
+  @apply dark:bg-neutral-500;
+}
+
+.mat-raised-button.mat-primary.mat-button-disabled {
+  @apply dark:bg-neutral-500;
+}
+
+.mat-raised-button.mat-raised-button.mat-button-disabled {
+  @apply dark:bg-neutral-500;
+}
+
+mat-dialog-container {
+  @apply dark:bg-neutral-900;
+}
+
+mat-expansion-panel.mat-expansion-panel:not([class*="mat-elevation-z"]),
+.mat-expansion-panel {
+  @apply shadow;
+}
+
+mat-panel-description.mat-expansion-panel-header-description .numberOfModules {
+  width: 82px !important;
+}
+
+// panel class for dialogs
+
+.modalDialog {
+  @apply dark:bg-neutral-800 w-3/4;
+}
+
+mat-dialog-container {
+  &.mat-dialog-container {
+    @apply rounded-lg;
+  }
+
+  & app-create-media div:is(.dark .dark\:bg-neutral-700) {
+    background-color: transparent !important;
+  }
+  & app-create-media div.bg-neutral-100 {
+    background-color: transparent !important;
+  }
+
+  & app-add-media div.bg-neutral-100 {
+    background-color: transparent !important;
+  }
+  & app-add-media div:is(.dark .dark\:bg-neutral-700) {
+    background-color: transparent !important;
+  }
+}
+
+//checkbox
+[type="checkbox"] {
+  color: rgb(110, 110, 231);
+}
+[type="checkbox"]:focus {
+  --tw-ring-color: rgb(110, 110, 231);
+}
+
+mat-checkbox span.mat-checkbox-frame {
+  @apply dark:border-primary-100;
+}
+
+.mat-expansion-panel-header[aria-disabled="true"] .mat-expansion-panel-header-title {
+  @apply dark:text-white;
+  color: rgba(0, 0, 0, 1);
+}
+.visibilityIcon[_ngcontent-rex-c170] {
+  @apply dark:text-white;
 }

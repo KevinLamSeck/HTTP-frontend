@@ -1,0 +1,46 @@
+<ng-container *ngIf="isDataAvailable">
+  <div class="space-y-4">
+    <div
+      class="bg-neutral-100 flex flex-col md:flex-row justify-between rounded-xl p-10 dark:bg-neutral-600"
+    >
+      <div class="flex-col gap-2 flex justify-center">
+        <h2>{{ module.name }}</h2>
+        <h4>{{ module.objective }}</h4>
+        <p>Created by : {{ conceptor.firstName }} {{ conceptor.lastName }}</p>
+      </div>
+      <div class="mt-2 md:mt-0">
+        <module-svg></module-svg>
+      </div>
+    </div>
+
+    <div>
+      <div class="flex flex-col justify-start lg:items-center h-ful">
+        <div class="w-full space-y-2">
+          <span *ngIf="medias.length > 0"
+            >{{ medias.length <= 1 ? " Media" : " Medias" }} in this module
+            :</span
+          >
+          <span *ngIf="medias.length == 0"
+            >This module doesn't have medias.</span
+          >
+          <ng-container *ngIf="medias">
+            <ul *ngFor="let media of medias" class="list-none w-full">
+              <li
+                class="bg-neutral-100 p-3 flex flex-col md:flex-row justify-between items-center dark:bg-neutral-600"
+              >
+                <span class="grow">{{ media.title }}</span>
+                <div>
+                  <span class="mx-2"
+                    >{{ media.typeMedia.title }} ·
+                    {{ media.duration * 1000 | date : "mm" }}min
+                    {{ media.duration * 1000 | date : "ss" }}s</span
+                  >
+                </div>
+              </li>
+            </ul>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

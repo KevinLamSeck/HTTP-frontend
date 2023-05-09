@@ -1,16 +1,60 @@
-<div class="row">
-  <span id="toggle-user-role" (click)="isAdmin = !isAdmin">
-    {{ isAdmin ? 'Admin' : 'User'}}
-  </span>
-</div>
-
-<div class="row">
-  <ng-container *ngFor="let tile of tiles">
-    <app-tile
-      *ngIf="isAdmin || tile.title !== 'Parameters'"
-      class="col xs12 md4"
-      [tileInfo]="tile"
+<header class="bg-stone-50 dark:bg-neutral-900 shadow-sm">
+  <div
+    class="main-layout px-4 py-8 sm:py-12 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center align-middle justify-between"
+  >
+    <div class="">
+      <nav dashboard-breadcrumb></nav>
+      <h1
+        class="text-3xl font-bold leading-tight tracking-tight text-stone-900 dark:text-white"
+      >
+        Dashboard {{ showRole(currentUser) }}
+      </h1>
+      <p class="mt-1.5 text-sm text-stone-500">{{ greetings(currentUser) }}</p>
+    </div>
+    <div
+      class="action-user sm:flex flex-row gap-2 justify-center mt-4 sm:mt-0 hidden sm:visible"
     >
-    </app-tile>
-  </ng-container>
-</div>
+      <button
+        mat-flat-button
+        *ngIf="!isOnDashboard()"
+        color="primary"
+        class="btn hover:bg-primary-900 transition-all"
+        (click)="goBack()"
+      >
+        <i class="material-icons text-sm">arrow_back</i> Back
+      </button>
+      <ng-container *ngIf="currentUser.role == 'CONCEPTOR'">
+        <button
+          mat-flat-button
+          color="primary"
+          class="btn hover:bg-primary-900"
+          (click)="goToCourseAdd()"
+        >
+          + Course
+        </button>
+        <button
+          mat-flat-button
+          color="primary"
+          class="btn hover:bg-primary-900"
+          (click)="goToModuleAdd()"
+        >
+          + Module
+        </button>
+        <button
+          mat-flat-button
+          color="primary"
+          class="btn hover:bg-primary-900"
+          (click)="goToMediaAdd()"
+        >
+          + Media
+        </button>
+      </ng-container>
+    </div>
+  </div>
+</header>
+
+<section class="main-layout py-8 h-full">
+  <router-outlet></router-outlet>
+</section>
+
+<floating-action-conceptor></floating-action-conceptor>

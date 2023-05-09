@@ -1,0 +1,53 @@
+.btn {
+    @apply inline-flex cursor-pointer select-none flex-wrap items-center justify-center border-transparent text-center transition duration-200 ease-in-out;
+    @apply h-10 px-4 text-sm rounded;
+    @apply rounded-xl;
+    line-height: 1em;
+
+    &-disabled,
+    &[disabled] {
+        @apply pointer-events-none;
+    }
+
+    &.loading {
+        &,
+        &:hover {
+            @apply pointer-events-none;
+        }
+        &:before {
+            @apply mr-2 h-4 w-4 rounded-full border-2;
+            animation: spin 2s linear infinite;
+            content: "";
+            border-top-color: transparent;
+            border-left-color: transparent;
+            border-bottom-color: currentColor;
+            border-right-color: currentColor;
+        }
+    }
+
+    &.outlined {
+        @apply border border-primary-300 text-primary-300;
+        &:hover {
+            @apply bg-primary-400;
+        }
+        &:focus {
+            @apply bg-primary-400 focus:outline-none focus:ring-2 focus:ring-offset-2;
+        }
+    }
+
+    &.primary {
+        @apply bg-primary-500 text-white;
+        &:hover {
+            @apply bg-primary-700;
+        }
+    }
+
+    // Mettre les autres couleurs ici avec &.nomdeclasse ex -> &.accent {}
+}
+
+.mat-button,
+.mat-flat-button,
+.mat-icon-button,
+.mat-stroked-button {
+    border-radius: 0.75rem !important;
+}

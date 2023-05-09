@@ -1,0 +1,9 @@
+<section id="actionForConceptor" *ngIf="isConceptorRoute()">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ">
+        <ng-container *ngFor="let tile of tiles">
+            <app-tile [tileInfo]="tile"></app-tile>
+        </ng-container>
+    </div>
+</section>
+
+<router-outlet></router-outlet>

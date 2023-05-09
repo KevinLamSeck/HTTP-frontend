@@ -1,0 +1,30 @@
+<div
+  class="bg-neutral-100 flex flex-col md:flex-row justify-between rounded-xl p-10 dark:bg-neutral-600"
+  [@fadeInOut]
+>
+  <div class="flex-col gap-2 flex mr-5 justify-center">
+    <h2>{{ medias?.title }}</h2>
+    <h3>{{ medias?.summary }}</h3>
+
+    <p>Created at : {{ medias?.createdAt }}</p>
+    <p>
+      Created by : {{ medias?.creator?.firstName }}
+      {{ medias?.creator?.lastName }}
+    </p>
+    <div class="flex gap-3 text-neutral-400">
+      <p>
+        {{ medias?.duration * 1000 | date : "mm" }}min
+        {{ medias?.duration * 1000 | date : "ss" }}s
+      </p>
+      <p>|</p>
+      <p>{{ medias?.typeMedia.title }}</p>
+    </div>
+  </div>
+  <div>
+    <media-svg></media-svg>
+  </div>
+</div>
+
+<div class="mt-10 justify-center p-10">
+  <app-player></app-player>
+</div>

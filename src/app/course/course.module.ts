@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { CourseRoutingModule } from './course-routing.module';
 import { SharedModule } from '../shared/shared.module';
-import { ListComponent } from './list/list.component';
+import ListComponent from './list/list.component';
 import { CourseTileComponent } from './components/course-tile/course-tile.component';
 import { ModuleListComponent } from './components/module-list/module-list.component';
 import { RemoveCourseDialogComponent } from './dialogs/remove-course-dialog/remove-course-dialog.component';
 import { CourseHandlerComponent } from './course-handler/course-handler.component';
 import { ModuleAddComponent } from './dialogs/module-add/module-add.component';
+import { CourseListComponent } from './pages/conceptor/course-list/course-list.component';
+import { ViewCourseComponent } from './pages/view-course/view-course.component';
 
 
 @NgModule({
@@ -18,7 +19,9 @@ import { ModuleAddComponent } from './dialogs/module-add/module-add.component';
     ModuleListComponent,
     RemoveCourseDialogComponent,
     CourseHandlerComponent,
-    ModuleAddComponent
+    ModuleAddComponent,
+    CourseListComponent,
+    ViewCourseComponent
   ],
   imports: [
     SharedModule,

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './auth/login/login.component';
 import { NoAuthGuard } from './guards/no-auth.guard';
 
 @NgModule({
@@ -17,7 +17,8 @@ export class UserRoutingModule {
     {
       path: 'login',
       component: LoginComponent,
-      canActivate: [NoAuthGuard]
+      canActivate: [NoAuthGuard],
+      data: { title: 'HTTP | Sign In' },
     },
     {
       path: '**',

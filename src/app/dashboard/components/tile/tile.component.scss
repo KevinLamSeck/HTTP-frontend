@@ -1,96 +1,38 @@
-$waiter-color: rgba(0, 100, 220);
+.card {
+  @apply rounded-xl hover:scale-[1.01] transition-all;
+  @apply flex flex-row sm:flex-col gap-2 sm:gap-0;
+  @apply h-fit md:h-[32em] lg:h-fit;
+  @apply dark:text-white;
 
-div {
-  &.tile {
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: column;
-    border: solid 1px rgb(128, 128, 128);
-    box-shadow: 1px 1px 3px rgb(128, 128, 128);
-
-    div {
-      &.title {
-        display: flex;
-        justify-content: center;
-        font-weight: bold;
-        font-size: 1.3em;
-        padding: 1em;
-      }
-
-      &.actions {
-        display: flex;
-        justify-content: end;
-        padding: 1em;
-      }
+  &:focus {
+    @apply outline-none;
+  }
+  &-body {
+    @apply flex flex-auto flex-col space-y-2 items-center text-center p-4 sm:p-0 my-auto;
+    :where(p) {
+      @apply md:flex-grow;
     }
   }
-}
-.waiter {
-  height: .3em;
-  width: 100%;
-  background-color: lighten($waiter-color, 50%);
-  position: relative;
-  .inner-waiter {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 0;
-    background-color: $waiter-color;
-    height: inherit;
-    animation-name: waiter;
-    animation-duration: 1.5s;
-    animation-iteration-count: infinite;
-    animation-fill-mode: backwards;
+  &-actions {
+    @apply flex flex-wrap mt-auto pt-3;
   }
-}
+  & figure {
+    @apply flex items-center justify-center sm:mb-2 w-2/6 sm:w-full;
 
-@keyframes waiter {
-  0% {}
-
-  10% {
-    left: 10%;
-    width: 10%;
+    img {
+      @apply w-full h-full;
+    }
   }
 
-  20% {
-    left: 20%;
-    width: 20%;
+  &-title {
+    @apply font-bold text-lg md:text-2xl;
   }
 
-  30% {
-    left: 30%;
-    width: 30%;
+  p {
+    @apply text-stone-500 sm:text-base text-center;
   }
 
-  40%{
-    left: 40%;
-    width: 40%;
+  .img {
+    @apply w-full h-full rounded-xl;
   }
-
-  50% {
-    left: 50%;
-    width: 50%;
-  }
-
-  60% {
-    left: 60%;
-    width: 40%;
-  }
-
-  70% {
-    left: 70%;
-    width: 30%;
-  }
-
-  80% {
-    left: 80%;
-    width: 20%;
-  }
-
-  90% {
-    left: 90%;
-    width: 10%;
-  }
-
-  100% {}
 }

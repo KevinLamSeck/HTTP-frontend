@@ -1,12 +1,33 @@
-<mat-toolbar color="primary">
-  <span>
-    <a [routerLink]="['/']">Streamer</a>
-  </span>
-  <span class="spacer"></span>
-  <button mat-icon-button *ngIf="user$ | async" (click)="logout()">
-    <mat-icon>logout</mat-icon>
-  </button>
-  <span *ngIf="user !== undefined">
-    {{ user.login }}
-  </span>
-</mat-toolbar>
+<div class="bg-primary-500 dark:bg-primary-900">
+  <nav class="mx-auto max-w-7xl p-6 lg:px-8">
+    <!-- For large and Medium-sized Screen -->
+    <div class="flex justify-between items-center gap-x-6">
+      <div class="flex space-x-3 items-center">
+        <h1
+          class="font-normal text-2xl leading-6 text-stone-100 dark:text-stone-50 cursor-pointer"
+          (click)="goToDashboard()"
+        >
+          STREAM
+        </h1>
+      </div>
+      <div class="flex flex-row space-x-4">
+        <button
+          (click)="toggleTheme()"
+          class="text-left text-sm font-medium hover:text-primary-800 text-primary-200 dark:text-primary-200 transition-all ease-in-out"
+        >
+          <span
+            class="flex flex-row gap-2 align-middle"
+            *ngIf="(theme$ | async) === 'light'"
+            ><i class="material-icons icon-transition">light_mode</i></span
+          >
+          <span
+            class="flex flex-row gap-2 align-middle"
+            *ngIf="(theme$ | async) === 'dark'"
+            ><i class="material-icons icon-transition">dark_mode</i></span
+          >
+        </button>
+        <member-avatar *ngIf="user$ | async"></member-avatar>
+      </div>
+    </div>
+  </nav>
+</div>

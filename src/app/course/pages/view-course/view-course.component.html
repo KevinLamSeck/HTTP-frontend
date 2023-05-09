@@ -1,0 +1,67 @@
+<div
+  class="bg-neutral-100 flex flex-col md:flex-row justify-between rounded-xl p-10 dark:bg-neutral-600"
+>
+  <div class="flex-col gap-2 flex justify-center">
+    <h2>{{ course.title }}</h2>
+    <h3>{{ course.objective }}</h3>
+    <p>Created at : {{ course.createdAt }}</p>
+    <p>Created by : {{ user.firstName }} {{ user.lastName }}</p>
+  </div>
+  <div class="mt-4 md:mt-0">
+    <course-svg></course-svg>
+  </div>
+</div>
+<div class="mt-10 mx-28">
+  <h2 class="mb-10">Course content</h2>
+  <span *ngIf="course.modules?.length == 0; else timeModule"
+    >This course doesn't have modules.</span
+  >
+  <ng-template #timeModule>
+    <p class="mb-5 text-neutral-400">
+      {{ course.modules?.length }}
+      {{
+        course && course.modules && course.modules.length <= 1
+          ? " module"
+          : " modules"
+      }}
+
+      <span *ngIf="totalTime !== '00h 00min'"
+        >| {{ totalTime }} total length</span
+      >
+    </p>
+  </ng-template>
+
+  <mat-accordion *ngFor="let module of course.modules">
+    <mat-expansion-panel
+      [disabled]="module.medias.length == 0"
+      class="mb-2 dark:bg-neutral-600"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title class="dark:text-white">
+          {{ module.name }}
+        </mat-panel-title>
+        <mat-panel-description class="flex-row-reverse dark:text-white">
+          <ng-container *ngIf="module.medias.length > 0; else noMedias">
+            {{ module.medias.length }}
+            {{ module.medias.length <= 1 ? "media" : "medias" }}
+          </ng-container>
+          <ng-template #noMedias>no media</ng-template>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <ng-container *ngFor="let media of module.medias">
+        <mat-panel-description class="grid grid-cols-2 gap-4 dark:text-white">
+          <p>{{ media.title }}</p>
+          <div class="flex justify-end">
+            <p class="mr-2">{{ media.typeMedia.title }}</p>
+            <p class="w-10 flex justify-center">|</p>
+            <p class="ml-2 w-20">
+              {{ media.duration * 1000 | date : "mm" }}min
+              {{ media.duration * 1000 | date : "ss" }}s
+            </p>
+          </div>
+        </mat-panel-description>
+      </ng-container>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

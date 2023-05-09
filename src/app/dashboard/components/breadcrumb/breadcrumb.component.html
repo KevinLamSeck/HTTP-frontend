@@ -1,0 +1,14 @@
+<!-- TODO : Disable the first link element -->
+<div class="breadcrumb-item">
+  <ng-container
+    *ngFor="let breadcrumb of breadcrumbs$ | async; let last = last"
+  >
+    <a
+      [routerLink]="[breadcrumb.url]"
+      routerLinkActive="router-link-active"
+      class="text-neutral-800 dark:text-white text-sm"
+      >{{ breadcrumb.label }}</a
+    >
+    <!-- <span *ngIf="!last" class="text-white text-sm">/</span> -->
+  </ng-container>
+</div>

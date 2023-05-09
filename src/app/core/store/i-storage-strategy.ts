@@ -1,4 +1,4 @@
-import { IStore } from "../interfaces/i-store";
+import { IStore } from "../../dashboard/interfaces/i-store";
 
 export interface IStorageStrategy extends IStore {
   store(value: any): void

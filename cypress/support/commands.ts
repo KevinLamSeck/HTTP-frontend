@@ -41,3 +41,24 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+import 'cypress-file-upload';
+
+Cypress.Commands.add('copyToClipboard', { prevSubject: 'element' }, (subject) => {
+    // Create a temporary input element and append it to the DOM
+    const input = document.createElement('input');
+    document.body.appendChild(input);
+
+    // Set the value of the input element to the text content to be copied
+    input.value = subject.text();
+
+    // Select the text in the input element and copy it to the clipboard
+    input.select();
+    document.execCommand('copy');
+
+    // Remove the input element from the DOM
+    document.body.removeChild(input);
+
+    // Return the text content that was copied to the clipboard
+    return subject.text();
+});

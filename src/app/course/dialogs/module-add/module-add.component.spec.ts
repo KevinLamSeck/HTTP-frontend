@@ -1,5 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { ReactiveFormsModule } from '@angular/forms';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { ModuleAddComponent } from './module-add.component';
 
 describe('ModuleAddComponent', () => {
@@ -8,9 +14,17 @@ describe('ModuleAddComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ModuleAddComponent ]
-    })
-    .compileComponents();
+      declarations: [ModuleAddComponent],
+      imports: [ReactiveFormsModule],
+      providers: [
+        { provide: MatDialog, useValue: {} },
+        { provide: MatDialogRef, useValue: {} },
+        {
+          provide: MAT_DIALOG_DATA,
+          useValue: {},
+        },
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {

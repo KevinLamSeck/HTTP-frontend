@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { RemoveCourseDialogComponent } from './remove-course-dialog.component';
 
 describe('RemoveCourseDialogComponent', () => {
@@ -8,9 +9,19 @@ describe('RemoveCourseDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RemoveCourseDialogComponent ]
+      declarations: [RemoveCourseDialogComponent],
+      imports: [MatDialogModule],
+      providers: [
+        { provide: MatDialog, useValue: {} },
+        { provide: MatDialogRef, useValue: {} },
+        {
+          provide: MAT_DIALOG_DATA, useValue: {
+
+          }
+        }],
+
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
